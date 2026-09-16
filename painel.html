@@ -9,7 +9,8 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0"
 >
-
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f172a">
 <title>NIKKO</title>
 
 
@@ -2580,7 +2581,11 @@ body.dark .navegacao {
 
 <body>
 
-
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+}
+</script>
 <!-- =====================================================
      TOPO
 ===================================================== -->
