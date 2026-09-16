@@ -1,2 +1,0 @@
-# nikko
-teste rede social
