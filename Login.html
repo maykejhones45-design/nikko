@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NIKKO - Entrar</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background: #f7f7f8;
+            color: #111827;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            transition:
+                background 0.3s,
+                color 0.3s;
+        }
+
+
+        /* ==============================
+           CONTAINER
+        ============================== */
+
+        .login-container {
+
+            width: 100%;
+            max-width: 410px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        /* ==============================
+           LOGO
+        ============================== */
+
+        .logo {
+
+            font-size: 38px;
+            font-weight: 800;
+
+            letter-spacing: 7px;
+
+            color: #111827;
+
+            margin-bottom: 12px;
+
+            user-select: none;
+        }
+
+
+        .subtitulo {
+
+            font-size: 15px;
+
+            color: #6b7280;
+
+            margin-bottom: 30px;
+
+            text-align: center;
+        }
+
+
+        /* ==============================
+           CAIXA
+        ============================== */
+
+        .login-box {
+
+            width: 100%;
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+
+        /* ==============================
+           CAMPOS
+        ============================== */
+
+        .campo {
+
+            margin-bottom: 18px;
+        }
+
+
+        .campo label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 7px;
+
+            color: #374151;
+        }
+
+
+        .campo input {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            padding: 0 14px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: white;
+
+            color: #111827;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .campo input:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+
+        /* ==============================
+           CAMPO SENHA
+        ============================== */
+
+        .senha-area {
+
+            position: relative;
+        }
+
+
+        .senha-area input {
+
+            padding-right: 48px;
+        }
+
+
+        .botao-olho {
+
+            position: absolute;
+
+            right: 10px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 32px;
+            height: 32px;
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 6px;
+        }
+
+
+        .botao-olho:hover {
+
+            background: #f3f4f6;
+        }
+
+
+        .icone-olho {
+
+            width: 20px;
+            height: 20px;
+
+            fill: none;
+
+            stroke: #4b5563;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+        }
+
+
+        /* ==============================
+           ERRO
+        ============================== */
+
+        .erro {
+
+            display: none;
+
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            color: #b91c1c;
+
+            border-radius: 8px;
+
+            padding: 11px 12px;
+
+            font-size: 13px;
+
+            margin-bottom: 17px;
+        }
+
+
+        .erro.ativo {
+
+            display: block;
+        }
+
+
+        .campo.erro-campo input {
+
+            border-color: #dc2626;
+
+            box-shadow:
+                0 0 0 3px rgba(220, 38, 38, 0.08);
+        }
+
+
+        /* ==============================
+           BOTÃO ENTRAR
+        ============================== */
+
+        .botao-entrar {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #111827;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s,
+                transform 0.1s;
+        }
+
+
+        .botao-entrar:hover {
+
+            background: #1f2937;
+        }
+
+
+        .botao-entrar:active {
+
+            transform: scale(0.99);
+        }
+
+
+        .botao-entrar:disabled {
+
+            cursor: default;
+
+            opacity: 0.8;
+        }
+
+
+        /* ==============================
+           LINKS
+        ============================== */
+
+        .esqueci {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 17px;
+
+            color: #2563eb;
+
+            font-size: 13px;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .esqueci:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ==============================
+           DIVISOR
+        ============================== */
+
+        .divisor {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 25px 0;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+        }
+
+
+        .divisor::before,
+        .divisor::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: #e5e7eb;
+        }
+
+
+        /* ==============================
+           CRIAR CONTA
+        ============================== */
+
+        .botao-criar {
+
+            width: 100%;
+
+            height: 46px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            background: white;
+
+            color: #111827;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s,
+                border-color 0.2s;
+        }
+
+
+        .botao-criar:hover {
+
+            background: #f9fafb;
+
+            border-color: #9ca3af;
+        }
+
+
+        /* ==============================
+           CARREGAMENTO
+        ============================== */
+
+        .carregando-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(255, 255, 255, 0.96);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            z-index: 9999;
+        }
+
+
+        .carregando-overlay.ativo {
+
+            display: flex;
+        }
+
+
+        .spinner {
+
+            width: 48px;
+            height: 48px;
+
+            border: 4px solid #e5e7eb;
+
+            border-top-color: #111827;
+
+            border-radius: 50%;
+
+            animation:
+                girar 0.8s linear infinite;
+
+            margin-bottom: 18px;
+        }
+
+
+        @keyframes girar {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        .texto-carregando {
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: #111827;
+        }
+
+
+        .pontos {
+
+            display: inline-block;
+
+            width: 18px;
+
+            overflow: hidden;
+
+            vertical-align: bottom;
+        }
+
+
+        /* ==============================
+           DARK MODE
+        ============================== */
+
+        body.dark {
+
+            background: #0f172a;
+
+            color: white;
+        }
+
+
+        body.dark .logo {
+
+            color: white;
+        }
+
+
+        body.dark .subtitulo {
+
+            color: #9ca3af;
+        }
+
+
+        body.dark .login-box {
+
+            background: #111827;
+
+            border-color: #1f2937;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.30);
+        }
+
+
+        body.dark .campo label {
+
+            color: #d1d5db;
+        }
+
+
+        body.dark .campo input {
+
+            background: #0f172a;
+
+            border-color: #374151;
+
+            color: white;
+        }
+
+
+        body.dark .campo input:focus {
+
+            border-color: #60a5fa;
+
+            box-shadow:
+                0 0 0 3px rgba(96, 165, 250, 0.12);
+        }
+
+
+        body.dark .botao-olho:hover {
+
+            background: #1f2937;
+        }
+
+
+        body.dark .icone-olho {
+
+            stroke: #d1d5db;
+        }
+
+
+        body.dark .botao-entrar {
+
+            background: white;
+
+            color: #111827;
+        }
+
+
+        body.dark .botao-entrar:hover {
+
+            background: #e5e7eb;
+        }
+
+
+        body.dark .divisor {
+
+            color: #6b7280;
+        }
+
+
+        body.dark .divisor::before,
+        body.dark .divisor::after {
+
+            background: #374151;
+        }
+
+
+        body.dark .botao-criar {
+
+            background: #111827;
+
+            color: white;
+
+            border-color: #374151;
+        }
+
+
+        body.dark .botao-criar:hover {
+
+            background: #1f2937;
+        }
+
+
+        body.dark .carregando-overlay {
+
+            background:
+                rgba(15, 23, 42, 0.97);
+        }
+
+
+        body.dark .spinner {
+
+            border-color: #374151;
+
+            border-top-color: white;
+        }
+
+
+        body.dark .texto-carregando {
+
+            color: white;
+        }
+
+
+        /* ==============================
+           RESPONSIVO
+        ============================== */
+
+        @media (max-width: 500px) {
+
+            body {
+
+                padding: 15px;
+            }
+
+
+            .login-box {
+
+                padding: 23px 20px;
+            }
+
+
+            .logo {
+
+                font-size: 32px;
+
+                letter-spacing: 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="login-container">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            NIKKO
+        </div>
+
+
+        <div class="subtitulo">
+            Entre na sua conta
+        </div>
+
+
+        <!-- CAIXA -->
+
+        <section class="login-box">
+
+
+            <!-- ERRO -->
+
+            <div
+                class="erro"
+                id="mensagemErro"
+            >
+                Usuário, e-mail ou senha incorretos.
+            </div>
+
+
+            <!-- USUÁRIO -->
+
+            <div
+                class="campo"
+                id="campoUsuario"
+            >
+
+                <label for="usuario">
+                    E-mail ou nome de usuário
+                </label>
+
+                <input
+                    type="text"
+                    id="usuario"
+                    autocomplete="username"
+                    placeholder="Digite seu e-mail ou @usuário"
+                >
+
+            </div>
+
+
+            <!-- SENHA -->
+
+            <div
+                class="campo"
+                id="campoSenha"
+            >
+
+                <label for="senha">
+                    Senha
+                </label>
+
+
+                <div class="senha-area">
+
+                    <input
+                        type="password"
+                        id="senha"
+                        autocomplete="current-password"
+                        placeholder="Digite sua senha"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="botao-olho"
+                        id="botaoOlho"
+                        aria-label="Mostrar senha"
+                        onclick="alternarSenha()"
+                    >
+
+                        <svg
+                            class="icone-olho"
+                            id="iconeOlho"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"
+                            ></path>
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="2.5"
+                            ></circle>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ENTRAR -->
+
+            <button
+                class="botao-entrar"
+                id="botaoEntrar"
+                onclick="fazerLogin()"
+            >
+                Entrar
+            </button>
+
+
+            <!-- ESQUECI -->
+
+            <a
+                href="esqueci-senha.html"
+                class="esqueci"
+                onclick="mostrarCarregamento(event, 'esqueci-senha.html')"
+            >
+                Esqueci minha senha
+            </a>
+
+
+            <!-- DIVISOR -->
+
+            <div class="divisor">
+                ou
+            </div>
+
+
+            <!-- CRIAR -->
+
+            <button
+                class="botao-criar"
+                onclick="irParaCadastro()"
+            >
+                Criar conta
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         CARREGAMENTO
+    ============================== -->
+
+    <div
+        class="carregando-overlay"
+        id="carregandoOverlay"
+    >
+
+        <div class="spinner"></div>
+
+
+        <div
+            class="texto-carregando"
+            id="textoCarregando"
+        >
+            Entrando<span class="pontos">...</span>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* ==========================================
+           MODO ESCURO
+        ========================================== */
+
+        if (
+            localStorage.getItem("modoEscuro") === "true"
+        ) {
+
+            document.body.classList.add("dark");
+
+        }
+
+
+        /* ==========================================
+           ELEMENTOS
+        ========================================== */
+
+        var campoUsuario =
+            document.getElementById("usuario");
+
+
+        var campoSenha =
+            document.getElementById("senha");
+
+
+        var campoUsuarioArea =
+            document.getElementById("campoUsuario");
+
+
+        var campoSenhaArea =
+            document.getElementById("campoSenha");
+
+
+        var mensagemErro =
+            document.getElementById("mensagemErro");
+
+
+        var botaoEntrar =
+            document.getElementById("botaoEntrar");
+
+
+        var carregandoOverlay =
+            document.getElementById(
+                "carregandoOverlay"
+            );
+
+
+        var textoCarregando =
+            document.getElementById(
+                "textoCarregando"
+            );
+
+
+        /* ==========================================
+           MOSTRAR / OCULTAR SENHA
+        ========================================== */
+
+        function alternarSenha() {
+
+            var tipoAtual =
+                campoSenha.type;
+
+
+            var icone =
+                document.getElementById("iconeOlho");
+
+
+            if (
+                tipoAtual === "password"
+            ) {
+
+                campoSenha.type =
+                    "text";
+
+
+                document
+                    .getElementById("botaoOlho")
+                    .setAttribute(
+                        "aria-label",
+                        "Ocultar senha"
+                    );
+
+
+                icone.innerHTML = `
+
+                    <path
+                        d="
+                            M2 12
+                            s3.5-6 10-6
+                            10 6 10 6
+                            s-3.5 6-10 6
+                            S2 12 2 12
+                        "
+                    ></path>
+
+                    <line
+                        x1="4"
+                        y1="4"
+                        x2="20"
+                        y2="20"
+                    ></line>
+
+                `;
+
+            }
+
+            else {
+
+                campoSenha.type =
+                    "password";
+
+
+                document
+                    .getElementById("botaoOlho")
+                    .setAttribute(
+                        "aria-label",
+                        "Mostrar senha"
+                    );
+
+
+                icone.innerHTML = `
+
+                    <path
+                        d="
+                            M2 12
+                            s3.5-6 10-6
+                            10 6 10 6
+                            s-3.5 6-10 6
+                            S2 12 2 12Z
+                        "
+                    ></path>
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="2.5"
+                    ></circle>
+
+                `;
+
+            }
+
+        }
+
+
+        /* ==========================================
+           LIMPAR ERROS
+        ========================================== */
+
+        function limparErros() {
+
+            mensagemErro.classList.remove(
+                "ativo"
+            );
+
+
+            campoUsuarioArea.classList.remove(
+                "erro-campo"
+            );
+
+
+            campoSenhaArea.classList.remove(
+                "erro-campo"
+            );
+
+        }
+
+
+        /* ==========================================
+           VERIFICAR CONTA
+        ========================================== */
+
+        function encontrarConta(
+            identificador
+        ) {
+
+            var contas =
+                JSON.parse(
+                    localStorage.getItem(
+                        "contasNikko"
+                    )
+                ) || [];
+
+
+            var valor =
+                identificador
+                    .trim()
+                    .toLowerCase();
+
+
+            for (
+                var i = 0;
+                i < contas.length;
+                i++
+            ) {
+
+                var conta =
+                    contas[i];
+
+
+                var email =
+                    (
+                        conta.email ||
+                        ""
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                var usuario =
+                    (
+                        conta.usuario ||
+                        ""
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                usuario =
+                    usuario.replace(
+                        /^@/,
+                        ""
+                    );
+
+
+                if (
+                    valor === email ||
+                    valor.replace(/^@/, "") === usuario
+                ) {
+
+                    return conta;
+
+                }
+
+            }
+
+
+            return null;
+
+        }
+
+
+        /* ==========================================
+           FAZER LOGIN
+        ========================================== */
+
+        function fazerLogin() {
+
+            limparErros();
+
+
+            var identificador =
+                campoUsuario.value.trim();
+
+
+            var senha =
+                campoSenha.value;
+
+
+            if (
+                identificador === ""
+            ) {
+
+                mensagemErro.textContent =
+                    "Digite seu e-mail ou nome de usuário.";
+
+
+                mensagemErro.classList.add(
+                    "ativo"
+                );
+
+
+                campoUsuarioArea.classList.add(
+                    "erro-campo"
+                );
+
+
+                campoUsuario.focus();
+
+                return;
+
+            }
+
+
+            if (
+                senha === ""
+            ) {
+
+                mensagemErro.textContent =
+                    "Digite sua senha.";
+
+
+                mensagemErro.classList.add(
+                    "ativo"
+                );
+
+
+                campoSenhaArea.classList.add(
+                    "erro-campo"
+                );
+
+
+                campoSenha.focus();
+
+                return;
+
+            }
+
+
+            var conta =
+                encontrarConta(
+                    identificador
+                );
+
+
+            if (
+                !conta ||
+                conta.senha !== senha
+            ) {
+
+                mensagemErro.textContent =
+                    "E-mail, nome de usuário ou senha incorretos.";
+
+
+                mensagemErro.classList.add(
+                    "ativo"
+                );
+
+
+                campoUsuarioArea.classList.add(
+                    "erro-campo"
+                );
+
+
+                campoSenhaArea.classList.add(
+                    "erro-campo"
+                );
+
+
+                campoSenha.focus();
+
+                return;
+
+            }
+
+
+            /* ==================================
+               SALVAR SESSÃO
+            ================================== */
+
+            localStorage.setItem(
+                "usuarioLogado",
+                "true"
+            );
+
+
+            localStorage.setItem(
+                "usuarioAtual",
+                conta.usuario
+            );
+
+
+            localStorage.setItem(
+                "nomeUsuario",
+                conta.nome || "Usuário"
+            );
+
+
+            localStorage.setItem(
+                "emailUsuario",
+                conta.email || ""
+            );
+
+
+            /* ==================================
+               CARREGAMENTO
+            ================================== */
+
+            botaoEntrar.disabled =
+                true;
+
+
+            botaoEntrar.textContent =
+                "Entrando...";
+
+
+            mostrarCarregamentoDireto(
+                "Entrando"
+            );
+
+
+            setTimeout(
+                function() {
+
+
+                    /*
+                       SE A CONTA AINDA NÃO
+                       TERMINOU A CONFIGURAÇÃO
+                    */
+
+                    if (
+                        conta.configurada !== true
+                    ) {
+
+                        window.location.href =
+                            "configurar-conta.html";
+
+                        return;
+
+                    }
+
+
+                    /*
+                       CONTA PRONTA
+                    */
+
+                    window.location.href =
+                        "painel.html";
+
+
+                },
+                1500
+            );
+
+        }
+
+
+        /* ==========================================
+           IR PARA CADASTRO
+        ========================================== */
+
+        function irParaCadastro() {
+
+            mostrarCarregamentoDireto(
+                "Abrindo cadastro"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "cadastro.html";
+
+                },
+                700
+            );
+
+        }
+
+
+        /* ==========================================
+           CARREGAMENTO PARA LINKS
+        ========================================== */
+
+        function mostrarCarregamento(
+            evento,
+            pagina
+        ) {
+
+            evento.preventDefault();
+
+
+            mostrarCarregamentoDireto(
+                "Carregando"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        pagina;
+
+                },
+                700
+            );
+
+        }
+
+
+        /* ==========================================
+           MOSTRAR CARREGAMENTO
+        ========================================== */
+
+        function mostrarCarregamentoDireto(
+            texto
+        ) {
+
+            textoCarregando.innerHTML =
+                texto +
+                '<span class="pontos">...</span>';
+
+
+            carregandoOverlay.classList.add(
+                "ativo"
+            );
+
+        }
+
+
+        /* ==========================================
+           ENTER NOS CAMPOS
+        ========================================== */
+
+        campoUsuario.addEventListener(
+            "keydown",
+            function(evento) {
+
+                if (
+                    evento.key === "Enter"
+                ) {
+
+                    campoSenha.focus();
+
+                }
+
+            }
+        );
+
+
+        campoSenha.addEventListener(
+            "keydown",
+            function(evento) {
+
+                if (
+                    evento.key === "Enter"
+                ) {
+
+                    fazerLogin();
+
+                }
+
+            }
+        );
+
+
+        /* ==========================================
+           ANIMAÇÃO DOS PONTOS
+        ========================================== */
+
+        setInterval(
+            function() {
+
+                var elementos =
+                    document.querySelectorAll(
+                        ".pontos"
+                    );
+
+
+                for (
+                    var i = 0;
+                    i < elementos.length;
+                    i++
+                ) {
+
+                    if (
+                        elementos[i].textContent === "..."
+                    ) {
+
+                        elementos[i].textContent =
+                            ".";
+
+                    }
+
+                    else if (
+                        elementos[i].textContent === "."
+                    ) {
+
+                        elementos[i].textContent =
+                            "..";
+
+                    }
+
+                    else {
+
+                        elementos[i].textContent =
+                            "...";
+
+                    }
+
+                }
+
+            },
+            400
+        );
+
+    </script>
+
+</body>
+
+</html>

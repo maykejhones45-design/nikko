@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NIKKO - Configurar conta</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            min-height: 100vh;
+
+            background: #f7f7f8;
+
+            color: #111827;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            transition:
+                background 0.3s,
+                color 0.3s;
+        }
+
+
+        /* =========================================
+           CONTAINER
+        ========================================= */
+
+        .config-container {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .logo {
+
+            font-size: 38px;
+
+            font-weight: 800;
+
+            letter-spacing: 7px;
+
+            margin-bottom: 12px;
+
+            color: #111827;
+
+            user-select: none;
+        }
+
+
+        .subtitulo {
+
+            font-size: 15px;
+
+            color: #6b7280;
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================================
+           CAIXA
+        ========================================= */
+
+        .config-box {
+
+            width: 100%;
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.06);
+        }
+
+
+        /* =========================================
+           ETAPAS
+        ========================================= */
+
+        .etapa {
+
+            display: none;
+        }
+
+
+        .etapa.ativa {
+
+            display: block;
+        }
+
+
+        .titulo-etapa {
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+            color: #111827;
+        }
+
+
+        .descricao-etapa {
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            color: #6b7280;
+
+            margin-bottom: 24px;
+        }
+
+
+        /* =========================================
+           CAMPO
+        ========================================= */
+
+        .campo {
+
+            margin-bottom: 18px;
+        }
+
+
+        .campo label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 7px;
+
+            color: #374151;
+        }
+
+
+        .campo input {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            padding: 0 14px;
+
+            font-size: 14px;
+
+            background: white;
+
+            color: #111827;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .campo input:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,0.10);
+        }
+
+
+        /* =========================================
+           AJUDA DO USUÁRIO
+        ========================================= */
+
+        .ajuda-usuario {
+
+            font-size: 12px;
+
+            color: #6b7280;
+
+            margin-top: 7px;
+
+            line-height: 1.4;
+        }
+
+
+        /* =========================================
+           ERRO
+        ========================================= */
+
+        .erro {
+
+            display: none;
+
+            padding: 11px 12px;
+
+            margin-bottom: 17px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            color: #b91c1c;
+        }
+
+
+        .erro.ativo {
+
+            display: block;
+        }
+
+
+        .erro-campo input {
+
+            border-color: #dc2626 !important;
+
+            box-shadow:
+                0 0 0 3px rgba(220,38,38,0.08) !important;
+        }
+
+
+        /* =========================================
+           BOTÃO PRINCIPAL
+        ========================================= */
+
+        .botao-principal {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #111827;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s,
+                transform 0.1s;
+        }
+
+
+        .botao-principal:hover {
+
+            background: #1f2937;
+        }
+
+
+        .botao-principal:active {
+
+            transform: scale(0.99);
+        }
+
+
+        .botao-principal:disabled {
+
+            opacity: 0.8;
+
+            cursor: default;
+        }
+
+
+        /* =========================================
+           FOTO
+        ========================================= */
+
+        .foto-area {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            margin: 25px 0;
+        }
+
+
+        .foto-preview {
+
+            width: 130px;
+
+            height: 130px;
+
+            border-radius: 50%;
+
+            border: 2px solid #e5e7eb;
+
+            background: #f3f4f6;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            text-align: center;
+
+            position: relative;
+
+            margin-bottom: 18px;
+        }
+
+
+        .foto-preview img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        .botao-foto {
+
+            min-width: 180px;
+
+            height: 44px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            background: white;
+
+            color: #111827;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+
+        .botao-foto:hover {
+
+            background: #f9fafb;
+
+        }
+
+
+        .pular {
+
+            display: block;
+
+            width: 100%;
+
+            border: none;
+
+            background: transparent;
+
+            color: #2563eb;
+
+            margin-top: 18px;
+
+            padding: 10px;
+
+            font-size: 14px;
+
+            cursor: pointer;
+        }
+
+
+        .pular:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           INDICADOR DE ETAPA
+        ========================================= */
+
+        .indicador {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .ponto-etapa {
+
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #d1d5db;
+
+            transition:
+                background 0.2s,
+                width 0.2s;
+        }
+
+
+        .ponto-etapa.ativo {
+
+            width: 22px;
+
+            border-radius: 10px;
+
+            background: #111827;
+        }
+
+
+        /* =========================================
+           CARREGAMENTO
+        ========================================= */
+
+        .carregando-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(255,255,255,0.96);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            z-index: 9999;
+        }
+
+
+        .carregando-overlay.ativo {
+
+            display: flex;
+        }
+
+
+        .spinner {
+
+            width: 48px;
+
+            height: 48px;
+
+            border: 4px solid #e5e7eb;
+
+            border-top-color: #111827;
+
+            border-radius: 50%;
+
+            animation:
+                girar 0.8s linear infinite;
+
+            margin-bottom: 18px;
+        }
+
+
+        @keyframes girar {
+
+            to {
+
+                transform: rotate(360deg);
+
+            }
+
+        }
+
+
+        .texto-carregando {
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: #111827;
+        }
+
+
+        .pontos {
+
+            display: inline-block;
+
+            width: 18px;
+
+            overflow: hidden;
+
+            vertical-align: bottom;
+        }
+
+
+        /* =========================================
+           DARK MODE
+        ========================================= */
+
+        body.dark {
+
+            background: #0f172a;
+
+            color: white;
+        }
+
+
+        body.dark .logo {
+
+            color: white;
+        }
+
+
+        body.dark .subtitulo {
+
+            color: #9ca3af;
+        }
+
+
+        body.dark .config-box {
+
+            background: #111827;
+
+            border-color: #1f2937;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.30);
+        }
+
+
+        body.dark .titulo-etapa {
+
+            color: white;
+        }
+
+
+        body.dark .descricao-etapa {
+
+            color: #9ca3af;
+        }
+
+
+        body.dark .campo label {
+
+            color: #d1d5db;
+        }
+
+
+        body.dark .campo input {
+
+            background: #0f172a;
+
+            border-color: #374151;
+
+            color: white;
+        }
+
+
+        body.dark .campo input:focus {
+
+            border-color: #60a5fa;
+
+            box-shadow:
+                0 0 0 3px rgba(96,165,250,0.12);
+        }
+
+
+        body.dark .ajuda-usuario {
+
+            color: #9ca3af;
+        }
+
+
+        body.dark .botao-principal {
+
+            background: white;
+
+            color: #111827;
+        }
+
+
+        body.dark .botao-principal:hover {
+
+            background: #e5e7eb;
+        }
+
+
+        body.dark .foto-preview {
+
+            background: #1f2937;
+
+            border-color: #374151;
+
+            color: #9ca3af;
+        }
+
+
+        body.dark .botao-foto {
+
+            background: #111827;
+
+            color: white;
+
+            border-color: #374151;
+        }
+
+
+        body.dark .botao-foto:hover {
+
+            background: #1f2937;
+        }
+
+
+        body.dark .ponto-etapa {
+
+            background: #374151;
+        }
+
+
+        body.dark .ponto-etapa.ativo {
+
+            background: white;
+        }
+
+
+        body.dark .carregando-overlay {
+
+            background:
+                rgba(15,23,42,0.97);
+        }
+
+
+        body.dark .spinner {
+
+            border-color: #374151;
+
+            border-top-color: white;
+        }
+
+
+        body.dark .texto-carregando {
+
+            color: white;
+        }
+
+
+        /* =========================================
+           RESPONSIVO
+        ========================================= */
+
+        @media (max-width: 500px) {
+
+            body {
+
+                padding: 15px;
+
+            }
+
+
+            .config-box {
+
+                padding: 23px 20px;
+
+            }
+
+
+            .logo {
+
+                font-size: 32px;
+
+                letter-spacing: 5px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="config-container">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            NIKKO
+        </div>
+
+
+        <div class="subtitulo">
+            Vamos configurar sua conta
+        </div>
+
+
+        <!-- CAIXA -->
+
+        <section class="config-box">
+
+
+            <!-- INDICADOR -->
+
+            <div class="indicador">
+
+                <div
+                    class="ponto-etapa ativo"
+                    id="ponto1"
+                ></div>
+
+                <div
+                    class="ponto-etapa"
+                    id="ponto2"
+                ></div>
+
+            </div>
+
+
+            <!-- =================================
+                 ETAPA 1
+            ================================== -->
+
+            <div
+                class="etapa ativa"
+                id="etapa1"
+            >
+
+                <h1 class="titulo-etapa">
+                    Configure seu perfil
+                </h1>
+
+
+                <p class="descricao-etapa">
+                    Escolha seu nome de usuário e informe sua data de nascimento.
+                </p>
+
+
+                <!-- ERRO -->
+
+                <div
+                    class="erro"
+                    id="mensagemErro1"
+                ></div>
+
+
+                <!-- USUÁRIO -->
+
+                <div
+                    class="campo"
+                    id="campoUsuario"
+                >
+
+                    <label for="usuario">
+                        Nome de usuário
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="usuario"
+                        placeholder="@seuusuario"
+                        maxlength="30"
+                        autocomplete="off"
+                    >
+
+
+                    <div class="ajuda-usuario">
+                        Use apenas letras, números, ponto ou underline.
+                    </div>
+
+                </div>
+
+
+                <!-- DATA -->
+
+                <div
+                    class="campo"
+                    id="campoNascimento"
+                >
+
+                    <label for="nascimento">
+                        Data de nascimento
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="nascimento"
+                    >
+
+                </div>
+
+
+                <button
+                    class="botao-principal"
+                    id="botaoContinuar"
+                    onclick="continuarConfiguracao()"
+                >
+                    Continuar
+                </button>
+
+            </div>
+
+
+            <!-- =================================
+                 ETAPA 2
+            ================================== -->
+
+            <div
+                class="etapa"
+                id="etapa2"
+            >
+
+                <h1 class="titulo-etapa">
+                    Foto de perfil
+                </h1>
+
+
+                <p class="descricao-etapa">
+                    Adicione uma foto para que outras pessoas reconheçam seu perfil.
+                </p>
+
+
+                <!-- FOTO -->
+
+                <div class="foto-area">
+
+
+                    <div
+                        class="foto-preview"
+                        id="fotoPreview"
+                    >
+                        Nenhuma foto
+                    </div>
+
+
+                    <input
+                        type="file"
+                        id="fotoInput"
+                        accept="image/*"
+                        style="display:none"
+                    >
+
+
+                    <button
+                        class="botao-foto"
+                        type="button"
+                        onclick="escolherFoto()"
+                    >
+                        Escolher foto
+                    </button>
+
+                </div>
+
+
+                <!-- FINALIZAR -->
+
+                <button
+                    class="botao-principal"
+                    id="botaoFinalizar"
+                    onclick="finalizarConfiguracao()"
+                >
+                    Continuar
+                </button>
+
+
+                <!-- PULAR -->
+
+                <button
+                    class="pular"
+                    type="button"
+                    onclick="pularFoto()"
+                >
+                    Pular
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         CARREGAMENTO
+    ========================================= -->
+
+    <div
+        class="carregando-overlay"
+        id="carregandoOverlay"
+    >
+
+        <div class="spinner"></div>
+
+
+        <div
+            class="texto-carregando"
+            id="textoCarregando"
+        >
+            Carregando<span class="pontos">...</span>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* =========================================
+           MODO ESCURO
+        ========================================= */
+
+        if (
+            localStorage.getItem("modoEscuro") === "true"
+        ) {
+
+            document.body.classList.add("dark");
+
+        }
+
+
+        /* =========================================
+           CONTA EM CONFIGURAÇÃO
+        ========================================= */
+
+        var contaId =
+            localStorage.getItem(
+                "contaConfigurando"
+            );
+
+
+        var contas =
+            JSON.parse(
+                localStorage.getItem(
+                    "contasNikko"
+                )
+            ) || [];
+
+
+        var contaAtual =
+            null;
+
+
+        for (
+            var i = 0;
+            i < contas.length;
+            i++
+        ) {
+
+            if (
+                contas[i].id === contaId
+            ) {
+
+                contaAtual =
+                    contas[i];
+
+                break;
+
+            }
+
+        }
+
+
+        /* =========================================
+           VERIFICAR CONTA
+        ========================================= */
+
+        if (!contaAtual) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        /* =========================================
+           ELEMENTOS
+        ========================================= */
+
+        var usuarioInput =
+            document.getElementById(
+                "usuario"
+            );
+
+
+        var nascimentoInput =
+            document.getElementById(
+                "nascimento"
+            );
+
+
+        var mensagemErro1 =
+            document.getElementById(
+                "mensagemErro1"
+            );
+
+
+        var campoUsuario =
+            document.getElementById(
+                "campoUsuario"
+            );
+
+
+        var campoNascimento =
+            document.getElementById(
+                "campoNascimento"
+            );
+
+
+        var etapa1 =
+            document.getElementById(
+                "etapa1"
+            );
+
+
+        var etapa2 =
+            document.getElementById(
+                "etapa2"
+            );
+
+
+        var ponto1 =
+            document.getElementById(
+                "ponto1"
+            );
+
+
+        var ponto2 =
+            document.getElementById(
+                "ponto2"
+            );
+
+
+        var fotoInput =
+            document.getElementById(
+                "fotoInput"
+            );
+
+
+        var fotoPreview =
+            document.getElementById(
+                "fotoPreview"
+            );
+
+
+        var botaoContinuar =
+            document.getElementById(
+                "botaoContinuar"
+            );
+
+
+        var botaoFinalizar =
+            document.getElementById(
+                "botaoFinalizar"
+            );
+
+
+        var carregandoOverlay =
+            document.getElementById(
+                "carregandoOverlay"
+            );
+
+
+        var textoCarregando =
+            document.getElementById(
+                "textoCarregando"
+            );
+
+
+        /* =========================================
+           RESTRINGIR DATA FUTURA
+        ========================================= */
+
+        var hoje =
+            new Date();
+
+
+        var ano =
+            hoje.getFullYear();
+
+
+        var mes =
+            String(
+                hoje.getMonth() + 1
+            ).padStart(2, "0");
+
+
+        var dia =
+            String(
+                hoje.getDate()
+            ).padStart(2, "0");
+
+
+        nascimentoInput.max =
+            ano + "-" +
+            mes + "-" +
+            dia;
+
+
+        /* =========================================
+           USUÁRIO
+        ========================================= */
+
+        usuarioInput.addEventListener(
+            "input",
+            function() {
+
+                var valor =
+                    this.value
+                        .toLowerCase()
+                        .replace(/^@/, "")
+                        .replace(
+                            /[^a-z0-9._]/g,
+                            ""
+                        );
+
+
+                this.value =
+                    valor;
+
+            }
+        );
+
+
+        /* =========================================
+           LIMPAR ERRO
+        ========================================= */
+
+        function limparErro1() {
+
+            mensagemErro1.classList.remove(
+                "ativo"
+            );
+
+
+            campoUsuario.classList.remove(
+                "erro-campo"
+            );
+
+
+            campoNascimento.classList.remove(
+                "erro-campo"
+            );
+
+        }
+
+
+        /* =========================================
+           MOSTRAR ERRO
+        ========================================= */
+
+        function mostrarErro1(
+            mensagem,
+            campo
+        ) {
+
+            mensagemErro1.textContent =
+                mensagem;
+
+
+            mensagemErro1.classList.add(
+                "ativo"
+            );
+
+
+            campo.classList.add(
+                "erro-campo"
+            );
+
+        }
+
+
+        /* =========================================
+           VERIFICAR USUÁRIO EXISTENTE
+        ========================================= */
+
+        function usuarioJaExiste(
+            usuario
+        ) {
+
+            var procurado =
+                usuario
+                    .toLowerCase()
+                    .replace(/^@/, "")
+                    .trim();
+
+
+            for (
+                var i = 0;
+                i < contas.length;
+                i++
+            ) {
+
+                if (
+                    contas[i].id === contaAtual.id
+                ) {
+
+                    continue;
+
+                }
+
+
+                var existente =
+                    (
+                        contas[i].usuario ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .replace(/^@/, "")
+                    .trim();
+
+
+                if (
+                    existente === procurado
+                ) {
+
+                    return true;
+
+                }
+
+            }
+
+
+            return false;
+
+        }
+
+
+        /* =========================================
+           CONTINUAR
+        ========================================= */
+
+        function continuarConfiguracao() {
+
+            limparErro1();
+
+
+            var usuario =
+                usuarioInput.value
+                    .trim()
+                    .toLowerCase()
+                    .replace(/^@/, "");
+
+
+            var nascimento =
+                nascimentoInput.value;
+
+
+            /* USUÁRIO */
+
+            if (
+                usuario === ""
+            ) {
+
+                mostrarErro1(
+                    "Digite um nome de usuário.",
+                    campoUsuario
+                );
+
+                usuarioInput.focus();
+
+                return;
+
+            }
+
+
+            if (
+                usuario.length < 3
+            ) {
+
+                mostrarErro1(
+                    "O nome de usuário precisa ter pelo menos 3 caracteres.",
+                    campoUsuario
+                );
+
+                usuarioInput.focus();
+
+                return;
+
+            }
+
+
+            if (
+                usuarioJaExiste(
+                    usuario
+                )
+            ) {
+
+                mostrarErro1(
+                    "Esse nome de usuário já está sendo usado.",
+                    campoUsuario
+                );
+
+                usuarioInput.focus();
+
+                return;
+
+            }
+
+
+            /* NASCIMENTO */
+
+            if (
+                nascimento === ""
+            ) {
+
+                mostrarErro1(
+                    "Informe sua data de nascimento.",
+                    campoNascimento
+                );
+
+                nascimentoInput.focus();
+
+                return;
+
+            }
+
+
+            /* ==================================
+               SALVAR DADOS
+            ================================== */
+
+            contaAtual.usuario =
+                usuario;
+
+
+            contaAtual.dataNascimento =
+                nascimento;
+
+
+            for (
+                var i = 0;
+                i < contas.length;
+                i++
+            ) {
+
+                if (
+                    contas[i].id === contaAtual.id
+                ) {
+
+                    contas[i] =
+                        contaAtual;
+
+                    break;
+
+                }
+
+            }
+
+
+            localStorage.setItem(
+                "contasNikko",
+                JSON.stringify(
+                    contas
+                )
+            );
+
+
+            /* ==================================
+               GUARDAR SESSÃO
+            ================================== */
+
+            localStorage.setItem(
+                "usuarioAtual",
+                usuario
+            );
+
+
+            localStorage.setItem(
+                "nomeUsuario",
+                contaAtual.nome
+            );
+
+
+            localStorage.setItem(
+                "emailUsuario",
+                contaAtual.email
+            );
+
+
+            /* ==================================
+               CARREGAMENTO
+            ================================== */
+
+            botaoContinuar.disabled =
+                true;
+
+
+            botaoContinuar.textContent =
+                "Salvando...";
+
+
+            mostrarCarregamento(
+                "Salvando seus dados"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    carregandoOverlay.classList.remove(
+                        "ativo"
+                    );
+
+
+                    botaoContinuar.disabled =
+                        false;
+
+
+                    botaoContinuar.textContent =
+                        "Continuar";
+
+
+                    etapa1.classList.remove(
+                        "ativa"
+                    );
+
+
+                    etapa2.classList.add(
+                        "ativa"
+                    );
+
+
+                    ponto1.classList.remove(
+                        "ativo"
+                    );
+
+
+                    ponto2.classList.add(
+                        "ativo"
+                    );
+
+                },
+                1200
+            );
+
+        }
+
+
+        /* =========================================
+           ESCOLHER FOTO
+        ========================================= */
+
+        function escolherFoto() {
+
+            fotoInput.value =
+                "";
+
+            fotoInput.click();
+
+        }
+
+
+        /* =========================================
+           FOTO SELECIONADA
+        ========================================= */
+
+        fotoInput.addEventListener(
+            "change",
+            function() {
+
+                var arquivo =
+                    this.files[0];
+
+
+                if (!arquivo) {
+
+                    return;
+
+                }
+
+
+                if (
+                    arquivo.type.indexOf(
+                        "image/"
+                    ) !== 0
+                ) {
+
+                    return;
+
+                }
+
+
+                var leitor =
+                    new FileReader();
+
+
+                leitor.onload =
+                    function(evento) {
+
+                        fotoPreview.innerHTML =
+                            "";
+
+
+                        var imagem =
+                            document.createElement(
+                                "img"
+                            );
+
+
+                        imagem.src =
+                            evento.target.result;
+
+
+                        fotoPreview.appendChild(
+                            imagem
+                        );
+
+
+                    };
+
+
+                leitor.readAsDataURL(
+                    arquivo
+                );
+
+            }
+        );
+
+
+        /* =========================================
+           SALVAR FOTO
+        ========================================= */
+
+        function salvarFoto(
+            fotoData
+        ) {
+
+            contaAtual.fotoPerfil =
+                fotoData || "";
+
+
+            contaAtual.configurada =
+                true;
+
+
+            for (
+                var i = 0;
+                i < contas.length;
+                i++
+            ) {
+
+                if (
+                    contas[i].id === contaAtual.id
+                ) {
+
+                    contas[i] =
+                        contaAtual;
+
+                    break;
+
+                }
+
+            }
+
+
+            localStorage.setItem(
+                "contasNikko",
+                JSON.stringify(
+                    contas
+                )
+            );
+
+
+            localStorage.setItem(
+                "usuarioAtual",
+                contaAtual.usuario
+            );
+
+
+            localStorage.setItem(
+                "nomeUsuario",
+                contaAtual.nome
+            );
+
+
+            localStorage.setItem(
+                "emailUsuario",
+                contaAtual.email
+            );
+
+
+            localStorage.setItem(
+                "usuarioLogado",
+                "true"
+            );
+
+
+            localStorage.removeItem(
+                "contaConfigurando"
+            );
+
+        }
+
+
+        /* =========================================
+           FINALIZAR
+        ========================================= */
+
+        function finalizarConfiguracao() {
+
+            var imagem =
+                fotoPreview.querySelector(
+                    "img"
+                );
+
+
+            var foto =
+                imagem
+                    ? imagem.src
+                    : "";
+
+
+            botaoFinalizar.disabled =
+                true;
+
+
+            botaoFinalizar.textContent =
+                "Salvando...";
+
+
+            mostrarCarregamento(
+                "Preparando seu perfil"
+            );
+
+
+            /*
+               Pequeno atraso para deixar
+               a transição visível
+            */
+
+            setTimeout(
+                function() {
+
+                    try {
+
+                        salvarFoto(
+                            foto
+                        );
+
+
+                        window.location.href =
+                            "painel.html";
+
+                    }
+
+                    catch (erro) {
+
+                        carregandoOverlay.classList.remove(
+                            "ativo"
+                        );
+
+
+                        botaoFinalizar.disabled =
+                            false;
+
+
+                        botaoFinalizar.textContent =
+                            "Continuar";
+
+
+                        alert(
+                            "Não foi possível salvar a foto. Tente novamente."
+                        );
+
+                    }
+
+                },
+                1200
+            );
+
+        }
+
+
+        /* =========================================
+           PULAR FOTO
+        ========================================= */
+
+        function pularFoto() {
+
+            botaoFinalizar.disabled =
+                true;
+
+
+            mostrarCarregamento(
+                "Preparando seu perfil"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    try {
+
+                        salvarFoto(
+                            ""
+                        );
+
+
+                        window.location.href =
+                            "painel.html";
+
+                    }
+
+                    catch (erro) {
+
+                        carregandoOverlay.classList.remove(
+                            "ativo"
+                        );
+
+
+                        botaoFinalizar.disabled =
+                            false;
+
+
+                        alert(
+                            "Não foi possível finalizar a configuração."
+                        );
+
+                    }
+
+                },
+                1200
+            );
+
+        }
+
+
+        /* =========================================
+           CARREGAMENTO
+        ========================================= */
+
+        function mostrarCarregamento(
+            texto
+        ) {
+
+            textoCarregando.innerHTML =
+                texto +
+                '<span class="pontos">...</span>';
+
+
+            carregandoOverlay.classList.add(
+                "ativo"
+            );
+
+        }
+
+
+        /* =========================================
+           ANIMAÇÃO DOS PONTOS
+        ========================================= */
+
+        setInterval(
+            function() {
+
+                var elementos =
+                    document.querySelectorAll(
+                        ".pontos"
+                    );
+
+
+                for (
+                    var i = 0;
+                    i < elementos.length;
+                    i++
+                ) {
+
+                    if (
+                        elementos[i].textContent === "..."
+                    ) {
+
+                        elementos[i].textContent =
+                            ".";
+
+                    }
+
+                    else if (
+                        elementos[i].textContent === "."
+                    ) {
+
+                        elementos[i].textContent =
+                            "..";
+
+                    }
+
+                    else {
+
+                        elementos[i].textContent =
+                            "...";
+
+                    }
+
+                }
+
+            },
+            400
+        );
+
+
+        /* =========================================
+           ENTER
+        ========================================= */
+
+        usuarioInput.addEventListener(
+            "keydown",
+            function(evento) {
+
+                if (
+                    evento.key === "Enter"
+                ) {
+
+                    nascimentoInput.focus();
+
+                }
+
+            }
+        );
+
+
+        nascimentoInput.addEventListener(
+            "keydown",
+            function(evento) {
+
+                if (
+                    evento.key === "Enter"
+                ) {
+
+                    continuarConfiguracao();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

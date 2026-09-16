@@ -1,0 +1,4059 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NIKKO - Configurações</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fafafa;
+            color: #111827;
+            min-height: 100vh;
+
+            transition:
+                background 0.25s,
+                color 0.25s;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+
+        /* =====================================================
+           TOPO
+        ===================================================== */
+
+        .topo {
+
+            height: 64px;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+        }
+
+
+        .topo-titulo {
+
+            font-size: 22px;
+
+            font-weight: 700;
+        }
+
+
+        .botao-voltar-topo {
+
+            position: absolute;
+
+            left: 14px;
+
+            width: 40px;
+
+            height: 40px;
+
+            border: none;
+
+            background: transparent;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .botao-voltar-topo:hover {
+
+            background: #f3f4f6;
+        }
+
+
+        .icone-voltar {
+
+            width: 21px;
+
+            height: 21px;
+
+            fill: none;
+
+            stroke: #111827;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+        }
+
+
+        /* =====================================================
+           CONTEÚDO
+        ===================================================== */
+
+        .conteudo {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            padding: 18px 14px 45px;
+        }
+
+
+        .tela {
+
+            display: none;
+        }
+
+
+        .tela.ativa {
+
+            display: block;
+        }
+
+
+        .descricao {
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            color: #6b7280;
+
+            margin: 3px 0 20px;
+        }
+
+
+        /* =====================================================
+           MENU PRINCIPAL
+        ===================================================== */
+
+        .grupo {
+
+            margin-bottom: 25px;
+        }
+
+
+        .grupo-titulo {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #6b7280;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+
+            margin: 0 4px 8px;
+        }
+
+
+        .lista {
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+        }
+
+
+        .item-menu {
+
+            width: 100%;
+
+            min-height: 66px;
+
+            border: none;
+
+            border-bottom: 1px solid #f1f5f9;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 12px 15px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            color: #111827;
+        }
+
+
+        .item-menu:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .item-menu:hover {
+
+            background: #f9fafb;
+        }
+
+
+        .icone-menu {
+
+            width: 22px;
+
+            height: 22px;
+
+            fill: none;
+
+            stroke: #111827;
+
+            stroke-width: 1.7;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+
+            flex-shrink: 0;
+        }
+
+
+        .item-textos {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .item-titulo {
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        .item-descricao {
+
+            font-size: 12px;
+
+            color: #6b7280;
+
+            margin-top: 3px;
+
+            line-height: 1.35;
+        }
+
+
+        .icone-chevron {
+
+            width: 18px;
+
+            height: 18px;
+
+            fill: none;
+
+            stroke: #9ca3af;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =====================================================
+           FORMULÁRIOS
+        ===================================================== */
+
+        .formulario {
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            padding: 18px;
+        }
+
+
+        .campo {
+
+            margin-bottom: 18px;
+        }
+
+
+        .campo:last-child {
+
+            margin-bottom: 0;
+        }
+
+
+        .campo label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+        }
+
+
+        .campo input,
+        .campo textarea,
+        .campo select {
+
+            width: 100%;
+
+            min-height: 44px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            background: white;
+
+            color: #111827;
+
+            padding: 10px 12px;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+
+        .campo textarea {
+
+            min-height: 90px;
+
+            resize: vertical;
+        }
+
+
+        .campo input:focus,
+        .campo textarea:focus,
+        .campo select:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,0.08);
+        }
+
+
+        .texto-pequeno {
+
+            margin-top: 6px;
+
+            font-size: 11px;
+
+            color: #6b7280;
+
+            line-height: 1.4;
+        }
+
+
+        .botao-principal {
+
+            width: 100%;
+
+            height: 44px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #111827;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 18px;
+        }
+
+
+        .botao-principal:hover {
+
+            background: #1f2937;
+        }
+
+
+        .botao-secundario {
+
+            width: 100%;
+
+            min-height: 42px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            background: white;
+
+            color: #111827;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+        }
+
+
+        .botao-secundario:hover {
+
+            background: #f9fafb;
+        }
+
+
+        .botao-perigo {
+
+            width: 100%;
+
+            min-height: 42px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #dc2626;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+        }
+
+
+        .botao-perigo:hover {
+
+            background: #b91c1c;
+        }
+
+
+        /* =====================================================
+           PERFIL / FOTO
+        ===================================================== */
+
+        .editar-foto {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+
+        .foto-atual {
+
+            width: 100px;
+
+            height: 100px;
+
+            border-radius: 50%;
+
+            overflow: hidden;
+
+            background: #111827;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+
+        .foto-atual img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .botao-foto {
+
+            min-height: 40px;
+
+            padding: 0 16px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: #111827;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           TOGGLE
+        ===================================================== */
+
+        .linha-config {
+
+            min-height: 64px;
+
+            border-bottom: 1px solid #f1f5f9;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+
+        .linha-config:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .linha-info {
+
+            flex: 1;
+        }
+
+
+        .linha-titulo {
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .linha-descricao {
+
+            font-size: 11px;
+
+            color: #6b7280;
+
+            margin-top: 3px;
+
+            line-height: 1.35;
+        }
+
+
+        .switch {
+
+            width: 46px;
+
+            height: 27px;
+
+            position: relative;
+
+            flex-shrink: 0;
+        }
+
+
+        .switch input {
+
+            display: none;
+        }
+
+
+        .slider {
+
+            position: absolute;
+
+            inset: 0;
+
+            background: #d1d5db;
+
+            border-radius: 30px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .slider::before {
+
+            content: "";
+
+            width: 21px;
+
+            height: 21px;
+
+            position: absolute;
+
+            left: 3px;
+
+            top: 3px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            transition: 0.2s;
+
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.15);
+        }
+
+
+        .switch input:checked + .slider {
+
+            background: #111827;
+        }
+
+
+        .switch input:checked + .slider::before {
+
+            transform: translateX(19px);
+        }
+
+
+        /* =====================================================
+           APARÊNCIA
+        ===================================================== */
+
+        .opcao-aparencia {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #f1f5f9;
+
+            cursor: pointer;
+        }
+
+
+        .opcao-aparencia:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .opcao-aparencia input {
+
+            accent-color: #111827;
+        }
+
+
+        .opcao-aparencia-texto strong {
+
+            display: block;
+
+            font-size: 14px;
+        }
+
+
+        .opcao-aparencia-texto span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: #6b7280;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           ALERTA
+        ===================================================== */
+
+        .mensagem {
+
+            display: none;
+
+            padding: 11px 12px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+
+            margin-bottom: 16px;
+        }
+
+
+        .mensagem.ativa {
+
+            display: block;
+        }
+
+
+        .mensagem.sucesso {
+
+            background: #ecfdf5;
+
+            border: 1px solid #a7f3d0;
+
+            color: #047857;
+        }
+
+
+        .mensagem.erro {
+
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            color: #b91c1c;
+        }
+
+
+        /* =====================================================
+           CARREGAMENTO
+        ===================================================== */
+
+        .overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(255,255,255,0.96);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            z-index: 9999;
+        }
+
+
+        .overlay.ativo {
+
+            display: flex;
+        }
+
+
+        .spinner {
+
+            width: 46px;
+
+            height: 46px;
+
+            border: 4px solid #e5e7eb;
+
+            border-top-color: #111827;
+
+            border-radius: 50%;
+
+            animation:
+                girar 0.8s linear infinite;
+
+            margin-bottom: 17px;
+        }
+
+
+        @keyframes girar {
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        .texto-carregamento {
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           DARK MODE
+        ===================================================== */
+
+        body.dark {
+
+            background: #0f172a;
+
+            color: white;
+        }
+
+
+        body.dark .topo {
+
+            background: #111827;
+
+            border-color: #1f2937;
+        }
+
+
+        body.dark .item-menu,
+        body.dark .lista,
+        body.dark .formulario {
+
+            background: #111827;
+
+            border-color: #1f2937;
+        }
+
+
+        body.dark .item-menu {
+
+            color: white;
+
+            border-bottom-color: #1f2937;
+        }
+
+
+        body.dark .item-menu:hover {
+
+            background: #1f2937;
+        }
+
+
+        body.dark .icone-menu,
+        body.dark .icone-voltar {
+
+            stroke: white;
+        }
+
+
+        body.dark .grupo-titulo,
+        body.dark .descricao,
+        body.dark .item-descricao,
+        body.dark .linha-descricao,
+        body.dark .texto-pequeno,
+        body.dark .opcao-aparencia-texto span {
+
+            color: #9ca3af;
+        }
+
+
+        body.dark .campo input,
+        body.dark .campo textarea,
+        body.dark .campo select {
+
+            background: #0f172a;
+
+            border-color: #374151;
+
+            color: white;
+        }
+
+
+        body.dark .botao-secundario,
+        body.dark .botao-foto {
+
+            background: #111827;
+
+            border-color: #374151;
+
+            color: white;
+        }
+
+
+        body.dark .botao-secundario:hover,
+        body.dark .botao-foto:hover {
+
+            background: #1f2937;
+        }
+
+
+        body.dark .opcao-aparencia {
+
+            border-color: #1f2937;
+        }
+
+
+        body.dark .overlay {
+
+            background:
+                rgba(15,23,42,0.97);
+        }
+
+
+        body.dark .spinner {
+
+            border-color: #374151;
+
+            border-top-color: white;
+        }
+
+
+        body.dark .texto-carregamento {
+
+            color: white;
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .conteudo {
+
+                padding:
+                    15px 10px 35px;
+            }
+
+
+            .topo {
+
+                height: 60px;
+            }
+
+
+            .topo-titulo {
+
+                font-size: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         TOPO
+    ===================================================== -->
+
+    <header class="topo">
+
+        <button
+            class="botao-voltar-topo"
+            id="botaoVoltar"
+            onclick="voltar()"
+            aria-label="Voltar"
+        >
+
+            <svg
+                class="icone-voltar"
+                viewBox="0 0 24 24"
+            >
+
+                <path
+                    d="M15 18l-6-6 6-6"
+                ></path>
+
+            </svg>
+
+        </button>
+
+
+        <div
+            class="topo-titulo"
+            id="tituloTopo"
+        >
+            Configurações
+        </div>
+
+    </header>
+
+
+    <main class="conteudo">
+
+
+        <!-- =================================================
+             TELA PRINCIPAL
+        ================================================== -->
+
+        <section
+            class="tela ativa"
+            id="telaPrincipal"
+        >
+
+            <div class="descricao">
+                Gerencie sua conta, privacidade, notificações e outras preferências do NIKKO.
+            </div>
+
+
+            <!-- CONTA -->
+
+            <div class="grupo">
+
+                <div class="grupo-titulo">
+                    Conta
+                </div>
+
+
+                <div class="lista">
+
+                    <button
+                        class="item-menu"
+                        onclick="abrirTela('conta')"
+                    >
+
+                        <svg
+                            class="icone-menu"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <circle
+                                cx="12"
+                                cy="8"
+                                r="4"
+                            ></circle>
+
+                            <path
+                                d="M4 21a8 8 0 0 1 16 0"
+                            ></path>
+
+                        </svg>
+
+
+                        <div class="item-textos">
+
+                            <div class="item-titulo">
+                                Conta
+                            </div>
+
+                            <div class="item-descricao">
+                                Perfil, nome, usuário, e-mail e senha
+                            </div>
+
+                        </div>
+
+
+                        <svg
+                            class="icone-chevron"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="m9 18 6-6-6-6"
+                            ></path>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRIVACIDADE -->
+
+            <div class="grupo">
+
+                <div class="grupo-titulo">
+                    Privacidade
+                </div>
+
+
+                <div class="lista">
+
+                    <button
+                        class="item-menu"
+                        onclick="abrirTela('privacidade')"
+                    >
+
+                        <svg
+                            class="icone-menu"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <rect
+                                x="5"
+                                y="10"
+                                width="14"
+                                height="10"
+                                rx="2"
+                            ></rect>
+
+                            <path
+                                d="
+                                    M8 10
+                                    V7
+                                    a4 4 0 0 1 8 0
+                                    v3
+                                "
+                            ></path>
+
+                        </svg>
+
+
+                        <div class="item-textos">
+
+                            <div class="item-titulo">
+                                Privacidade
+                            </div>
+
+                            <div class="item-descricao">
+                                Controle das suas interações no NIKKO
+                            </div>
+
+                        </div>
+
+
+                        <svg
+                            class="icone-chevron"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="m9 18 6-6-6-6"
+                            ></path>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTIFICAÇÕES -->
+
+            <div class="grupo">
+
+                <div class="grupo-titulo">
+                    Notificações
+                </div>
+
+
+                <div class="lista">
+
+                    <button
+                        class="item-menu"
+                        onclick="abrirTela('notificacoes')"
+                    >
+
+                        <svg
+                            class="icone-menu"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="
+                                    M18 9
+                                    a6 6 0 0 0-12 0
+                                    c0 7-3 7-3 8
+                                    h18
+                                    c0-1-3-1-3-8
+                                "
+                            ></path>
+
+                            <path
+                                d="M9.5 20h5"
+                            ></path>
+
+                        </svg>
+
+
+                        <div class="item-textos">
+
+                            <div class="item-titulo">
+                                Notificações
+                            </div>
+
+                            <div class="item-descricao">
+                                Escolha quais avisos você deseja receber
+                            </div>
+
+                        </div>
+
+
+                        <svg
+                            class="icone-chevron"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="m9 18 6-6-6-6"
+                            ></path>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- APARÊNCIA -->
+
+            <div class="grupo">
+
+                <div class="grupo-titulo">
+                    Aparência
+                </div>
+
+
+                <div class="lista">
+
+                    <button
+                        class="item-menu"
+                        onclick="abrirTela('aparencia')"
+                    >
+
+                        <svg
+                            class="icone-menu"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="4"
+                            ></circle>
+
+                            <path d="M12 2v2"></path>
+                            <path d="M12 20v2"></path>
+                            <path d="m4.93 4.93 1.41 1.41"></path>
+                            <path d="m17.66 17.66 1.41 1.41"></path>
+                            <path d="M2 12h2"></path>
+                            <path d="M20 12h2"></path>
+                            <path d="m4.93 19.07 1.41-1.41"></path>
+                            <path d="m17.66 6.34 1.41-1.41"></path>
+
+                        </svg>
+
+
+                        <div class="item-textos">
+
+                            <div class="item-titulo">
+                                Aparência
+                            </div>
+
+                            <div class="item-descricao">
+                                Claro, escuro ou configuração do sistema
+                            </div>
+
+                        </div>
+
+
+                        <svg
+                            class="icone-chevron"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="m9 18 6-6-6-6"
+                            ></path>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- SEGURANÇA -->
+
+            <div class="grupo">
+
+                <div class="grupo-titulo">
+                    Segurança
+                </div>
+
+
+                <div class="lista">
+
+                    <button
+                        class="item-menu"
+                        onclick="abrirTela('seguranca')"
+                    >
+
+                        <svg
+                            class="icone-menu"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="
+                                    M12 3
+                                    l7 3
+                                    v5
+                                    c0 5-3 8-7 10
+                                    c-4-2-7-5-7-10
+                                    V6
+                                    Z
+                                "
+                            ></path>
+
+                            <path
+                                d="m9 12 2 2 4-4"
+                            ></path>
+
+                        </svg>
+
+
+                        <div class="item-textos">
+
+                            <div class="item-titulo">
+                                Segurança
+                            </div>
+
+                            <div class="item-descricao">
+                                Senha, sessões e proteção da conta
+                            </div>
+
+                        </div>
+
+
+                        <svg
+                            class="icone-chevron"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="m9 18 6-6-6-6"
+                            ></path>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- AJUDA -->
+
+            <div class="grupo">
+
+                <div class="grupo-titulo">
+                    Suporte
+                </div>
+
+
+                <div class="lista">
+
+                    <button
+                        class="item-menu"
+                        onclick="abrirTela('ajuda')"
+                    >
+
+                        <svg
+                            class="icone-menu"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="9"
+                            ></circle>
+
+                            <path
+                                d="
+                                    M9.6 9
+                                    a2.6 2.6 0 0 1 5 1
+                                    c0 2-2.6 2.1-2.6 4
+                                "
+                            ></path>
+
+                            <circle
+                                cx="12"
+                                cy="17.3"
+                                r=".6"
+                                fill="currentColor"
+                                stroke="none"
+                            ></circle>
+
+                        </svg>
+
+
+                        <div class="item-textos">
+
+                            <div class="item-titulo">
+                                Ajuda
+                            </div>
+
+                            <div class="item-descricao">
+                                Central de ajuda e suporte
+                            </div>
+
+                        </div>
+
+
+                        <svg
+                            class="icone-chevron"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="m9 18 6-6-6-6"
+                            ></path>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- SOBRE -->
+
+            <div class="grupo">
+
+                <div class="grupo-titulo">
+                    Informações
+                </div>
+
+
+                <div class="lista">
+
+                    <button
+                        class="item-menu"
+                        onclick="abrirTela('sobre')"
+                    >
+
+                        <svg
+                            class="icone-menu"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="9"
+                            ></circle>
+
+                            <path
+                                d="M12 10v6"
+                            ></path>
+
+                            <circle
+                                cx="12"
+                                cy="7"
+                                r=".6"
+                                fill="currentColor"
+                                stroke="none"
+                            ></circle>
+
+                        </svg>
+
+
+                        <div class="item-textos">
+
+                            <div class="item-titulo">
+                                Sobre o NIKKO
+                            </div>
+
+                            <div class="item-descricao">
+                                Versão e informações do aplicativo
+                            </div>
+
+                        </div>
+
+
+                        <svg
+                            class="icone-chevron"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="m9 18 6-6-6-6"
+                            ></path>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CONTA
+        ================================================== -->
+
+        <section
+            class="tela"
+            id="telaConta"
+        >
+
+            <div class="descricao">
+                Gerencie as informações da sua conta e do seu perfil.
+            </div>
+
+
+            <div
+                class="mensagem"
+                id="mensagemConta"
+            ></div>
+
+
+            <div class="formulario">
+
+
+                <div class="editar-foto">
+
+                    <div
+                        class="foto-atual"
+                        id="fotoAtual"
+                    ></div>
+
+
+                    <input
+                        type="file"
+                        id="inputFotoPerfil"
+                        accept="image/*"
+                        style="display:none"
+                    >
+
+
+                    <button
+                        class="botao-foto"
+                        onclick="escolherFotoPerfil()"
+                    >
+                        Alterar foto
+                    </button>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="contaNome"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Nome de usuário
+                    </label>
+
+                    <input
+                        type="text"
+                        id="contaUsuario"
+                    >
+
+                    <div class="texto-pequeno">
+                        Use letras, números, ponto ou underline.
+                    </div>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="contaEmail"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Data de nascimento
+                    </label>
+
+                    <input
+                        type="date"
+                        id="contaNascimento"
+                    >
+
+                    <div class="texto-pequeno">
+                        Sua data de nascimento não aparece publicamente no perfil.
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="botao-principal"
+                    onclick="salvarDadosConta()"
+                >
+                    Salvar alterações
+                </button>
+
+            </div>
+
+
+            <div
+                class="formulario"
+                style="margin-top:15px;"
+            >
+
+                <div class="campo">
+
+                    <label>
+                        Alterar senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senhaAtual"
+                        placeholder="Senha atual"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <input
+                        type="password"
+                        id="novaSenha"
+                        placeholder="Nova senha"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <input
+                        type="password"
+                        id="confirmarNovaSenha"
+                        placeholder="Confirmar nova senha"
+                    >
+
+                </div>
+
+
+                <button
+                    class="botao-principal"
+                    onclick="alterarSenha()"
+                >
+                    Alterar senha
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PRIVACIDADE
+        ================================================== -->
+
+        <section
+            class="tela"
+            id="telaPrivacidade"
+        >
+
+            <div class="descricao">
+                Controle como outras pessoas interagem com você.
+            </div>
+
+
+            <div class="formulario">
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Conta privada
+                        </div>
+
+                        <div class="linha-descricao">
+                            Por enquanto, o sistema mantém o seguir livre.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="privacidadeContaPrivada"
+                            disabled
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Mostrar atividade online
+                        </div>
+
+                        <div class="linha-descricao">
+                            Permite que outras pessoas vejam se você está online.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="atividadeOnline"
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Mostrar última vez online
+                        </div>
+
+                        <div class="linha-descricao">
+                            Mostra quando você esteve ativo pela última vez.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="ultimaVezOnline"
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Permitir respostas aos stories
+                        </div>
+
+                        <div class="linha-descricao">
+                            Outras pessoas poderão responder aos seus stories.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="respostasStories"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Permitir compartilhamento dos stories
+                        </div>
+
+                        <div class="linha-descricao">
+                            Permite que outras pessoas compartilhem seus stories.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="compartilhamentoStories"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Mensagens
+                        </div>
+
+                        <div class="linha-descricao">
+                            Inicialmente, somente pessoas que você segue poderão enviar mensagens.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Comentários
+                        </div>
+
+                        <div class="linha-descricao">
+                            Por padrão, todas as pessoas podem comentar suas publicações.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Menções
+                        </div>
+
+                        <div class="linha-descricao">
+                            Inicialmente, pessoas que você segue podem mencionar você.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NOTIFICAÇÕES
+        ================================================== -->
+
+        <section
+            class="tela"
+            id="telaNotificacoes"
+        >
+
+            <div class="descricao">
+                Escolha quais interações devem gerar notificações.
+            </div>
+
+
+            <div class="formulario">
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Curtidas
+                        </div>
+
+                        <div class="linha-descricao">
+                            Quando alguém curtir suas publicações ou stories.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notifCurtidas"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Comentários
+                        </div>
+
+                        <div class="linha-descricao">
+                            Quando alguém comentar nas suas publicações.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notifComentarios"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Novos seguidores
+                        </div>
+
+                        <div class="linha-descricao">
+                            Quando alguém começar a seguir você.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notifSeguidores"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Respostas aos stories
+                        </div>
+
+                        <div class="linha-descricao">
+                            Quando alguém responder aos seus stories.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notifRespostas"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Mensagens
+                        </div>
+
+                        <div class="linha-descricao">
+                            Quando você receber uma nova mensagem.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notifMensagens"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Compartilhamentos
+                        </div>
+
+                        <div class="linha-descricao">
+                            Quando alguém compartilhar seu conteúdo.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notifCompartilhamentos"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="linha-config">
+
+                    <div class="linha-info">
+
+                        <div class="linha-titulo">
+                            Avisos do NIKKO
+                        </div>
+
+                        <div class="linha-descricao">
+                            Informações importantes sobre o aplicativo.
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="notifSistema"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             APARÊNCIA
+        ================================================== -->
+
+        <section
+            class="tela"
+            id="telaAparencia"
+        >
+
+            <div class="descricao">
+                Escolha como o NIKKO deve aparecer para você.
+            </div>
+
+
+            <div class="formulario">
+
+                <label class="opcao-aparencia">
+
+                    <input
+                        type="radio"
+                        name="tema"
+                        value="claro"
+                        onchange="alterarTema('claro')"
+                    >
+
+                    <div class="opcao-aparencia-texto">
+
+                        <strong>
+                            Claro
+                        </strong>
+
+                        <span>
+                            Fundo claro e interface clara.
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <label class="opcao-aparencia">
+
+                    <input
+                        type="radio"
+                        name="tema"
+                        value="escuro"
+                        onchange="alterarTema('escuro')"
+                    >
+
+                    <div class="opcao-aparencia-texto">
+
+                        <strong>
+                            Escuro
+                        </strong>
+
+                        <span>
+                            Fundo escuro e interface escura.
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <label class="opcao-aparencia">
+
+                    <input
+                        type="radio"
+                        name="tema"
+                        value="sistema"
+                        onchange="alterarTema('sistema')"
+                    >
+
+                    <div class="opcao-aparencia-texto">
+
+                        <strong>
+                            Sistema
+                        </strong>
+
+                        <span>
+                            Usa a preferência de aparência do dispositivo.
+                        </span>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SEGURANÇA
+        ================================================== -->
+
+        <section
+            class="tela"
+            id="telaSeguranca"
+        >
+
+            <div class="descricao">
+                Proteja sua conta e gerencie suas sessões.
+            </div>
+
+
+            <div class="formulario">
+
+
+                <button
+                    class="botao-secundario"
+                    onclick="irAlterarSenha()"
+                >
+                    Alterar senha
+                </button>
+
+
+                <button
+                    class="botao-secundario"
+                    onclick="mostrarSessaoAtual()"
+                >
+                    Sessões e dispositivos
+                </button>
+
+
+                <button
+                    class="botao-secundario"
+                    onclick="alert('A verificação em duas etapas ficará disponível em uma atualização futura.')"
+                >
+                    Verificação em duas etapas
+                </button>
+
+
+                <button
+                    class="botao-perigo"
+                    onclick="sairTodosDispositivos()"
+                >
+                    Sair da conta
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AJUDA
+        ================================================== -->
+
+        <section
+            class="tela"
+            id="telaAjuda"
+        >
+
+            <div class="descricao">
+                Encontre respostas e informações para usar o NIKKO.
+            </div>
+
+
+            <div class="lista">
+
+
+                <button
+                    class="item-menu"
+                    onclick="alert('A Central de ajuda será adicionada conforme as funções do NIKKO forem concluídas.')"
+                >
+
+                    <div class="item-textos">
+
+                        <div class="item-titulo">
+                            Central de ajuda
+                        </div>
+
+                        <div class="item-descricao">
+                            Encontre informações sobre o NIKKO
+                        </div>
+
+                    </div>
+
+                    <svg
+                        class="icone-chevron"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <path
+                            d="m9 18 6-6-6-6"
+                        ></path>
+
+                    </svg>
+
+                </button>
+
+
+                <button
+                    class="item-menu"
+                    onclick="alert('As perguntas frequentes serão adicionadas conforme o sistema crescer.')"
+                >
+
+                    <div class="item-textos">
+
+                        <div class="item-titulo">
+                            Perguntas frequentes
+                        </div>
+
+                        <div class="item-descricao">
+                            Dúvidas comuns sobre o aplicativo
+                        </div>
+
+                    </div>
+
+                    <svg
+                        class="icone-chevron"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <path
+                            d="m9 18 6-6-6-6"
+                        ></path>
+
+                    </svg>
+
+                </button>
+
+
+                <button
+                    class="item-menu"
+                    onclick="alert('O relatório de problemas será adicionado em uma próxima etapa.')"
+                >
+
+                    <div class="item-textos">
+
+                        <div class="item-titulo">
+                            Relatar um problema
+                        </div>
+
+                        <div class="item-descricao">
+                            Informe um erro ou problema
+                        </div>
+
+                    </div>
+
+                    <svg
+                        class="icone-chevron"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <path
+                            d="m9 18 6-6-6-6"
+                        ></path>
+
+                    </svg>
+
+                </button>
+
+
+                <button
+                    class="item-menu"
+                    onclick="alert('O contato com o suporte será adicionado posteriormente.')"
+                >
+
+                    <div class="item-textos">
+
+                        <div class="item-titulo">
+                            Entrar em contato
+                        </div>
+
+                        <div class="item-descricao">
+                            Fale com o suporte do NIKKO
+                        </div>
+
+                    </div>
+
+                    <svg
+                        class="icone-chevron"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <path
+                            d="m9 18 6-6-6-6"
+                        ></path>
+
+                    </svg>
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SOBRE
+        ================================================== -->
+
+        <section
+            class="tela"
+            id="telaSobre"
+        >
+
+            <div class="descricao">
+                Informações sobre o aplicativo NIKKO.
+            </div>
+
+
+            <div class="formulario"
+                 style="text-align:center;">
+
+                <div
+                    style="
+                        font-size:34px;
+                        font-weight:800;
+                        letter-spacing:6px;
+                        margin-bottom:10px;
+                    "
+                >
+                    NIKKO
+                </div>
+
+
+                <div
+                    style="
+                        font-size:13px;
+                        color:#6b7280;
+                    "
+                >
+                    Sua rede social
+                </div>
+
+
+                <div
+                    style="
+                        margin-top:25px;
+                        padding-top:18px;
+                        border-top:1px solid #f1f5f9;
+                        text-align:left;
+                    "
+                >
+
+                    <div
+                        style="
+                            font-size:13px;
+                            font-weight:700;
+                            margin-bottom:8px;
+                        "
+                    >
+                        Versão
+                    </div>
+
+                    <div
+                        style="
+                            font-size:13px;
+                            color:#6b7280;
+                        "
+                    >
+                        NIKKO 1.0
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="botao-secundario"
+                    onclick="alert('Os termos de uso serão adicionados posteriormente.')"
+                >
+                    Termos de uso
+                </button>
+
+
+                <button
+                    class="botao-secundario"
+                    onclick="alert('A política de privacidade será adicionada posteriormente.')"
+                >
+                    Política de privacidade
+                </button>
+
+
+                <button
+                    class="botao-secundario"
+                    onclick="alert('Licenças e informações técnicas serão adicionadas posteriormente.')"
+                >
+                    Licenças
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         CARREGAMENTO
+    ===================================================== -->
+
+    <div
+        class="overlay"
+        id="overlay"
+    >
+
+        <div class="spinner"></div>
+
+        <div
+            class="texto-carregamento"
+            id="textoCarregamento"
+        >
+            Carregando...
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* =====================================================
+           CONTA ATUAL
+        ===================================================== */
+
+        var usuarioAtual =
+            localStorage.getItem(
+                "usuarioAtual"
+            ) || "";
+
+
+        var contas =
+            JSON.parse(
+                localStorage.getItem(
+                    "contasNikko"
+                )
+            ) || [];
+
+
+        var contaAtual =
+            null;
+
+
+        function carregarContaAtual() {
+
+            for (
+                var i = 0;
+                i < contas.length;
+                i++
+            ) {
+
+                if (
+                    (
+                        contas[i].usuario ||
+                        ""
+                    ).toLowerCase() ===
+                    usuarioAtual.toLowerCase()
+                ) {
+
+                    contaAtual =
+                        contas[i];
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+
+        carregarContaAtual();
+
+
+        if (
+            !contaAtual
+        ) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        /* =====================================================
+           TEMA
+        ===================================================== */
+
+        var temaSalvo =
+            localStorage.getItem(
+                "temaNikko"
+            );
+
+
+        function aplicarTema() {
+
+    var tema =
+        localStorage.getItem(
+            "temaNikko"
+        ) || "sistema";
+
+
+    if (tema === "escuro") {
+
+        document.body.classList.add("dark");
+
+    }
+
+    else if (tema === "claro") {
+
+        document.body.classList.remove("dark");
+
+    }
+
+    else {
+
+        if (
+            window.matchMedia &&
+            window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches
+        ) {
+
+            document.body.classList.add("dark");
+
+        }
+
+        else {
+
+            document.body.classList.remove("dark");
+
+        }
+
+    }
+
+}
+
+
+aplicarTema();
+
+
+            /* SISTEMA */
+
+            if (
+                window.matchMedia &&
+                window.matchMedia(
+                    "(prefers-color-scheme: dark)"
+                ).matches
+            ) {
+
+                document.body.classList.add(
+                    "dark"
+                );
+
+            }
+
+            else {
+
+                document.body.classList.remove(
+                    "dark"
+                );
+
+            }
+
+        aplicarTemaAtual();
+
+
+        /* =====================================================
+           TELAS
+        ===================================================== */
+
+        var telas = {
+
+            principal:
+                document.getElementById(
+                    "telaPrincipal"
+                ),
+
+            conta:
+                document.getElementById(
+                    "telaConta"
+                ),
+
+            privacidade:
+                document.getElementById(
+                    "telaPrivacidade"
+                ),
+
+            notificacoes:
+                document.getElementById(
+                    "telaNotificacoes"
+                ),
+
+            aparencia:
+                document.getElementById(
+                    "telaAparencia"
+                ),
+
+            seguranca:
+                document.getElementById(
+                    "telaSeguranca"
+                ),
+
+            ajuda:
+                document.getElementById(
+                    "telaAjuda"
+                ),
+
+            sobre:
+                document.getElementById(
+                    "telaSobre"
+                )
+
+        };
+
+
+        var titulos = {
+
+            principal:
+                "Configurações",
+
+            conta:
+                "Conta",
+
+            privacidade:
+                "Privacidade",
+
+            notificacoes:
+                "Notificações",
+
+            aparencia:
+                "Aparência",
+
+            seguranca:
+                "Segurança",
+
+            ajuda:
+                "Ajuda",
+
+            sobre:
+                "Sobre o NIKKO"
+
+        };
+
+
+        var telaAtual =
+            "principal";
+
+
+        function abrirTela(nome) {
+
+    var todasAsTelas =
+        document.querySelectorAll(".tela");
+
+    for (
+        var i = 0;
+        i < todasAsTelas.length;
+        i++
+    ) {
+
+        todasAsTelas[i].classList.remove(
+            "ativa"
+        );
+
+    }
+
+
+    var telaEscolhida =
+        document.getElementById(
+            "tela" +
+            nome.charAt(0).toUpperCase() +
+            nome.slice(1)
+        );
+
+
+    if (!telaEscolhida) {
+
+        console.log(
+            "Tela não encontrada:",
+            nome
+        );
+
+        return;
+
+    }
+
+
+    telaEscolhida.classList.add(
+        "ativa"
+    );
+
+
+    telaAtual =
+        nome;
+
+
+    document.getElementById(
+        "tituloTopo"
+    ).textContent =
+        titulos[nome] || "Configurações";
+
+
+    if (nome === "conta") {
+
+        carregarDadosConta();
+
+    }
+
+    else if (nome === "privacidade") {
+
+        carregarPrivacidade();
+
+    }
+
+    else if (nome === "notificacoes") {
+
+        carregarNotificacoesConfig();
+
+    }
+
+    else if (nome === "aparencia") {
+
+        carregarAparencia();
+
+    }
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+        function voltar() {
+
+            if (
+                telaAtual !==
+                "principal"
+            ) {
+
+                abrirTela(
+                    "principal"
+                );
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "painel.html";
+
+        }
+
+
+        /* =====================================================
+           CONTA
+        ===================================================== */
+
+        function carregarDadosConta() {
+
+            if (
+                !contaAtual
+            ) {
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "contaNome"
+            ).value =
+                contaAtual.nome || "";
+
+
+            document.getElementById(
+                "contaUsuario"
+            ).value =
+                contaAtual.usuario
+                    ? "@" +
+                      contaAtual.usuario
+                    : "";
+
+
+            document.getElementById(
+                "contaEmail"
+            ).value =
+                contaAtual.email || "";
+
+
+            document.getElementById(
+                "contaNascimento"
+            ).value =
+                contaAtual.dataNascimento || "";
+
+
+            mostrarFotoConta();
+
+        }
+
+
+        function mostrarFotoConta() {
+
+            var area =
+                document.getElementById(
+                    "fotoAtual"
+                );
+
+
+            area.innerHTML =
+                "";
+
+
+            if (
+                contaAtual &&
+                contaAtual.fotoPerfil
+            ) {
+
+                var img =
+                    document.createElement(
+                        "img"
+                    );
+
+
+                img.src =
+                    contaAtual.fotoPerfil;
+
+
+                area.appendChild(
+                    img
+                );
+
+            }
+
+            else {
+
+                area.textContent =
+                    (
+                        contaAtual &&
+                        contaAtual.nome
+                            ? contaAtual.nome
+                            : "U"
+                    )
+                    .charAt(0)
+                    .toUpperCase();
+
+            }
+
+        }
+
+
+        function escolherFotoPerfil() {
+
+            document.getElementById(
+                "inputFotoPerfil"
+            ).value = "";
+
+
+            document.getElementById(
+                "inputFotoPerfil"
+            ).click();
+
+        }
+
+
+        document.getElementById(
+            "inputFotoPerfil"
+        ).addEventListener(
+            "change",
+            function() {
+
+                var arquivo =
+                    this.files[0];
+
+
+                if (
+                    !arquivo
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    arquivo.type.indexOf(
+                        "image/"
+                    ) !== 0
+                ) {
+
+                    return;
+
+                }
+
+
+                var leitor =
+                    new FileReader();
+
+
+                leitor.onload =
+                    function(evento) {
+
+                        contaAtual.fotoPerfil =
+                            evento.target.result;
+
+
+                        salvarContaAtual();
+
+
+                        mostrarFotoConta();
+
+
+                        mostrarMensagemConta(
+                            "Foto de perfil atualizada.",
+                            "sucesso"
+                        );
+
+                    };
+
+
+                leitor.readAsDataURL(
+                    arquivo
+                );
+
+            }
+        );
+
+
+        function salvarContaAtual() {
+
+            var contasAtuais =
+                JSON.parse(
+                    localStorage.getItem(
+                        "contasNikko"
+                    )
+                ) || [];
+
+
+            for (
+                var i = 0;
+                i < contasAtuais.length;
+                i++
+            ) {
+
+                if (
+                    contasAtuais[i].id ===
+                    contaAtual.id
+                ) {
+
+                    contasAtuais[i] =
+                        contaAtual;
+
+                    break;
+
+                }
+
+            }
+
+
+            localStorage.setItem(
+                "contasNikko",
+                JSON.stringify(
+                    contasAtuais
+                )
+            );
+
+
+            contas =
+                contasAtuais;
+
+        }
+
+
+        function salvarDadosConta() {
+
+            var novoNome =
+                document.getElementById(
+                    "contaNome"
+                ).value.trim();
+
+
+            var novoUsuario =
+                document.getElementById(
+                    "contaUsuario"
+                ).value
+                    .trim()
+                    .toLowerCase()
+                    .replace(
+                        /^@/,
+                        ""
+                    )
+                    .replace(
+                        /[^a-z0-9._]/g,
+                        ""
+                    );
+
+
+            var novoEmail =
+                document.getElementById(
+                    "contaEmail"
+                ).value
+                    .trim()
+                    .toLowerCase();
+
+
+            var novoNascimento =
+                document.getElementById(
+                    "contaNascimento"
+                ).value;
+
+
+            if (
+                novoNome === ""
+            ) {
+
+                mostrarMensagemConta(
+                    "Digite seu nome.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                novoUsuario.length < 3
+            ) {
+
+                mostrarMensagemConta(
+                    "O nome de usuário precisa ter pelo menos 3 caracteres.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                novoEmail === ""
+            ) {
+
+                mostrarMensagemConta(
+                    "Digite seu e-mail.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            /* Verificar usuário duplicado */
+
+            for (
+                var i = 0;
+                i < contas.length;
+                i++
+            ) {
+
+                if (
+                    contas[i].id !==
+                    contaAtual.id &&
+                    (
+                        contas[i].usuario ||
+                        ""
+                    ).toLowerCase() ===
+                    novoUsuario
+                ) {
+
+                    mostrarMensagemConta(
+                        "Esse nome de usuário já está sendo usado.",
+                        "erro"
+                    );
+
+                    return;
+
+                }
+
+            }
+
+
+            /* Verificar e-mail duplicado */
+
+            for (
+                var j = 0;
+                j < contas.length;
+                j++
+            ) {
+
+                if (
+                    contas[j].id !==
+                    contaAtual.id &&
+                    (
+                        contas[j].email ||
+                        ""
+                    ).toLowerCase() ===
+                    novoEmail
+                ) {
+
+                    mostrarMensagemConta(
+                        "Esse e-mail já está sendo usado.",
+                        "erro"
+                    );
+
+                    return;
+
+                }
+
+            }
+
+
+            var usuarioAntigo =
+                contaAtual.usuario;
+
+
+            contaAtual.nome =
+                novoNome;
+
+
+            contaAtual.usuario =
+                novoUsuario;
+
+
+            contaAtual.email =
+                novoEmail;
+
+
+            contaAtual.dataNascimento =
+                novoNascimento;
+
+
+            salvarContaAtual();
+
+
+            localStorage.setItem(
+                "usuarioAtual",
+                novoUsuario
+            );
+
+
+            localStorage.setItem(
+                "nomeUsuario",
+                novoNome
+            );
+
+
+            localStorage.setItem(
+                "emailUsuario",
+                novoEmail
+            );
+
+
+            /*
+               Atualizar listas de seguir
+               quando o usuário muda de @.
+            */
+
+            if (
+                usuarioAntigo &&
+                usuarioAntigo !==
+                novoUsuario
+            ) {
+
+                migrarDadosUsuario(
+                    usuarioAntigo,
+                    novoUsuario
+                );
+
+            }
+
+
+            carregarContaAtual();
+
+
+            mostrarMensagemConta(
+                "Alterações salvas com sucesso.",
+                "sucesso"
+            );
+
+        }
+
+
+        function migrarDadosUsuario(
+            antigo,
+            novo
+        ) {
+
+            var seguindo =
+                localStorage.getItem(
+                    "seguindo_" +
+                    antigo
+                );
+
+
+            if (
+                seguindo !== null
+            ) {
+
+                localStorage.setItem(
+                    "seguindo_" +
+                    novo,
+                    seguindo
+                );
+
+
+                localStorage.removeItem(
+                    "seguindo_" +
+                    antigo
+                );
+
+            }
+
+
+            var seguidores =
+                localStorage.getItem(
+                    "seguidores_" +
+                    antigo
+                );
+
+
+            if (
+                seguidores !== null
+            ) {
+
+                localStorage.setItem(
+                    "seguidores_" +
+                    novo,
+                    seguidores
+                );
+
+
+                localStorage.removeItem(
+                    "seguidores_" +
+                    antigo
+                );
+
+            }
+
+
+            var notificacoes =
+                localStorage.getItem(
+                    "notificacoes_" +
+                    antigo
+                );
+
+
+            if (
+                notificacoes !== null
+            ) {
+
+                localStorage.setItem(
+                    "notificacoes_" +
+                    novo,
+                    notificacoes
+                );
+
+
+                localStorage.removeItem(
+                    "notificacoes_" +
+                    antigo
+                );
+
+            }
+
+        }
+
+
+        function alterarSenha() {
+
+            var senhaAtual =
+                document.getElementById(
+                    "senhaAtual"
+                ).value;
+
+
+            var novaSenha =
+                document.getElementById(
+                    "novaSenha"
+                ).value;
+
+
+            var confirmar =
+                document.getElementById(
+                    "confirmarNovaSenha"
+                ).value;
+
+
+            if (
+                senhaAtual !==
+                contaAtual.senha
+            ) {
+
+                mostrarMensagemConta(
+                    "A senha atual está incorreta.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                novaSenha.length < 6
+            ) {
+
+                mostrarMensagemConta(
+                    "A nova senha precisa ter pelo menos 6 caracteres.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                novaSenha !==
+                confirmar
+            ) {
+
+                mostrarMensagemConta(
+                    "As novas senhas não coincidem.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            contaAtual.senha =
+                novaSenha;
+
+
+            salvarContaAtual();
+
+
+            document.getElementById(
+                "senhaAtual"
+            ).value = "";
+
+
+            document.getElementById(
+                "novaSenha"
+            ).value = "";
+
+
+            document.getElementById(
+                "confirmarNovaSenha"
+            ).value = "";
+
+
+            mostrarMensagemConta(
+                "Senha alterada com sucesso.",
+                "sucesso"
+            );
+
+        }
+
+
+        function mostrarMensagemConta(
+            texto,
+            tipo
+        ) {
+
+            var mensagem =
+                document.getElementById(
+                    "mensagemConta"
+                );
+
+
+            mensagem.textContent =
+                texto;
+
+
+            mensagem.className =
+                "mensagem ativa " +
+                tipo;
+
+        }
+
+
+        /* =====================================================
+           PRIVACIDADE
+        ===================================================== */
+
+        function chavePrivacidade() {
+
+            return (
+                "privacidade_" +
+                contaAtual.id
+            );
+
+        }
+
+
+        function carregarPrivacidade() {
+
+            var dados =
+                JSON.parse(
+                    localStorage.getItem(
+                        chavePrivacidade()
+                    )
+                ) || {};
+
+
+            document.getElementById(
+                "atividadeOnline"
+            ).checked =
+                dados.atividadeOnline !==
+                false;
+
+
+            document.getElementById(
+                "ultimaVezOnline"
+            ).checked =
+                dados.ultimaVezOnline !==
+                false;
+
+
+            document.getElementById(
+                "respostasStories"
+            ).checked =
+                dados.respostasStories !==
+                false;
+
+
+            document.getElementById(
+                "compartilhamentoStories"
+            ).checked =
+                dados.compartilhamentoStories !==
+                false;
+
+
+            salvarPrivacidadeAutomaticamente();
+
+        }
+
+
+        function salvarPrivacidadeAutomaticamente() {
+
+            var dados = {
+
+                atividadeOnline:
+                    document.getElementById(
+                        "atividadeOnline"
+                    ).checked,
+
+                ultimaVezOnline:
+                    document.getElementById(
+                        "ultimaVezOnline"
+                    ).checked,
+
+                respostasStories:
+                    document.getElementById(
+                        "respostasStories"
+                    ).checked,
+
+                compartilhamentoStories:
+                    document.getElementById(
+                        "compartilhamentoStories"
+                    ).checked
+
+            };
+
+
+            localStorage.setItem(
+                chavePrivacidade(),
+                JSON.stringify(
+                    dados
+                )
+            );
+
+        }
+
+
+        [
+            "atividadeOnline",
+            "ultimaVezOnline",
+            "respostasStories",
+            "compartilhamentoStories"
+        ].forEach(
+            function(id) {
+
+                document.getElementById(
+                    id
+                ).addEventListener(
+                    "change",
+                    salvarPrivacidadeAutomaticamente
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           NOTIFICAÇÕES
+        ===================================================== */
+
+        function chaveNotificacoes() {
+
+            return (
+                "config_notificacoes_" +
+                contaAtual.id
+            );
+
+        }
+
+
+        var idsNotificacoes = [
+
+            "notifCurtidas",
+            "notifComentarios",
+            "notifSeguidores",
+            "notifRespostas",
+            "notifMensagens",
+            "notifCompartilhamentos",
+            "notifSistema"
+
+        ];
+
+
+        function carregarNotificacoesConfig() {
+
+            var dados =
+                JSON.parse(
+                    localStorage.getItem(
+                        chaveNotificacoes()
+                    )
+                ) || {};
+
+
+            for (
+                var i = 0;
+                i < idsNotificacoes.length;
+                i++
+            ) {
+
+                var id =
+                    idsNotificacoes[i];
+
+
+                document.getElementById(
+                    id
+                ).checked =
+                    dados[id] !==
+                    false;
+
+            }
+
+
+            salvarNotificacoesConfig();
+
+        }
+
+
+        function salvarNotificacoesConfig() {
+
+            var dados =
+                {};
+
+
+            for (
+                var i = 0;
+                i < idsNotificacoes.length;
+                i++
+            ) {
+
+                var id =
+                    idsNotificacoes[i];
+
+
+                dados[id] =
+                    document.getElementById(
+                        id
+                    ).checked;
+
+            }
+
+
+            localStorage.setItem(
+                chaveNotificacoes(),
+                JSON.stringify(
+                    dados
+                )
+            );
+
+        }
+
+
+        for (
+            var i = 0;
+            i < idsNotificacoes.length;
+            i++
+        ) {
+
+            document.getElementById(
+                idsNotificacoes[i]
+            ).addEventListener(
+                "change",
+                salvarNotificacoesConfig
+            );
+
+        }
+
+
+        /* =====================================================
+           APARÊNCIA
+        ===================================================== */
+
+        function carregarAparencia() {
+
+            var tema =
+                localStorage.getItem(
+                    "temaNikko"
+                ) || "sistema";
+
+
+            var radio =
+                document.querySelector(
+                    'input[name="tema"][value="' +
+                    tema +
+                    '"]'
+                );
+
+
+            if (
+                radio
+            ) {
+
+                radio.checked =
+                    true;
+
+            }
+
+        }
+
+
+        function alterarTema(tema) {
+
+    localStorage.setItem(
+        "temaNikko",
+        tema
+    );
+
+
+    if (tema === "escuro") {
+
+        localStorage.setItem(
+            "modoEscuro",
+            "true"
+        );
+
+    }
+
+    else if (tema === "claro") {
+
+        localStorage.setItem(
+            "modoEscuro",
+            "false"
+        );
+
+    }
+
+    else {
+
+        var sistemaEscuro =
+            window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches;
+
+
+        localStorage.setItem(
+            "modoEscuro",
+            sistemaEscuro
+                ? "true"
+                : "false"
+        );
+
+    }
+
+
+    aplicarTemaAtual();
+
+}
+
+    function aplicarTemaAtual() {
+
+    var tema =
+        localStorage.getItem(
+            "temaNikko"
+        ) || "sistema";
+
+
+    if (tema === "escuro") {
+
+        document.body.classList.add("dark");
+
+        return;
+
+    }
+
+
+    if (tema === "claro") {
+
+        document.body.classList.remove("dark");
+
+        return;
+
+    }
+
+
+    if (
+        window.matchMedia &&
+        window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        ).matches
+    ) {
+
+        document.body.classList.add("dark");
+
+    }
+
+    else {
+
+        document.body.classList.remove("dark");
+
+    }
+
+}
+
+
+        /* =====================================================
+           SEGURANÇA
+        ===================================================== */
+
+        function irAlterarSenha() {
+
+            abrirTela(
+                "conta"
+            );
+
+
+            document.getElementById(
+                "senhaAtual"
+            ).focus();
+
+        }
+
+
+        function mostrarSessaoAtual() {
+
+            var nome =
+                contaAtual.nome ||
+                "Usuário";
+
+
+            var usuario =
+                contaAtual.usuario ||
+                "";
+
+
+            alert(
+                "Sessão atual\n\n" +
+                nome +
+                "\n@" +
+                usuario +
+                "\n\n" +
+                "Dispositivo atual: navegador"
+            );
+
+        }
+
+
+        function sairTodosDispositivos() {
+
+            var confirmar =
+                confirm(
+                    "Deseja sair da sua conta neste navegador?"
+                );
+
+
+            if (
+                !confirmar
+            ) {
+
+                return;
+
+            }
+
+
+            localStorage.removeItem(
+                "usuarioLogado"
+            );
+
+
+            localStorage.removeItem(
+                "usuarioAtual"
+            );
+
+
+            localStorage.removeItem(
+                "nomeUsuario"
+            );
+
+
+            localStorage.removeItem(
+                "emailUsuario"
+            );
+
+
+            mostrarCarregamento(
+                "Saindo da conta"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "login.html";
+
+                },
+                900
+            );
+
+        }
+
+
+        /* =====================================================
+           CARREGAMENTO
+        ===================================================== */
+
+        function mostrarCarregamento(
+            texto
+        ) {
+
+            document.getElementById(
+                "textoCarregamento"
+            ).textContent =
+                texto;
+
+
+            document.getElementById(
+                "overlay"
+            ).classList.add(
+                "ativo"
+            );
+
+        }
+
+
+        /* =====================================================
+           INICIALIZAÇÃO
+        ===================================================== */
+
+        carregarDadosConta();
+
+    </script>
+
+</body>
+
+</html>

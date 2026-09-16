@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NIKKO - Criar conta</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            min-height: 100vh;
+
+            background: #f7f7f8;
+
+            color: #111827;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            transition:
+                background 0.3s,
+                color 0.3s;
+        }
+
+
+        /* ==============================
+           CONTAINER
+        ============================== */
+
+        .cadastro-container {
+
+            width: 100%;
+
+            max-width: 410px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+        }
+
+
+        /* ==============================
+           LOGO
+        ============================== */
+
+        .logo {
+
+            font-size: 38px;
+
+            font-weight: 800;
+
+            letter-spacing: 7px;
+
+            color: #111827;
+
+            margin-bottom: 12px;
+
+            user-select: none;
+        }
+
+
+        .subtitulo {
+
+            font-size: 15px;
+
+            color: #6b7280;
+
+            margin-bottom: 30px;
+
+            text-align: center;
+        }
+
+
+        /* ==============================
+           CAIXA
+        ============================== */
+
+        .cadastro-box {
+
+            width: 100%;
+
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+
+        /* ==============================
+           CAMPOS
+        ============================== */
+
+        .campo {
+
+            margin-bottom: 17px;
+        }
+
+
+        .campo label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 7px;
+
+            color: #374151;
+        }
+
+
+        .campo input {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            padding: 0 14px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: white;
+
+            color: #111827;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .campo input:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+
+        /* ==============================
+           SENHA
+        ============================== */
+
+        .senha-area {
+
+            position: relative;
+        }
+
+
+        .senha-area input {
+
+            padding-right: 48px;
+        }
+
+
+        .botao-olho {
+
+            position: absolute;
+
+            right: 10px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 32px;
+
+            height: 32px;
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 6px;
+        }
+
+
+        .botao-olho:hover {
+
+            background: #f3f4f6;
+        }
+
+
+        .icone-olho {
+
+            width: 20px;
+
+            height: 20px;
+
+            fill: none;
+
+            stroke: #4b5563;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+        }
+
+
+        /* ==============================
+           ERRO
+        ============================== */
+
+        .erro {
+
+            display: none;
+
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            color: #b91c1c;
+
+            border-radius: 8px;
+
+            padding: 11px 12px;
+
+            font-size: 13px;
+
+            margin-bottom: 17px;
+        }
+
+
+        .erro.ativo {
+
+            display: block;
+        }
+
+
+        .erro-campo input {
+
+            border-color: #dc2626 !important;
+
+            box-shadow:
+                0 0 0 3px rgba(220, 38, 38, 0.08) !important;
+        }
+
+
+        /* ==============================
+           BOTÃO
+        ============================== */
+
+        .botao-criar-conta {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #111827;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s,
+                transform 0.1s;
+        }
+
+
+        .botao-criar-conta:hover {
+
+            background: #1f2937;
+        }
+
+
+        .botao-criar-conta:active {
+
+            transform: scale(0.99);
+        }
+
+
+        .botao-criar-conta:disabled {
+
+            opacity: 0.8;
+
+            cursor: default;
+        }
+
+
+        /* ==============================
+           VOLTAR
+        ============================== */
+
+        .voltar {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #2563eb;
+
+            font-size: 13px;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .voltar:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ==============================
+           CARREGAMENTO
+        ============================== */
+
+        .carregando-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(255,255,255,0.96);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            z-index: 9999;
+        }
+
+
+        .carregando-overlay.ativo {
+
+            display: flex;
+        }
+
+
+        .spinner {
+
+            width: 48px;
+
+            height: 48px;
+
+            border: 4px solid #e5e7eb;
+
+            border-top-color: #111827;
+
+            border-radius: 50%;
+
+            animation:
+                girar 0.8s linear infinite;
+
+            margin-bottom: 18px;
+        }
+
+
+        @keyframes girar {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        .texto-carregando {
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            color: #111827;
+        }
+
+
+        .pontos {
+
+            display: inline-block;
+
+            width: 18px;
+
+            overflow: hidden;
+
+            vertical-align: bottom;
+        }
+
+
+        /* ==============================
+           DARK MODE
+        ============================== */
+
+        body.dark {
+
+            background: #0f172a;
+
+            color: white;
+        }
+
+
+        body.dark .logo {
+
+            color: white;
+        }
+
+
+        body.dark .subtitulo {
+
+            color: #9ca3af;
+        }
+
+
+        body.dark .cadastro-box {
+
+            background: #111827;
+
+            border-color: #1f2937;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.30);
+        }
+
+
+        body.dark .campo label {
+
+            color: #d1d5db;
+        }
+
+
+        body.dark .campo input {
+
+            background: #0f172a;
+
+            border-color: #374151;
+
+            color: white;
+        }
+
+
+        body.dark .campo input:focus {
+
+            border-color: #60a5fa;
+
+            box-shadow:
+                0 0 0 3px rgba(96,165,250,0.12);
+        }
+
+
+        body.dark .botao-olho:hover {
+
+            background: #1f2937;
+        }
+
+
+        body.dark .icone-olho {
+
+            stroke: #d1d5db;
+        }
+
+
+        body.dark .botao-criar-conta {
+
+            background: white;
+
+            color: #111827;
+        }
+
+
+        body.dark .botao-criar-conta:hover {
+
+            background: #e5e7eb;
+        }
+
+
+        body.dark .carregando-overlay {
+
+            background:
+                rgba(15,23,42,0.97);
+        }
+
+
+        body.dark .spinner {
+
+            border-color: #374151;
+
+            border-top-color: white;
+        }
+
+
+        body.dark .texto-carregando {
+
+            color: white;
+        }
+
+
+        /* ==============================
+           RESPONSIVO
+        ============================== */
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 15px;
+            }
+
+
+            .cadastro-box {
+                padding: 23px 20px;
+            }
+
+
+            .logo {
+                font-size: 32px;
+                letter-spacing: 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="cadastro-container">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            NIKKO
+        </div>
+
+
+        <div class="subtitulo">
+            Crie sua conta
+        </div>
+
+
+        <!-- CAIXA -->
+
+        <section class="cadastro-box">
+
+
+            <!-- ERRO -->
+
+            <div
+                class="erro"
+                id="mensagemErro"
+            ></div>
+
+
+            <!-- NOME -->
+
+            <div
+                class="campo"
+                id="campoNome"
+            >
+
+                <label for="nome">
+                    Nome
+                </label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    autocomplete="name"
+                    placeholder="Digite seu nome"
+                >
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div
+                class="campo"
+                id="campoEmail"
+            >
+
+                <label for="email">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    autocomplete="email"
+                    placeholder="Digite seu e-mail"
+                >
+
+            </div>
+
+
+            <!-- SENHA -->
+
+            <div
+                class="campo"
+                id="campoSenha"
+            >
+
+                <label for="senha">
+                    Senha
+                </label>
+
+
+                <div class="senha-area">
+
+                    <input
+                        type="password"
+                        id="senha"
+                        autocomplete="new-password"
+                        placeholder="Crie uma senha"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="botao-olho"
+                        onclick="alternarSenha('senha', 'olho1')"
+                        aria-label="Mostrar senha"
+                    >
+
+                        <svg
+                            class="icone-olho"
+                            id="olho1"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="
+                                    M2 12
+                                    s3.5-6 10-6
+                                    10 6 10 6
+                                    s-3.5 6-10 6
+                                    S2 12 2 12Z
+                                "
+                            ></path>
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="2.5"
+                            ></circle>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRMAR -->
+
+            <div
+                class="campo"
+                id="campoConfirmar"
+            >
+
+                <label for="confirmarSenha">
+                    Confirmar senha
+                </label>
+
+
+                <div class="senha-area">
+
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        autocomplete="new-password"
+                        placeholder="Digite a senha novamente"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="botao-olho"
+                        onclick="alternarSenha('confirmarSenha', 'olho2')"
+                        aria-label="Mostrar senha"
+                    >
+
+                        <svg
+                            class="icone-olho"
+                            id="olho2"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <path
+                                d="
+                                    M2 12
+                                    s3.5-6 10-6
+                                    10 6 10 6
+                                    s-3.5 6-10 6
+                                    S2 12 2 12Z
+                                "
+                            ></path>
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="2.5"
+                            ></circle>
+
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTÃO -->
+
+            <button
+                class="botao-criar-conta"
+                id="botaoCriarConta"
+                onclick="criarConta()"
+            >
+                Criar conta
+            </button>
+
+
+            <!-- VOLTAR -->
+
+            <a
+                href="login.html"
+                class="voltar"
+                onclick="voltarLogin(event)"
+            >
+                Já tenho uma conta
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         CARREGAMENTO
+    ============================== -->
+
+    <div
+        class="carregando-overlay"
+        id="carregandoOverlay"
+    >
+
+        <div class="spinner"></div>
+
+
+        <div
+            class="texto-carregando"
+            id="textoCarregando"
+        >
+            Criando sua conta<span class="pontos">...</span>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* ==========================================
+           MODO ESCURO
+        ========================================== */
+
+        if (
+            localStorage.getItem("modoEscuro") === "true"
+        ) {
+
+            document.body.classList.add("dark");
+
+        }
+
+
+        /* ==========================================
+           ELEMENTOS
+        ========================================== */
+
+        var nome =
+            document.getElementById("nome");
+
+        var email =
+            document.getElementById("email");
+
+        var senha =
+            document.getElementById("senha");
+
+        var confirmarSenha =
+            document.getElementById("confirmarSenha");
+
+        var mensagemErro =
+            document.getElementById("mensagemErro");
+
+        var botaoCriarConta =
+            document.getElementById(
+                "botaoCriarConta"
+            );
+
+        var carregandoOverlay =
+            document.getElementById(
+                "carregandoOverlay"
+            );
+
+        var textoCarregando =
+            document.getElementById(
+                "textoCarregando"
+            );
+
+
+        /* ==========================================
+           MOSTRAR / OCULTAR SENHA
+        ========================================== */
+
+        function alternarSenha(
+            idCampo,
+            idIcone
+        ) {
+
+            var campo =
+                document.getElementById(
+                    idCampo
+                );
+
+            var icone =
+                document.getElementById(
+                    idIcone
+                );
+
+
+            if (
+                campo.type === "password"
+            ) {
+
+                campo.type =
+                    "text";
+
+
+                icone.innerHTML = `
+
+                    <path
+                        d="
+                            M2 12
+                            s3.5-6 10-6
+                            10 6 10 6
+                            s-3.5 6-10 6
+                            S2 12 2 12
+                        "
+                    ></path>
+
+                    <line
+                        x1="4"
+                        y1="4"
+                        x2="20"
+                        y2="20"
+                    ></line>
+
+                `;
+
+            }
+
+            else {
+
+                campo.type =
+                    "password";
+
+
+                icone.innerHTML = `
+
+                    <path
+                        d="
+                            M2 12
+                            s3.5-6 10-6
+                            10 6 10 6
+                            s-3.5 6-10 6
+                            S2 12 2 12Z
+                        "
+                    ></path>
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="2.5"
+                    ></circle>
+
+                `;
+
+            }
+
+        }
+
+
+        /* ==========================================
+           LIMPAR ERROS
+        ========================================== */
+
+        function limparErros() {
+
+            mensagemErro.classList.remove(
+                "ativo"
+            );
+
+
+            document
+                .querySelectorAll(".erro-campo")
+                .forEach(
+                    function(elemento) {
+
+                        elemento.classList.remove(
+                            "erro-campo"
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /* ==========================================
+           MOSTRAR ERRO
+        ========================================== */
+
+        function mostrarErro(
+            texto,
+            campoId
+        ) {
+
+            mensagemErro.textContent =
+                texto;
+
+
+            mensagemErro.classList.add(
+                "ativo"
+            );
+
+
+            document
+                .getElementById(campoId)
+                .classList.add(
+                    "erro-campo"
+                );
+
+        }
+
+
+        /* ==========================================
+           VERIFICAR EMAIL
+        ========================================== */
+
+        function emailValido(
+            valor
+        ) {
+
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                .test(valor);
+
+        }
+
+
+        /* ==========================================
+           CRIAR CONTA
+        ========================================== */
+
+        function criarConta() {
+
+            limparErros();
+
+
+            var nomeValor =
+                nome.value.trim();
+
+
+            var emailValor =
+                email.value.trim()
+                    .toLowerCase();
+
+
+            var senhaValor =
+                senha.value;
+
+
+            var confirmarValor =
+                confirmarSenha.value;
+
+
+            /* NOME */
+
+            if (
+                nomeValor === ""
+            ) {
+
+                mostrarErro(
+                    "Digite seu nome.",
+                    "campoNome"
+                );
+
+                nome.focus();
+
+                return;
+
+            }
+
+
+            /* EMAIL */
+
+            if (
+                emailValor === ""
+            ) {
+
+                mostrarErro(
+                    "Digite seu e-mail.",
+                    "campoEmail"
+                );
+
+                email.focus();
+
+                return;
+
+            }
+
+
+            if (
+                !emailValido(
+                    emailValor
+                )
+            ) {
+
+                mostrarErro(
+                    "Digite um e-mail válido.",
+                    "campoEmail"
+                );
+
+                email.focus();
+
+                return;
+
+            }
+
+
+            /* SENHA */
+
+            if (
+                senhaValor === ""
+            ) {
+
+                mostrarErro(
+                    "Crie uma senha.",
+                    "campoSenha"
+                );
+
+                senha.focus();
+
+                return;
+
+            }
+
+
+            if (
+                senhaValor.length < 6
+            ) {
+
+                mostrarErro(
+                    "A senha deve ter pelo menos 6 caracteres.",
+                    "campoSenha"
+                );
+
+                senha.focus();
+
+                return;
+
+            }
+
+
+            /* CONFIRMAÇÃO */
+
+            if (
+                confirmarValor === ""
+            ) {
+
+                mostrarErro(
+                    "Confirme sua senha.",
+                    "campoConfirmar"
+                );
+
+                confirmarSenha.focus();
+
+                return;
+
+            }
+
+
+            if (
+                senhaValor !== confirmarValor
+            ) {
+
+                mostrarErro(
+                    "As senhas não coincidem.",
+                    "campoConfirmar"
+                );
+
+                confirmarSenha.focus();
+
+                return;
+
+            }
+
+
+            /* ==================================
+               CONTAS EXISTENTES
+            ================================== */
+
+            var contas =
+                JSON.parse(
+                    localStorage.getItem(
+                        "contasNikko"
+                    )
+                ) || [];
+
+
+            /* EMAIL JÁ CADASTRADO */
+
+            for (
+                var i = 0;
+                i < contas.length;
+                i++
+            ) {
+
+                var emailExistente =
+                    (
+                        contas[i].email ||
+                        ""
+                    )
+                    .toLowerCase();
+
+
+                if (
+                    emailExistente ===
+                    emailValor
+                ) {
+
+                    mostrarErro(
+                        "Este e-mail já está cadastrado.",
+                        "campoEmail"
+                    );
+
+                    email.focus();
+
+                    return;
+
+                }
+
+            }
+
+
+            /* ==================================
+               CRIAR IDENTIFICADOR TEMPORÁRIO
+            ================================== */
+
+            var idConta =
+                "nikko_" +
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .substring(2, 9);
+
+
+            /* ==================================
+               NOVA CONTA
+            ================================== */
+
+            var novaConta = {
+
+                id:
+                    idConta,
+
+                nome:
+                    nomeValor,
+
+                email:
+                    emailValor,
+
+                senha:
+                    senhaValor,
+
+                usuario:
+                    "",
+
+                dataNascimento:
+                    "",
+
+                fotoPerfil:
+                    "",
+
+                configurada:
+                    false,
+
+                criadoEm:
+                    new Date().toISOString()
+
+            };
+
+
+            contas.push(
+                novaConta
+            );
+
+
+            /* ==================================
+               SALVAR
+            ================================== */
+
+            try {
+
+                localStorage.setItem(
+                    "contasNikko",
+                    JSON.stringify(
+                        contas
+                    )
+                );
+
+            }
+
+            catch (erro) {
+
+                mostrarErro(
+                    "Não foi possível criar a conta neste navegador.",
+                    "campoEmail"
+                );
+
+                return;
+
+            }
+
+
+            /* ==================================
+               GUARDAR CONTA ATUAL
+            ================================== */
+
+            localStorage.setItem(
+                "contaConfigurando",
+                novaConta.id
+            );
+
+
+            localStorage.setItem(
+                "nomeUsuario",
+                novaConta.nome
+            );
+
+
+            localStorage.setItem(
+                "emailUsuario",
+                novaConta.email
+            );
+
+
+            /* ==================================
+               CARREGAMENTO
+            ================================== */
+
+            botaoCriarConta.disabled =
+                true;
+
+
+            botaoCriarConta.textContent =
+                "Criando conta...";
+
+
+            mostrarCarregamento(
+                "Criando sua conta"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "configurar-conta.html";
+
+                },
+                1500
+            );
+
+        }
+
+
+        /* ==========================================
+           VOLTAR PARA LOGIN
+        ========================================== */
+
+        function voltarLogin(
+            evento
+        ) {
+
+            evento.preventDefault();
+
+
+            mostrarCarregamento(
+                "Voltando"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "login.html";
+
+                },
+                700
+            );
+
+        }
+
+
+        /* ==========================================
+           MOSTRAR CARREGAMENTO
+        ========================================== */
+
+        function mostrarCarregamento(
+            texto
+        ) {
+
+            textoCarregando.innerHTML =
+                texto +
+                '<span class="pontos">...</span>';
+
+
+            carregandoOverlay.classList.add(
+                "ativo"
+            );
+
+        }
+
+
+        /* ==========================================
+           ANIMAÇÃO DOS PONTOS
+        ========================================== */
+
+        setInterval(
+            function() {
+
+                var elementos =
+                    document.querySelectorAll(
+                        ".pontos"
+                    );
+
+
+                for (
+                    var i = 0;
+                    i < elementos.length;
+                    i++
+                ) {
+
+                    if (
+                        elementos[i].textContent === "..."
+                    ) {
+
+                        elementos[i].textContent =
+                            ".";
+
+                    }
+
+                    else if (
+                        elementos[i].textContent === "."
+                    ) {
+
+                        elementos[i].textContent =
+                            "..";
+
+                    }
+
+                    else {
+
+                        elementos[i].textContent =
+                            "...";
+
+                    }
+
+                }
+
+            },
+            400
+        );
+
+
+        /* ==========================================
+           ENTER
+        ========================================== */
+
+        nome.addEventListener(
+            "keydown",
+            function(evento) {
+
+                if (
+                    evento.key === "Enter"
+                ) {
+
+                    email.focus();
+
+                }
+
+            }
+        );
+
+
+        email.addEventListener(
+            "keydown",
+            function(evento) {
+
+                if (
+                    evento.key === "Enter"
+                ) {
+
+                    senha.focus();
+
+                }
+
+            }
+        );
+
+
+        senha.addEventListener(
+            "keydown",
+            function(evento) {
+
+                if (
+                    evento.key === "Enter"
+                ) {
+
+                    confirmarSenha.focus();
+
+                }
+
+            }
+        );
+
+
+        confirmarSenha.addEventListener(
+            "keydown",
+            function(evento) {
+
+                if (
+                    evento.key === "Enter"
+                ) {
+
+                    criarConta();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

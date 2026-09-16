@@ -1,0 +1,8862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>NIKKO</title>
+
+
+<style>
+
+/* =====================================================
+   GERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #fafafa;
+
+    color: #111827;
+
+    min-height: 100vh;
+
+    padding-bottom: 76px;
+
+    transition:
+        background .25s,
+        color .25s;
+}
+
+
+button,
+input,
+textarea,
+select {
+
+    font-family: inherit;
+
+}
+
+
+button {
+
+    -webkit-tap-highlight-color: transparent;
+
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.topo {
+
+    height: 64px;
+
+    background: white;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.logo {
+
+    font-size: 27px;
+
+    font-weight: 800;
+
+    letter-spacing: 5px;
+
+    color: #111827;
+
+    user-select: none;
+}
+
+
+.botao-config {
+
+    position: absolute;
+
+    right: 18px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    background: transparent;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.botao-config:hover {
+
+    background: #f3f4f6;
+
+}
+
+
+.icone-config {
+
+    width: 21px;
+
+    height: 21px;
+
+    fill: none;
+
+    stroke: #111827;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.conteudo {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    margin: auto;
+
+    padding: 18px 14px 35px;
+}
+
+
+/* =====================================================
+   BUSCA
+===================================================== */
+
+.busca-area {
+
+    display: none;
+
+    margin-bottom: 18px;
+}
+
+
+.busca-area.ativa {
+
+    display: block;
+
+}
+
+
+.busca-input {
+
+    width: 100%;
+
+    height: 44px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    padding: 0 14px;
+
+    background: white;
+
+    color: #111827;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+
+.busca-input:focus {
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,.08);
+
+}
+
+
+.resultados-busca {
+
+    display: none;
+
+    margin-top: 8px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+}
+
+
+.resultados-busca.ativo {
+
+    display: block;
+
+}
+
+
+.resultado-usuario {
+
+    width: 100%;
+
+    border: none;
+
+    background: white;
+
+    padding: 12px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+
+.resultado-usuario:hover {
+
+    background: #f3f4f6;
+
+}
+
+
+.resultado-avatar {
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background: #111827;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+
+    flex-shrink: 0;
+}
+
+
+.resultado-avatar img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+.resultado-dados {
+
+    min-width: 0;
+
+}
+
+
+.resultado-nome {
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+
+.resultado-usuario {
+
+    font-size: 12px;
+
+    color: #6b7280;
+
+    margin-top: 2px;
+
+}
+
+
+.busca-vazia {
+
+    padding: 18px;
+
+    text-align: center;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   STORIES
+===================================================== */
+
+.stories {
+
+    display: flex;
+
+    gap: 18px;
+
+    overflow-x: auto;
+
+    padding: 5px 0 20px;
+
+    scrollbar-width: none;
+
+}
+
+
+.stories::-webkit-scrollbar {
+
+    display: none;
+
+}
+
+
+.story {
+
+    width: 68px;
+
+    min-width: 68px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+}
+
+
+.story-foto {
+
+    width: 66px;
+
+    height: 66px;
+
+    padding: 3px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            45deg,
+            #f59e0b,
+            #ef4444,
+            #ec4899,
+            #8b5cf6
+        );
+}
+
+
+.story-foto-interna {
+
+    width: 100%;
+
+    height: 100%;
+
+    border-radius: 50%;
+
+    border: 3px solid white;
+
+    background: #111827;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    color: white;
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+
+.story-foto-interna img,
+.story-foto-interna video {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+
+.story-adicionar
+.story-foto {
+
+    background: #e5e7eb;
+
+}
+
+
+.story-adicionar
+.story-foto-interna {
+
+    background: white;
+
+    border-color: #e5e7eb;
+
+    color: #2563eb;
+}
+
+
+.plus-story {
+
+    position: absolute;
+
+    right: -2px;
+
+    bottom: -2px;
+
+    width: 22px;
+
+    height: 22px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    border: 3px solid white;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 15px;
+}
+
+
+.story-nome {
+
+    margin-top: 7px;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =====================================================
+   FEED
+===================================================== */
+
+.titulo-feed {
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    margin: 8px 0 16px;
+}
+
+
+.publicacao {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 13px;
+
+    overflow: hidden;
+
+    margin-bottom: 20px;
+}
+
+
+.publicacao-topo {
+
+    min-height: 64px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 10px 14px;
+
+    border-bottom: 1px solid #f1f1f1;
+}
+
+
+.avatar {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #111827;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+
+    margin-right: 10px;
+}
+
+
+.avatar img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+.publicacao-nome {
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.publicacao-usuario {
+
+    font-size: 12px;
+
+    color: #6b7280;
+
+    margin-top: 3px;
+}
+
+
+.botao-opcoes-publicacao {
+
+    margin-left: auto;
+
+    width: 34px;
+
+    height: 34px;
+
+    border: none;
+
+    background: transparent;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 21px;
+
+    color: #4b5563;
+}
+
+
+.botao-opcoes-publicacao:hover {
+
+    background: #f3f4f6;
+
+}
+
+
+.midia-publicacao {
+
+    width: 100%;
+
+    background: #000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.midia-publicacao img,
+.midia-publicacao video {
+
+    width: 100%;
+
+    max-height: 700px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.publicacao-acoes {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 11px 14px 4px;
+}
+
+
+.acao-publicacao {
+
+    border: none;
+
+    background: transparent;
+
+    padding: 3px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.icone-acao {
+
+    width: 24px;
+
+    height: 24px;
+
+    fill: none;
+
+    stroke: #111827;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+    transition: .15s;
+}
+
+
+.acao-publicacao.curtido
+.icone-acao {
+
+    fill: #dc2626;
+
+    stroke: #dc2626;
+}
+
+
+.acao-publicacao.favorito
+.icone-acao {
+
+    fill: #111827;
+
+    stroke: #111827;
+}
+
+
+.publicacao-info {
+
+    padding: 4px 14px 15px;
+}
+
+
+.curtidas {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 7px;
+}
+
+
+.legenda {
+
+    font-size: 14px;
+
+    line-height: 1.45;
+
+    word-break: break-word;
+}
+
+
+.data-publicacao {
+
+    color: #9ca3af;
+
+    font-size: 11px;
+
+    margin-top: 8px;
+}
+
+
+.vazio {
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   COMENTÁRIOS
+===================================================== */
+
+.comentarios {
+
+    display: none;
+
+    border-top: 1px solid #f1f1f1;
+
+    background: #fafafa;
+}
+
+
+.comentarios.ativo {
+
+    display: block;
+}
+
+
+.comentarios-lista {
+
+    max-height: 220px;
+
+    overflow-y: auto;
+
+    padding: 10px 14px;
+}
+
+
+.comentario {
+
+    margin-bottom: 10px;
+}
+
+
+.comentario-nome {
+
+    font-weight: 700;
+
+    font-size: 13px;
+}
+
+
+.comentario-texto {
+
+    font-size: 13px;
+
+    margin-top: 2px;
+}
+
+
+.comentario-form {
+
+    display: flex;
+
+    gap: 8px;
+
+    padding: 10px 14px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+
+.comentario-form input {
+
+    flex: 1;
+
+    height: 38px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    padding: 0 11px;
+
+    outline: none;
+}
+
+
+.comentario-form button {
+
+    width: 78px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #111827;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   MENU FLUTUANTE
+===================================================== */
+
+.menu-flutuante {
+
+    position: fixed;
+
+    z-index: 7000;
+
+    width: 190px;
+
+    display: none;
+
+    background: white;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.22);
+
+    border: 1px solid #e5e7eb;
+}
+
+
+.menu-flutuante.ativo {
+
+    display: block;
+}
+
+
+.menu-flutuante button {
+
+    width: 100%;
+
+    border: none;
+
+    background: white;
+
+    color: #111827;
+
+    text-align: left;
+
+    padding: 13px 14px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+
+.menu-flutuante button:hover {
+
+    background: #f3f4f6;
+}
+
+
+.menu-flutuante
+.perigoso {
+
+    color: #dc2626;
+}
+
+
+/* =====================================================
+   VISUALIZADOR STORY
+===================================================== */
+
+.visualizador-story {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: black;
+
+    z-index: 9000;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.visualizador-story.ativo {
+
+    display: flex;
+}
+
+
+.story-aberto-conteudo {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.story-aberto-conteudo img,
+.story-aberto-conteudo video {
+
+    max-width: 100%;
+
+    max-height: 100%;
+
+    object-fit: contain;
+}
+
+
+.barra-story {
+
+    position: absolute;
+
+    top: 9px;
+
+    left: 14px;
+
+    right: 14px;
+
+    height: 3px;
+
+    background: rgba(255,255,255,.3);
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    z-index: 20;
+}
+
+
+.barra-story-progresso {
+
+    width: 0%;
+
+    height: 100%;
+
+    background: white;
+}
+
+
+@keyframes tempoStory {
+
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+
+}
+
+
+.story-nome-aberto {
+
+    position: absolute;
+
+    left: 20px;
+
+    top: 25px;
+
+    color: white;
+
+    z-index: 20;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.story-acoes-topo {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 16px;
+
+    display: flex;
+
+    gap: 7px;
+
+    z-index: 30;
+}
+
+
+.botao-story-topo {
+
+    width: 40px;
+
+    height: 40px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.14);
+
+    color: white;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 24px;
+}
+
+
+.botao-story-topo:hover {
+
+    background: rgba(255,255,255,.24);
+
+}
+
+
+.story-resposta-area {
+
+    position: absolute;
+
+    bottom: 18px;
+
+    left: 18px;
+
+    right: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    z-index: 30;
+}
+
+
+.story-resposta-area input {
+
+    flex: 1;
+
+    height: 44px;
+
+    border-radius: 22px;
+
+    border: 1px solid rgba(255,255,255,.45);
+
+    background: rgba(0,0,0,.35);
+
+    color: white;
+
+    padding: 0 16px;
+
+    outline: none;
+}
+
+
+.story-resposta-area input::placeholder {
+
+    color: rgba(255,255,255,.8);
+}
+
+
+.botao-curtir-story {
+
+    width: 46px;
+
+    height: 46px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.45);
+
+    background: rgba(0,0,0,.35);
+
+    color: white;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.icone-coracao-story {
+
+    width: 23px;
+
+    height: 23px;
+
+    fill: none;
+
+    stroke: white;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.botao-curtir-story.curtido
+.icone-coracao-story {
+
+    fill: #ef4444;
+
+    stroke: #ef4444;
+}
+
+
+/* =====================================================
+   MENU STORY
+===================================================== */
+
+.menu-story-flutuante {
+
+    position: fixed;
+
+    width: 195px;
+
+    top: 64px;
+
+    right: 18px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.3);
+
+    display: none;
+
+    z-index: 9500;
+}
+
+
+.menu-story-flutuante.ativo {
+
+    display: block;
+}
+
+
+.menu-story-flutuante button {
+
+    width: 100%;
+
+    border: none;
+
+    background: white;
+
+    padding: 14px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    color: #111827;
+
+    font-size: 14px;
+}
+
+
+.menu-story-flutuante button:hover {
+
+    background: #f3f4f6;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.55);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 10000;
+}
+
+
+.modal.ativo {
+
+    display: flex;
+}
+
+
+.modal-caixa {
+
+    width: 100%;
+
+    max-width: 430px;
+
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 18px 50px rgba(0,0,0,.28);
+}
+
+
+.modal-titulo {
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    margin-bottom: 15px;
+}
+
+
+.modal-texto {
+
+    font-size: 13px;
+
+    color: #6b7280;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+
+.modal-lista {
+
+    max-height: 300px;
+
+    overflow-y: auto;
+
+    margin-bottom: 15px;
+}
+
+
+.pessoa-compartilhar {
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 10px 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+
+.pessoa-avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background: #111827;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+
+.pessoa-avatar img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.pessoa-dados strong {
+
+    display: block;
+
+    font-size: 13px;
+}
+
+
+.pessoa-dados span {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color: #6b7280;
+
+    font-size: 11px;
+}
+
+
+.modal-acoes {
+
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.modal-acoes button {
+
+    flex: 1;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.botao-cancelar {
+
+    background: #f3f4f6;
+
+    color: #111827;
+}
+
+
+.botao-confirmar {
+
+    background: #111827;
+
+    color: white;
+}
+
+
+/* =====================================================
+   CRIAÇÃO
+===================================================== */
+
+.criacao-preview {
+
+    width: 100%;
+
+    min-height: 180px;
+
+    max-height: 400px;
+
+    border-radius: 12px;
+
+    background: #f3f4f6;
+
+    margin-bottom: 15px;
+
+    overflow: hidden;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.criacao-preview.ativo {
+
+    display: flex;
+}
+
+
+.criacao-preview img,
+.criacao-preview video {
+
+    max-width: 100%;
+
+    max-height: 400px;
+
+    object-fit: contain;
+}
+
+
+.opcao-criar {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+}
+
+
+.opcao-criar button {
+
+    flex: 1;
+
+    min-height: 44px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+
+.botao-publicacao {
+
+    background: #111827;
+
+    color: white;
+}
+
+
+.botao-story {
+
+    background: #2563eb;
+
+    color: white;
+}
+
+
+/* =====================================================
+   NOTIFICAÇÕES
+===================================================== */
+
+.notificacoes-area {
+
+    display: none;
+}
+
+
+.notificacoes-area.ativa {
+
+    display: block;
+}
+
+
+.cabecalho-pagina {
+
+    display: flex;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+
+.cabecalho-pagina h2 {
+
+    font-size: 20px;
+}
+
+
+.botao-voltar {
+
+    width: 35px;
+
+    height: 35px;
+
+    margin-right: 8px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.botao-voltar:hover {
+
+    background: #f3f4f6;
+}
+
+
+.icone-voltar {
+
+    width: 20px;
+
+    height: 20px;
+
+    fill: none;
+
+    stroke: #111827;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.notificacao-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 11px;
+
+    margin-bottom: 9px;
+
+    cursor: pointer;
+}
+
+
+.notificacao-item.nao-lida {
+
+    background: #eff6ff;
+
+    border-color: #bfdbfe;
+}
+
+
+.notificacao-avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #111827;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+
+.notificacao-avatar img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.notificacao-texto {
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+
+.notificacao-data {
+
+    font-size: 11px;
+
+    color: #6b7280;
+
+    margin-top: 3px;
+}
+
+
+/* =====================================================
+   PERFIL NOVO
+===================================================== */
+
+.perfil-area {
+
+    display: none;
+}
+
+
+.perfil-area.ativa {
+
+    display: block;
+}
+
+
+.perfil-conteudo {
+
+    width: 100%;
+
+    background: transparent;
+
+    padding: 5px 0 40px;
+}
+
+
+.perfil-topo-novo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 10px 0 15px;
+}
+
+
+.perfil-foto-nova {
+
+    width: 92px;
+
+    height: 92px;
+
+    min-width: 92px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background: #111827;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 30px;
+
+    font-weight: bold;
+}
+
+
+.perfil-foto-nova img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.perfil-dados-novos {
+
+    min-width: 0;
+}
+
+
+.perfil-nome-novo {
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: #111827;
+}
+
+
+.perfil-usuario-novo {
+
+    font-size: 13px;
+
+    color: #6b7280;
+
+    margin-top: 4px;
+}
+
+
+.perfil-bio-nova {
+
+    font-size: 13px;
+
+    line-height: 1.45;
+
+    color: #374151;
+
+    white-space: pre-wrap;
+
+    margin: 5px 0 16px;
+}
+
+
+.perfil-numeros-novos {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    max-width: 400px;
+
+    margin-bottom: 17px;
+}
+
+
+.numero-perfil {
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    min-width: 90px;
+
+    color: #111827;
+
+    text-align: center;
+}
+
+
+.numero-perfil:disabled {
+
+    cursor: default;
+}
+
+
+.numero-perfil strong {
+
+    display: block;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+.numero-perfil span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color: #6b7280;
+}
+
+
+.perfil-acoes-novas {
+
+    display: flex;
+
+    gap: 8px;
+
+    width: 100%;
+
+    max-width: 500px;
+
+    margin-bottom: 22px;
+}
+
+
+.perfil-acoes-novas button {
+
+    flex: 1;
+
+    height: 40px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.botao-perfil-principal {
+
+    background: #111827;
+
+    color: white;
+}
+
+
+.botao-perfil-secundario {
+
+    background: #e5e7eb;
+
+    color: #111827;
+}
+
+
+.abas-perfil {
+
+    display: flex;
+
+    width: 100%;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    margin-bottom: 12px;
+}
+
+
+.aba-perfil {
+
+    flex: 1;
+
+    height: 44px;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    position: relative;
+}
+
+
+.aba-perfil.ativa {
+
+    color: #111827;
+}
+
+
+.aba-perfil.ativa::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 18%;
+
+    right: 18%;
+
+    bottom: -1px;
+
+    height: 2px;
+
+    background: #111827;
+}
+
+
+.conteudo-aba-perfil {
+
+    display: none;
+}
+
+
+.conteudo-aba-perfil.ativa {
+
+    display: block;
+}
+
+
+.mensagem-vazia-perfil {
+
+    text-align: center;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    padding: 35px 20px 12px;
+}
+
+
+.botao-criar-perfil {
+
+    display: block;
+
+    width: 170px;
+
+    height: 40px;
+
+    margin: 0 auto 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.grade-perfil {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 3px;
+
+    width: 100%;
+}
+
+
+.item-grade-perfil {
+
+    width: 100%;
+
+    aspect-ratio: 1/1;
+
+    overflow: hidden;
+
+    background: #e5e7eb;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+
+.item-grade-perfil img,
+.item-grade-perfil video {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.indicador-video-perfil {
+
+    position: absolute;
+
+    top: 8px;
+
+    right: 8px;
+
+    width: 25px;
+
+    height: 25px;
+
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.65);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.indicador-video-perfil svg {
+
+    width: 12px;
+
+    height: 12px;
+
+    fill: white;
+
+    stroke: white;
+}
+
+
+/* =====================================================
+   BARRA INFERIOR
+===================================================== */
+
+.navegacao {
+
+    position: fixed;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    height: 70px;
+
+    background: white;
+
+    border-top: 1px solid #e5e7eb;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 1200;
+}
+
+
+.navegacao-inner {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+}
+
+
+.nav-botao {
+
+    width: 56px;
+
+    height: 50px;
+
+    border: none;
+
+    background: transparent;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.nav-botao:hover {
+
+    background: #f3f4f6;
+}
+
+
+.icone-nav {
+
+    width: 23px;
+
+    height: 23px;
+
+    fill: none;
+
+    stroke: #111827;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.badge {
+
+    position: absolute;
+
+    top: 4px;
+
+    right: 9px;
+
+    min-width: 16px;
+
+    height: 16px;
+
+    border-radius: 20px;
+
+    background: #dc2626;
+
+    color: white;
+
+    font-size: 9px;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+}
+
+
+.badge.ativo {
+
+    display: flex;
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+body.dark {
+
+    background: #0f172a;
+
+    color: white;
+}
+
+
+body.dark .topo {
+
+    background: #111827;
+
+    border-color: #1f2937;
+}
+
+
+body.dark .logo {
+
+    color: white;
+}
+
+
+body.dark .icone-config,
+body.dark .icone-nav,
+body.dark .icone-voltar,
+body.dark .icone-acao {
+
+    stroke: white;
+}
+
+
+body.dark .botao-config:hover,
+body.dark .nav-botao:hover,
+body.dark .botao-voltar:hover {
+
+    background: #1f2937;
+}
+
+
+body.dark .busca-input {
+
+    background: #111827;
+
+    border-color: #374151;
+
+    color: white;
+}
+
+
+body.dark .resultados-busca {
+
+    background: #111827;
+
+    border-color: #1f2937;
+}
+
+
+body.dark .resultado-usuario {
+
+    background: #111827;
+
+    color: white;
+}
+
+
+body.dark .resultado-usuario:hover {
+
+    background: #1f2937;
+}
+
+
+body.dark .publicacao {
+
+    background: #111827;
+
+    border-color: #1f2937;
+}
+
+
+body.dark .publicacao-topo {
+
+    border-color: #1f2937;
+}
+
+
+body.dark .publicacao-usuario {
+
+    color: #9ca3af;
+}
+
+
+body.dark .comentarios {
+
+    background: #0f172a;
+
+    border-color: #1f2937;
+}
+
+
+body.dark .comentario-form {
+
+    border-color: #1f2937;
+}
+
+
+body.dark .comentario-form input {
+
+    background: #111827;
+
+    color: white;
+
+    border-color: #374151;
+}
+
+
+body.dark .menu-flutuante,
+body.dark .menu-flutuante button,
+body.dark .menu-story-flutuante,
+body.dark .menu-story-flutuante button {
+
+    background: #111827;
+
+    color: white;
+
+    border-color: #1f2937;
+}
+
+
+body.dark .menu-flutuante button:hover,
+body.dark .menu-story-flutuante button:hover {
+
+    background: #1f2937;
+}
+
+
+body.dark .modal-caixa {
+
+    background: #111827;
+
+    color: white;
+}
+
+
+body.dark .modal-texto {
+
+    color: #9ca3af;
+}
+
+
+body.dark .botao-cancelar {
+
+    background: #1f2937;
+
+    color: white;
+}
+
+
+body.dark .notificacao-item {
+
+    background: #111827;
+
+    border-color: #1f2937;
+}
+
+
+body.dark .notificacao-item.nao-lida {
+
+    background: #172554;
+
+    border-color: #1d4ed8;
+}
+
+
+body.dark .perfil-nome-novo {
+
+    color: white;
+}
+
+
+body.dark .perfil-usuario-novo,
+body.dark .perfil-bio-nova,
+body.dark .numero-perfil span {
+
+    color: #9ca3af;
+}
+
+
+body.dark .numero-perfil {
+
+    color: white;
+}
+
+
+body.dark .abas-perfil {
+
+    border-color: #1f2937;
+}
+
+
+body.dark .aba-perfil {
+
+    color: #9ca3af;
+}
+
+
+body.dark .aba-perfil.ativa {
+
+    color: white;
+}
+
+
+body.dark .aba-perfil.ativa::after {
+
+    background: white;
+}
+
+
+body.dark .botao-perfil-secundario {
+
+    background: #1f2937;
+
+    color: white;
+}
+
+
+body.dark .botao-criar-perfil,
+body.dark .botao-perfil-principal {
+
+    background: white;
+
+    color: #111827;
+}
+
+
+body.dark .item-grade-perfil {
+
+    background: #1f2937;
+}
+
+
+body.dark .navegacao {
+
+    background: #111827;
+
+    border-color: #1f2937;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width:600px) {
+
+    .conteudo {
+
+        padding-left: 10px;
+
+        padding-right: 10px;
+
+    }
+
+
+    .topo {
+
+        height: 60px;
+
+    }
+
+
+    .logo {
+
+        font-size: 24px;
+
+    }
+
+
+    .perfil-topo-novo {
+
+        gap: 14px;
+
+    }
+
+
+    .perfil-foto-nova {
+
+        width: 82px;
+
+        height: 82px;
+
+        min-width: 82px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOPO
+===================================================== -->
+
+<header class="topo">
+
+    <div class="logo">
+        NIKKO
+    </div>
+
+
+    <button
+        class="botao-config"
+        onclick="abrirConfiguracoes()"
+        aria-label="Configurações"
+    >
+
+        <svg
+            class="icone-config"
+            viewBox="0 0 24 24"
+        >
+
+            <path d="
+                M12 8.5
+                a3.5 3.5 0 1 0 0 7
+                a3.5 3.5 0 0 0 0-7
+            "></path>
+
+
+            <path d="
+                M19.4 15
+                a8 8 0 0 0 .1-1.5
+                8 8 0 0 0-.1-1.5
+                l2-1.5
+                -2-3.4
+                -2.3.9
+                a8 8 0 0 0-2.6-1.5
+                L14.2 4
+                h-4.4
+                l-.3 2.5
+                A8 8 0 0 0 6.9 8
+                l-2.3-.9
+                -2 3.4
+                2 1.5
+                a8 8 0 0 0 0 3
+                l-2 1.5
+                2 3.4
+                2.3-.9
+                a8 8 0 0 0 2.6 1.5
+                l.3 2.5
+                h4.4
+                l.3-2.5
+                a8 8 0 0 0 2.6-1.5
+                l2.3.9
+                2-3.4
+                -2-1.5
+            "></path>
+
+        </svg>
+
+    </button>
+
+</header>
+
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main class="conteudo">
+
+
+    <!-- BUSCA -->
+
+    <section
+        class="busca-area"
+        id="buscaArea"
+    >
+
+        <input
+            type="text"
+            id="buscaInput"
+            class="busca-input"
+            placeholder="Pesquisar no NIKKO..."
+            autocomplete="off"
+        >
+
+
+        <div
+            class="resultados-busca"
+            id="resultadosBusca"
+        ></div>
+
+    </section>
+
+
+    <!-- =================================================
+         INÍCIO
+    ================================================== -->
+
+    <section id="inicioArea">
+
+
+        <div
+            class="stories"
+            id="stories"
+        ></div>
+
+
+        <input
+            type="file"
+            id="arquivoStory"
+            accept="image/*,video/*"
+            style="display:none"
+        >
+
+
+        <input
+            type="file"
+            id="arquivoCriacao"
+            accept="image/*,video/*"
+            multiple
+            style="display:none"
+        >
+
+
+        <div class="titulo-feed">
+            Publicações
+        </div>
+
+
+        <div id="feed"></div>
+
+    </section>
+
+
+    <!-- =================================================
+         NOTIFICAÇÕES
+    ================================================== -->
+
+    <section
+        class="notificacoes-area"
+        id="notificacoesArea"
+    >
+
+        <div class="cabecalho-pagina">
+
+            <button
+                class="botao-voltar"
+                onclick="voltarInicio()"
+            >
+
+                <svg
+                    class="icone-voltar"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+
+            </button>
+
+
+            <h2>
+                Notificações
+            </h2>
+
+        </div>
+
+
+        <div id="listaNotificacoes"></div>
+
+    </section>
+
+
+    <!-- =================================================
+         PERFIL
+    ================================================== -->
+
+    <section
+        class="perfil-area"
+        id="perfilArea"
+    >
+
+        <div class="cabecalho-pagina">
+
+            <button
+                class="botao-voltar"
+                onclick="voltarInicio()"
+            >
+
+                <svg
+                    class="icone-voltar"
+                    viewBox="0 0 24 24"
+                >
+                    <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+
+            </button>
+
+
+            <h2>
+                Perfil
+            </h2>
+
+        </div>
+
+
+        <div class="perfil-conteudo">
+
+
+            <div class="perfil-topo-novo">
+
+                <div
+                    class="perfil-foto-nova"
+                    id="perfilFotoNova"
+                ></div>
+
+
+                <div class="perfil-dados-novos">
+
+                    <div
+                        class="perfil-nome-novo"
+                        id="perfilNomeNovo"
+                    ></div>
+
+
+                    <div
+                        class="perfil-usuario-novo"
+                        id="perfilUsuarioNovo"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="perfil-bio-nova"
+                id="perfilBioNova"
+            ></div>
+
+
+            <div class="perfil-numeros-novos">
+
+                <button
+                    class="numero-perfil"
+                    id="botaoSeguidoresPerfil"
+                >
+
+                    <strong
+                        id="numeroSeguidoresPerfil"
+                    >
+                        0
+                    </strong>
+
+                    <span>
+                        Seguidores
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="numero-perfil"
+                    id="botaoSeguindoPerfil"
+                >
+
+                    <strong
+                        id="numeroSeguindoPerfil"
+                    >
+                        0
+                    </strong>
+
+                    <span>
+                        Seguindo
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="numero-perfil"
+                    disabled
+                >
+
+                    <strong
+                        id="numeroPublicacoesPerfil"
+                    >
+                        0
+                    </strong>
+
+                    <span>
+                        Publicações
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="perfil-acoes-novas"
+                id="perfilAcoesNovas"
+            ></div>
+
+
+            <div class="abas-perfil">
+
+                <button
+                    class="aba-perfil ativa"
+                    id="abaFotos"
+                    onclick="trocarAbaPerfil('fotos')"
+                >
+                    Fotos
+                </button>
+
+
+                <button
+                    class="aba-perfil"
+                    id="abaVideos"
+                    onclick="trocarAbaPerfil('videos')"
+                >
+                    Vídeos
+                </button>
+
+            </div>
+
+
+            <div
+                class="conteudo-aba-perfil ativa"
+                id="conteudoFotos"
+            >
+
+                <div
+                    class="mensagem-vazia-perfil"
+                    id="vazioFotos"
+                >
+                    Ainda não há publicações.
+                </div>
+
+
+                <button
+                    class="botao-criar-perfil"
+                    id="criarFotos"
+                    onclick="abrirCriacao('fotos')"
+                >
+                    Criar
+                </button>
+
+
+                <div
+                    class="grade-perfil"
+                    id="gradeFotos"
+                ></div>
+
+            </div>
+
+
+            <div
+                class="conteudo-aba-perfil"
+                id="conteudoVideos"
+            >
+
+                <div
+                    class="mensagem-vazia-perfil"
+                    id="vazioVideos"
+                >
+                    Ainda não há vídeos.
+                </div>
+
+
+                <button
+                    class="botao-criar-perfil"
+                    id="criarVideos"
+                    onclick="abrirCriacao('videos')"
+                >
+                    Criar
+                </button>
+
+
+                <div
+                    class="grade-perfil"
+                    id="gradeVideos"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     MENU PUBLICAÇÃO
+===================================================== -->
+
+<div
+    class="menu-flutuante"
+    id="menuPublicacao"
+></div>
+
+
+<!-- =====================================================
+     VISUALIZADOR STORY
+===================================================== -->
+
+<div
+    class="visualizador-story"
+    id="visualizadorStory"
+>
+
+    <div class="barra-story">
+
+        <div
+            class="barra-story-progresso"
+            id="barraStoryProgresso"
+        ></div>
+
+    </div>
+
+
+    <div
+        class="story-nome-aberto"
+        id="storyNomeAberto"
+    ></div>
+
+
+    <div class="story-acoes-topo">
+
+        <button
+            class="botao-story-topo"
+            onclick="abrirMenuStory()"
+            aria-label="Opções"
+        >
+            ⋮
+        </button>
+
+
+        <button
+            class="botao-story-topo"
+            onclick="fecharStory()"
+            aria-label="Fechar"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        class="story-aberto-conteudo"
+        id="storyAbertoConteudo"
+    ></div>
+
+
+    <div
+        class="story-resposta-area"
+        id="storyRespostaArea"
+    >
+
+        <input
+            type="text"
+            id="respostaStoryInput"
+            placeholder="Responder ao story..."
+        >
+
+
+        <button
+            class="botao-curtir-story"
+            id="botaoCurtirStory"
+            onclick="curtirStoryAtual()"
+        >
+
+            <svg
+                class="icone-coracao-story"
+                viewBox="0 0 24 24"
+            >
+
+                <path d="
+                    M20.8 8.7
+                    c0 5.5-8.8 10.1-8.8 10.1
+                    S3.2 14.2 3.2 8.7
+                    A4.2 4.2 0 0 1 7.4 4.5
+                    c1.7 0 3.3.9 4.2 2.2
+                    a5 5 0 0 1 4.2-2.2
+                    a5 5 0 0 1 5 4.2Z
+                "></path>
+
+            </svg>
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MENU STORY
+===================================================== -->
+
+<div
+    class="menu-story-flutuante"
+    id="menuStoryFlutuante"
+></div>
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="modalGeral"
+>
+
+    <div class="modal-caixa">
+
+        <div
+            class="modal-titulo"
+            id="modalTitulo"
+        ></div>
+
+
+        <div
+            class="modal-texto"
+            id="modalTexto"
+        ></div>
+
+
+        <div
+            class="modal-lista"
+            id="modalLista"
+        ></div>
+
+
+        <div class="modal-acoes">
+
+            <button
+                class="botao-cancelar"
+                onclick="fecharModal()"
+            >
+                Cancelar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL CRIAÇÃO
+===================================================== -->
+
+<div
+    class="modal"
+    id="modalSaidaConta"
+>
+
+    <div class="modal-caixa">
+
+        <div class="modal-titulo">
+            Sair da conta
+        </div>
+
+        <div class="modal-texto">
+            O que você deseja fazer?
+        </div>
+
+        <div class="modal-acoes">
+
+            <button
+                class="botao-cancelar"
+                onclick="entrarOutraConta()"
+            >
+                Entrar em outra conta
+            </button>
+
+            <button
+                class="botao-confirmar"
+                onclick="criarOutraConta()"
+            >
+                Criar conta
+            </button>
+
+        </div>
+
+        <button
+            class="botao-cancelar"
+            style="width:100%; margin-top:8px;"
+            onclick="fecharModalSaida()"
+        >
+            Cancelar
+        </button>
+
+    </div>
+
+</div>
+
+
+<div
+    class="modal"
+    id="modalCriacao"
+>
+
+    <div class="modal-caixa">
+
+        <div class="modal-titulo">
+            Criar conteúdo
+        </div>
+
+
+        <div
+            class="criacao-preview"
+            id="criacaoPreview"
+        ></div>
+
+
+        <div class="opcao-criar">
+
+            <button
+                class="botao-publicacao"
+                onclick="criarPublicacaoSelecionada()"
+            >
+                Publicação normal
+            </button>
+
+
+            <button
+                class="botao-story"
+                onclick="criarStorySelecionado()"
+            >
+                Story
+            </button>
+
+        </div>
+
+
+        <div class="modal-acoes">
+
+            <button
+                class="botao-cancelar"
+                onclick="cancelarCriacao()"
+            >
+                Cancelar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     NAVEGAÇÃO
+===================================================== -->
+
+<nav class="navegacao">
+
+    <div class="navegacao-inner">
+
+
+        <button
+            class="nav-botao ativo"
+            id="navInicio"
+            onclick="irInicio()"
+        >
+
+            <svg
+                class="icone-nav"
+                viewBox="0 0 24 24"
+            >
+
+                <path d="
+                    M3 10.5
+                    12 3
+                    21 10.5
+                    V21
+                    H14
+                    V15
+                    H10
+                    V21
+                    H3
+                    Z
+                "></path>
+
+            </svg>
+
+        </button>
+
+
+        <button
+            class="nav-botao"
+            id="navBuscar"
+            onclick="abrirBusca()"
+        >
+
+            <svg
+                class="icone-nav"
+                viewBox="0 0 24 24"
+            >
+
+                <circle
+                    cx="10.8"
+                    cy="10.8"
+                    r="6.5"
+                ></circle>
+
+                <path d="m16 16 5 5"></path>
+
+            </svg>
+
+        </button>
+
+
+        <button
+            class="nav-botao"
+            id="navCriar"
+            onclick="abrirCriacao()"
+        >
+
+            <svg
+                class="icone-nav"
+                viewBox="0 0 24 24"
+            >
+
+                <path d="M12 5v14M5 12h14"></path>
+
+            </svg>
+
+        </button>
+
+
+        <button
+            class="nav-botao"
+            id="navNotificacoes"
+            onclick="abrirNotificacoes()"
+        >
+
+            <svg
+                class="icone-nav"
+                viewBox="0 0 24 24"
+            >
+
+                <path d="
+                    M18 9
+                    a6 6 0 0 0-12 0
+                    c0 7-3 7-3 8
+                    h18
+                    c0-1-3-1-3-8
+                "></path>
+
+                <path d="M9.5 20h5"></path>
+
+            </svg>
+
+
+            <span
+                class="badge"
+                id="badgeNotificacoes"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <button
+            class="nav-botao"
+            id="navPerfil"
+            onclick="abrirPerfilProprio()"
+        >
+
+            <svg
+                class="icone-nav"
+                viewBox="0 0 24 24"
+            >
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="4"
+                ></circle>
+
+                <path d="
+                    M4 21
+                    a8 8 0 0 1 16 0
+                "></path>
+
+            </svg>
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+<script>
+
+/* =====================================================
+   USUÁRIO
+===================================================== */
+
+var nomeUsuario =
+    localStorage.getItem(
+        "nomeUsuario"
+    ) || "Usuário";
+
+
+var usuarioAtual =
+    localStorage.getItem(
+        "usuarioAtual"
+    ) || "";
+
+
+if (!usuarioAtual) {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =====================================================
+   TEMA
+===================================================== */
+
+function carregarTema() {
+
+    var tema =
+        localStorage.getItem(
+            "temaNikko"
+        );
+
+
+    if (tema === "claro") {
+
+        document.body.classList.remove(
+            "dark"
+        );
+
+        return;
+
+    }
+
+
+    if (tema === "escuro") {
+
+        document.body.classList.add(
+            "dark"
+        );
+
+        return;
+
+    }
+
+
+    var modoEscuro =
+        localStorage.getItem(
+            "modoEscuro"
+        );
+
+
+    if (modoEscuro === "true") {
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }
+
+    else {
+
+        document.body.classList.remove(
+            "dark"
+        );
+
+    }
+
+}
+
+
+carregarTema();
+
+
+/* =====================================================
+   DADOS
+===================================================== */
+
+function pegarContas() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "contasNikko"
+        )
+    ) || [];
+
+}
+
+
+function salvarContas(contas) {
+
+    localStorage.setItem(
+        "contasNikko",
+        JSON.stringify(contas)
+    );
+
+}
+
+
+function pegarPublicacoes() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "publicacoes"
+        )
+    ) || [];
+
+}
+
+
+function salvarPublicacoes(
+    publicacoes
+) {
+
+    localStorage.setItem(
+        "publicacoes",
+        JSON.stringify(
+            publicacoes
+        )
+    );
+
+}
+
+
+function pegarStories() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "stories"
+        )
+    ) || [];
+
+}
+
+
+function salvarStories(
+    stories
+) {
+
+    localStorage.setItem(
+        "stories",
+        JSON.stringify(
+            stories
+        )
+    );
+
+}
+
+
+function gerarId(prefixo) {
+
+    return (
+        prefixo +
+        "_" +
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2,9)
+    );
+
+}
+
+
+function buscarConta(usuario) {
+
+    var contas =
+        pegarContas();
+
+
+    for (
+        var i = 0;
+        i < contas.length;
+        i++
+    ) {
+
+        if (
+            contas[i].usuario ===
+            usuario
+        ) {
+
+            return contas[i];
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =====================================================
+   SEGUIDORES
+===================================================== */
+
+function pegarSeguindo(usuario) {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "seguindo_" +
+            usuario
+        )
+    ) || [];
+
+}
+
+
+function salvarSeguindo(
+    usuario,
+    lista
+) {
+
+    localStorage.setItem(
+        "seguindo_" +
+        usuario,
+        JSON.stringify(
+            lista
+        )
+    );
+
+}
+
+
+function pegarSeguidores(usuario) {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "seguidores_" +
+            usuario
+        )
+    ) || [];
+
+}
+
+
+function salvarSeguidores(
+    usuario,
+    lista
+) {
+
+    localStorage.setItem(
+        "seguidores_" +
+        usuario,
+        JSON.stringify(
+            lista
+        )
+    );
+
+}
+
+
+/* =====================================================
+   NOTIFICAÇÕES
+===================================================== */
+
+function pegarNotificacoes() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "notificacoes_" +
+            usuarioAtual
+        )
+    ) || [];
+
+}
+
+
+function salvarNotificacoes(
+    lista
+) {
+
+    localStorage.setItem(
+        "notificacoes_" +
+        usuarioAtual,
+        JSON.stringify(
+            lista
+        )
+    );
+
+}
+
+
+function criarNotificacao(
+    destino,
+    tipo,
+    texto,
+    origem
+) {
+
+    if (
+        !destino ||
+        destino === usuarioAtual
+    ) {
+
+        return;
+
+    }
+
+
+    var chave =
+        "notificacoes_" +
+        destino;
+
+
+    var lista =
+        JSON.parse(
+            localStorage.getItem(
+                chave
+            )
+        ) || [];
+
+
+    lista.unshift({
+
+        id:
+            gerarId("not"),
+
+        tipo:
+            tipo,
+
+        texto:
+            texto,
+
+        usuario:
+            origem,
+
+        lida:
+            false,
+
+        data:
+            new Date()
+                .toLocaleString(
+                    "pt-BR"
+                )
+
+    });
+
+
+    localStorage.setItem(
+        chave,
+        JSON.stringify(
+            lista
+        )
+    );
+
+}
+
+
+/* =====================================================
+   NAVEGAÇÃO
+===================================================== */
+
+function mostrarSomente(area) {
+
+    document.getElementById(
+        "inicioArea"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "notificacoesArea"
+    ).classList.remove(
+        "ativa"
+    );
+
+
+    document.getElementById(
+        "perfilArea"
+    ).classList.remove(
+        "ativa"
+    );
+
+
+    document.getElementById(
+        "buscaArea"
+    ).classList.remove(
+        "ativa"
+    );
+
+
+    if (area === "inicio") {
+
+        document.getElementById(
+            "inicioArea"
+        ).style.display =
+            "block";
+
+    }
+
+
+    if (area === "notificacoes") {
+
+        document.getElementById(
+            "notificacoesArea"
+        ).classList.add(
+            "ativa"
+        );
+
+    }
+
+
+    if (area === "perfil") {
+
+        document.getElementById(
+            "perfilArea"
+        ).classList.add(
+            "ativa"
+        );
+
+    }
+
+
+    if (area === "busca") {
+
+        document.getElementById(
+            "inicioArea"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "buscaArea"
+        ).classList.add(
+            "ativa"
+        );
+
+    }
+
+}
+
+
+function atualizarNav(ativo) {
+
+    var botoes = {
+
+        inicio:
+            document.getElementById(
+                "navInicio"
+            ),
+
+        buscar:
+            document.getElementById(
+                "navBuscar"
+            ),
+
+        criar:
+            document.getElementById(
+                "navCriar"
+            ),
+
+        notificacoes:
+            document.getElementById(
+                "navNotificacoes"
+            ),
+
+        perfil:
+            document.getElementById(
+                "navPerfil"
+            )
+
+    };
+
+
+    for (
+        var chave in botoes
+    ) {
+
+        botoes[chave]
+            .classList.remove(
+                "ativo"
+            );
+
+    }
+
+
+    if (
+        botoes[ativo]
+    ) {
+
+        botoes[ativo]
+            .classList.add(
+                "ativo"
+            );
+
+    }
+
+}
+
+
+function irInicio() {
+
+    mostrarSomente(
+        "inicio"
+    );
+
+
+    atualizarNav(
+        "inicio"
+    );
+
+
+    carregarStories();
+
+    carregarPublicacoes();
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+function voltarInicio() {
+
+    irInicio();
+
+}
+
+
+/* =====================================================
+   BUSCA
+===================================================== */
+
+var buscaInput =
+    document.getElementById(
+        "buscaInput"
+    );
+
+
+buscaInput.addEventListener(
+    "input",
+    pesquisarUsuarios
+);
+
+
+function abrirBusca() {
+
+    mostrarSomente(
+        "busca"
+    );
+
+
+    atualizarNav(
+        "buscar"
+    );
+
+
+    setTimeout(
+        function() {
+
+            buscaInput.focus();
+
+        },
+        50
+    );
+
+}
+
+
+function pesquisarUsuarios() {
+
+    var texto =
+        buscaInput.value
+            .trim()
+            .toLowerCase();
+
+
+    var resultados =
+        document.getElementById(
+            "resultadosBusca"
+        );
+
+
+    resultados.innerHTML =
+        "";
+
+
+    if (
+        texto === ""
+    ) {
+
+        resultados.classList.remove(
+            "ativo"
+        );
+
+        return;
+
+    }
+
+
+    var contas =
+        pegarContas();
+
+
+    var encontrados =
+        [];
+
+
+    for (
+        var i = 0;
+        i < contas.length;
+        i++
+    ) {
+
+        var conta =
+            contas[i];
+
+
+        if (
+            !conta.usuario ||
+            conta.usuario ===
+            usuarioAtual
+        ) {
+
+            continue;
+
+        }
+
+
+        var nome =
+            (
+                conta.nome ||
+                ""
+            ).toLowerCase();
+
+
+        var usuario =
+            (
+                conta.usuario ||
+                ""
+            ).toLowerCase();
+
+
+        var pesquisa =
+            texto.replace(
+                /^@/,
+                ""
+            );
+
+
+        if (
+            nome.includes(texto) ||
+            usuario.includes(pesquisa)
+        ) {
+
+            encontrados.push(
+                conta
+            );
+
+        }
+
+    }
+
+
+    if (
+        encontrados.length === 0
+    ) {
+
+        var vazio =
+            document.createElement(
+                "div"
+            );
+
+
+        vazio.className =
+            "busca-vazia";
+
+
+        vazio.textContent =
+            "Nenhuma conta encontrada.";
+
+
+        resultados.appendChild(
+            vazio
+        );
+
+
+        resultados.classList.add(
+            "ativo"
+        );
+
+
+        return;
+
+    }
+
+
+    for (
+        var j = 0;
+        j < encontrados.length;
+        j++
+    ) {
+
+        criarResultadoBusca(
+            encontrados[j]
+        );
+
+    }
+
+
+    resultados.classList.add(
+        "ativo"
+    );
+
+}
+
+
+function criarResultadoBusca(
+    conta
+) {
+
+    var botao =
+        document.createElement(
+            "button"
+        );
+
+
+    botao.className =
+        "resultado-usuario";
+
+
+    var avatar =
+        document.createElement(
+            "div"
+        );
+
+
+    avatar.className =
+        "resultado-avatar";
+
+
+    if (
+        conta.fotoPerfil
+    ) {
+
+        var img =
+            document.createElement(
+                "img"
+            );
+
+
+        img.src =
+            conta.fotoPerfil;
+
+
+        avatar.appendChild(
+            img
+        );
+
+    }
+
+    else {
+
+        avatar.textContent =
+            (
+                conta.nome ||
+                "U"
+            )
+            .charAt(0)
+            .toUpperCase();
+
+    }
+
+
+    var dados =
+        document.createElement(
+            "div"
+        );
+
+
+    dados.className =
+        "resultado-dados";
+
+
+    var nome =
+        document.createElement(
+            "div"
+        );
+
+
+    nome.className =
+        "resultado-nome";
+
+
+    nome.textContent =
+        conta.nome ||
+        "Usuário";
+
+
+    var usuario =
+        document.createElement(
+            "div"
+        );
+
+
+    usuario.className =
+        "resultado-usuario";
+
+
+    usuario.textContent =
+        "@" +
+        conta.usuario;
+
+
+    dados.appendChild(
+        nome
+    );
+
+
+    dados.appendChild(
+        usuario
+    );
+
+
+    botao.appendChild(
+        avatar
+    );
+
+
+    botao.appendChild(
+        dados
+    );
+
+
+    botao.onclick =
+        function() {
+
+            abrirPerfilUsuario(
+                conta.usuario
+            );
+
+        };
+
+
+    document.getElementById(
+        "resultadosBusca"
+    ).appendChild(
+        botao
+    );
+
+}
+
+
+/* =====================================================
+   STORIES
+===================================================== */
+
+var storyAtual =
+    null;
+
+
+var timerStory =
+    null;
+
+
+var arquivosSelecionados =
+    [];
+
+var origemCriacaoPerfil =
+    "";
+
+
+function carregarStories() {
+
+    var container =
+        document.getElementById(
+            "stories"
+        );
+
+
+    var stories =
+        pegarStories();
+
+
+    var contas =
+        pegarContas();
+
+
+    var usuariosExistentes =
+        contas.map(
+            function(conta) {
+
+                return (
+                    conta.usuario ||
+                    ""
+                )
+                .toLowerCase()
+                .trim();
+
+            }
+        );
+
+
+    stories =
+        stories.filter(
+            function(story) {
+
+                var usuario =
+                    (
+                        story.usuario ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .trim();
+
+
+                return usuariosExistentes
+                    .includes(
+                        usuario
+                    );
+
+            }
+        );
+
+
+    var meus =
+        stories.filter(
+            function(story) {
+
+                return story.usuario ===
+                    usuarioAtual;
+
+            }
+        );
+
+
+    var outros =
+        stories.filter(
+            function(story) {
+
+                return story.usuario !==
+                    usuarioAtual;
+
+            }
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    criarMeuStory(
+        meus
+    );
+
+
+    for (
+        var i = 0;
+        i < outros.length;
+        i++
+    ) {
+
+        criarStoryVisual(
+            outros[i]
+        );
+
+    }
+
+}
+
+
+function criarMeuStory(
+    meus
+) {
+
+    var elemento =
+        document.createElement(
+            "div"
+        );
+
+
+    elemento.className =
+        "story story-adicionar";
+
+
+    elemento.onclick =
+        function() {
+
+            if (
+                meus.length > 0
+            ) {
+
+                visualizarStory(
+                    meus[0]
+                );
+
+            }
+
+            else {
+
+                abrirEscolhaStory();
+
+            }
+
+        };
+
+
+    var foto =
+        document.createElement(
+            "div"
+        );
+
+
+    foto.className =
+        "story-foto";
+
+
+    var interna =
+        document.createElement(
+            "div"
+        );
+
+
+    interna.className =
+        "story-foto-interna";
+
+
+    if (
+        meus.length > 0
+    ) {
+
+        var story =
+            meus[0];
+
+
+        if (
+            story.tipo ===
+            "imagem"
+        ) {
+
+            var img =
+                document.createElement(
+                    "img"
+                );
+
+
+            img.src =
+                story.arquivo;
+
+
+            interna.appendChild(
+                img
+            );
+
+        }
+
+        else {
+
+            var video =
+                document.createElement(
+                    "video"
+                );
+
+
+            video.src =
+                story.arquivo;
+
+            video.muted =
+                true;
+
+            video.preload =
+                "metadata";
+
+
+            interna.appendChild(
+                video
+            );
+
+        }
+
+
+        var mais =
+            document.createElement(
+                "div"
+            );
+
+
+        mais.className =
+            "plus-story";
+
+
+        mais.textContent =
+            "+";
+
+
+        interna.appendChild(
+            mais
+        );
+
+    }
+
+    else {
+
+        interna.textContent =
+            "+";
+
+    }
+
+
+    foto.appendChild(
+        interna
+    );
+
+
+    var nome =
+        document.createElement(
+            "div"
+        );
+
+
+    nome.className =
+        "story-nome";
+
+
+    nome.textContent =
+        "Seu story";
+
+
+    elemento.appendChild(
+        foto
+    );
+
+
+    elemento.appendChild(
+        nome
+    );
+
+
+    document.getElementById(
+        "stories"
+    ).appendChild(
+        elemento
+    );
+
+}
+
+
+function criarStoryVisual(
+    story
+) {
+
+    var elemento =
+        document.createElement(
+            "div"
+        );
+
+
+    elemento.className =
+        "story";
+
+
+    elemento.onclick =
+        function() {
+
+            visualizarStory(
+                story
+            );
+
+        };
+
+
+    var foto =
+        document.createElement(
+            "div"
+        );
+
+
+    foto.className =
+        "story-foto";
+
+
+    var interna =
+        document.createElement(
+            "div"
+        );
+
+
+    interna.className =
+        "story-foto-interna";
+
+
+    if (
+        story.tipo ===
+        "imagem"
+    ) {
+
+        var img =
+            document.createElement(
+                "img"
+            );
+
+
+        img.src =
+            story.arquivo;
+
+
+        interna.appendChild(
+            img
+        );
+
+    }
+
+    else {
+
+        var video =
+            document.createElement(
+                "video"
+            );
+
+
+        video.src =
+            story.arquivo;
+
+        video.muted =
+            true;
+
+        video.preload =
+            "metadata";
+
+
+        interna.appendChild(
+            video
+        );
+
+    }
+
+
+    foto.appendChild(
+        interna
+    );
+
+
+    var nome =
+        document.createElement(
+            "div"
+        );
+
+
+    nome.className =
+        "story-nome";
+
+
+    nome.textContent =
+        story.nome ||
+        "Usuário";
+
+
+    elemento.appendChild(
+        foto
+    );
+
+
+    elemento.appendChild(
+        nome
+    );
+
+
+    document.getElementById(
+        "stories"
+    ).appendChild(
+        elemento
+    );
+
+}
+
+
+function abrirEscolhaStory() {
+
+    document.getElementById(
+        "arquivoStory"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "arquivoStory"
+    ).click();
+
+}
+
+
+document.getElementById(
+    "arquivoStory"
+).addEventListener(
+    "change",
+    function() {
+
+        var arquivo =
+            this.files[0];
+
+
+        if (!arquivo) {
+
+            return;
+
+        }
+
+
+        var tipo =
+            arquivo.type.indexOf(
+                "video/"
+            ) === 0
+                ? "video"
+                : "imagem";
+
+
+        var leitor =
+            new FileReader();
+
+
+        leitor.onload =
+            function(evento) {
+
+                var stories =
+                    pegarStories();
+
+
+                stories.unshift({
+
+                    id:
+                        gerarId("story"),
+
+                    nome:
+                        nomeUsuario,
+
+                    usuario:
+                        usuarioAtual,
+
+                    tipo:
+                        tipo,
+
+                    arquivo:
+                        evento.target.result,
+
+                    curtidas:
+                        [],
+
+                    respostas:
+                        [],
+
+                    data:
+                        new Date()
+                            .toLocaleString(
+                                "pt-BR"
+                            )
+
+                });
+
+
+                try {
+
+                    salvarStories(
+                        stories
+                    );
+
+
+                    carregarStories();
+
+                }
+
+                catch (
+                    erro
+                ) {
+
+                    alert(
+                        "O arquivo é muito grande para o armazenamento do navegador."
+                    );
+
+                }
+
+            };
+
+
+        leitor.readAsDataURL(
+            arquivo
+        );
+
+    }
+);
+
+
+function visualizarStory(
+    story
+) {
+
+    storyAtual =
+        story;
+
+
+    var visualizador =
+        document.getElementById(
+            "visualizadorStory"
+        );
+
+
+    var conteudo =
+        document.getElementById(
+            "storyAbertoConteudo"
+        );
+
+
+    var nome =
+        document.getElementById(
+            "storyNomeAberto"
+        );
+
+
+    var barra =
+        document.getElementById(
+            "barraStoryProgresso"
+        );
+
+
+    conteudo.innerHTML =
+        "";
+
+
+    nome.textContent =
+        story.nome ||
+        "Usuário";
+
+
+    var resposta =
+        document.getElementById(
+            "storyRespostaArea"
+        );
+
+
+    resposta.style.display =
+        story.usuario ===
+        usuarioAtual
+            ? "none"
+            : "flex";
+
+
+    var curtido =
+        (
+            story.curtidas ||
+            []
+        ).includes(
+            usuarioAtual
+        );
+
+
+    document.getElementById(
+        "botaoCurtirStory"
+    ).classList.toggle(
+        "curtido",
+        curtido
+    );
+
+
+    if (
+        story.tipo ===
+        "imagem"
+    ) {
+
+        var img =
+            document.createElement(
+                "img"
+            );
+
+
+        img.src =
+            story.arquivo;
+
+
+        conteudo.appendChild(
+            img
+        );
+
+    }
+
+    else {
+
+        var video =
+            document.createElement(
+                "video"
+            );
+
+
+        video.src =
+            story.arquivo;
+
+        video.controls =
+            true;
+
+        video.autoplay =
+            true;
+
+        video.playsInline =
+            true;
+
+
+        conteudo.appendChild(
+            video
+        );
+
+    }
+
+
+    visualizador.classList.add(
+        "ativo"
+    );
+
+
+    barra.style.animation =
+        "none";
+
+
+    void barra.offsetWidth;
+
+
+    barra.style.animation =
+        "tempoStory 10s linear forwards";
+
+
+    if (
+        timerStory
+    ) {
+
+        clearTimeout(
+            timerStory
+        );
+
+    }
+
+
+    timerStory =
+        setTimeout(
+            fecharStory,
+            10000
+        );
+
+}
+
+
+function fecharStory() {
+
+    if (
+        timerStory
+    ) {
+
+        clearTimeout(
+            timerStory
+        );
+
+        timerStory =
+            null;
+
+    }
+
+
+    document.getElementById(
+        "visualizadorStory"
+    ).classList.remove(
+        "ativo"
+    );
+
+
+    fecharMenuStory();
+
+
+    storyAtual =
+        null;
+
+}
+
+
+function abrirMenuStory() {
+
+    if (
+        !storyAtual
+    ) {
+
+        return;
+
+    }
+
+
+    var menu =
+        document.getElementById(
+            "menuStoryFlutuante"
+        );
+
+
+    menu.innerHTML =
+        "";
+
+
+    adicionarBotaoMenu(
+        menu,
+        "Compartilhar",
+        function() {
+
+            fecharMenuStory();
+
+            abrirCompartilhar(
+                storyAtual
+            );
+
+        }
+    );
+
+
+    adicionarBotaoMenu(
+        menu,
+        "Copiar link",
+        function() {
+
+            copiarLinkStory();
+
+        }
+    );
+
+
+    if (
+        storyAtual.usuario ===
+        usuarioAtual
+    ) {
+
+        adicionarBotaoMenu(
+            menu,
+            "Apagar story",
+            function() {
+
+                apagarStory();
+
+            },
+            true
+        );
+
+    }
+
+    else {
+
+        adicionarBotaoMenu(
+            menu,
+            "Silenciar",
+            function() {
+
+                fecharMenuStory();
+
+                alert(
+                    "Silenciar ficará disponível posteriormente."
+                );
+
+            }
+        );
+
+
+        adicionarBotaoMenu(
+            menu,
+            "Ver perfil",
+            function() {
+
+                var usuario =
+                    storyAtual.usuario;
+
+
+                fecharMenuStory();
+
+                fecharStory();
+
+                abrirPerfilUsuario(
+                    usuario
+                );
+
+            }
+        );
+
+    }
+
+
+    adicionarBotaoMenu(
+        menu,
+        "Cancelar",
+        function() {
+
+            fecharMenuStory();
+
+        }
+    );
+
+
+    menu.classList.add(
+        "ativo"
+    );
+
+}
+
+
+function fecharMenuStory() {
+
+    document.getElementById(
+        "menuStoryFlutuante"
+    ).classList.remove(
+        "ativo"
+    );
+
+}
+
+
+function adicionarBotaoMenu(
+    menu,
+    texto,
+    funcao,
+    perigoso
+) {
+
+    var botao =
+        document.createElement(
+            "button"
+        );
+
+
+    botao.textContent =
+        texto;
+
+
+    if (
+        perigoso
+    ) {
+
+        botao.className =
+            "perigoso";
+
+    }
+
+
+    botao.onclick =
+        funcao;
+
+
+    menu.appendChild(
+        botao
+    );
+
+}
+
+
+function copiarLinkStory() {
+
+    if (
+        !storyAtual
+    ) {
+
+        return;
+
+    }
+
+
+    var link =
+        window.location.href.split(
+            "#"
+        )[0] +
+        "#story=" +
+        encodeURIComponent(
+            storyAtual.id
+        );
+
+
+    if (
+        navigator.clipboard
+    ) {
+
+        navigator.clipboard
+            .writeText(
+                link
+            )
+            .then(
+                function() {
+
+                    fecharMenuStory();
+
+                    alert(
+                        "Link do story copiado."
+                    );
+
+                }
+            )
+            .catch(
+                function() {
+
+                    alert(
+                        link
+                    );
+
+                    fecharMenuStory();
+
+                }
+            );
+
+    }
+
+    else {
+
+        alert(
+            link
+        );
+
+        fecharMenuStory();
+
+    }
+
+}
+
+
+function curtirStoryAtual() {
+
+    if (
+        !storyAtual ||
+        storyAtual.usuario ===
+        usuarioAtual
+    ) {
+
+        return;
+
+    }
+
+
+    var stories =
+        pegarStories();
+
+
+    for (
+        var i = 0;
+        i < stories.length;
+        i++
+    ) {
+
+        if (
+            stories[i].id ===
+            storyAtual.id
+        ) {
+
+            if (
+                !stories[i].curtidas
+            ) {
+
+                stories[i].curtidas =
+                    [];
+
+            }
+
+
+            var pos =
+                stories[i]
+                    .curtidas
+                    .indexOf(
+                        usuarioAtual
+                    );
+
+
+            if (
+                pos === -1
+            ) {
+
+                stories[i]
+                    .curtidas
+                    .push(
+                        usuarioAtual
+                    );
+
+
+                criarNotificacao(
+                    stories[i].usuario,
+                    "story_like",
+                    nomeUsuario +
+                    " curtiu seu story.",
+                    usuarioAtual
+                );
+
+            }
+
+            else {
+
+                stories[i]
+                    .curtidas
+                    .splice(
+                        pos,
+                        1
+                    );
+
+            }
+
+
+            storyAtual =
+                stories[i];
+
+
+            salvarStories(
+                stories
+            );
+
+
+            document.getElementById(
+                "botaoCurtirStory"
+            ).classList.toggle(
+                "curtido",
+                pos === -1
+            );
+
+
+            break;
+
+        }
+
+    }
+
+
+    atualizarBadgeNotificacoes();
+
+}
+
+
+document.getElementById(
+    "respostaStoryInput"
+).addEventListener(
+    "keydown",
+    function(evento) {
+
+        if (
+            evento.key ===
+            "Enter"
+        ) {
+
+            responderStory();
+
+        }
+
+    }
+);
+
+
+function responderStory() {
+
+    if (
+        !storyAtual ||
+        storyAtual.usuario ===
+        usuarioAtual
+    ) {
+
+        return;
+
+    }
+
+
+    var input =
+        document.getElementById(
+            "respostaStoryInput"
+        );
+
+
+    var texto =
+        input.value.trim();
+
+
+    if (
+        texto === ""
+    ) {
+
+        return;
+
+    }
+
+
+    var stories =
+        pegarStories();
+
+
+    for (
+        var i = 0;
+        i < stories.length;
+        i++
+    ) {
+
+        if (
+            stories[i].id ===
+            storyAtual.id
+        ) {
+
+            if (
+                !stories[i].respostas
+            ) {
+
+                stories[i].respostas =
+                    [];
+
+            }
+
+
+            stories[i]
+                .respostas
+                .push({
+
+                    usuario:
+                        usuarioAtual,
+
+                    nome:
+                        nomeUsuario,
+
+                    texto:
+                        texto,
+
+                    data:
+                        new Date()
+                            .toLocaleString(
+                                "pt-BR"
+                            )
+
+                });
+
+
+            criarNotificacao(
+                stories[i].usuario,
+                "story_reply",
+                nomeUsuario +
+                " respondeu ao seu story.",
+                usuarioAtual
+            );
+
+
+            break;
+
+        }
+
+    }
+
+
+    salvarStories(
+        stories
+    );
+
+
+    input.value =
+        "";
+
+
+    alert(
+        "Resposta enviada."
+    );
+
+
+    atualizarBadgeNotificacoes();
+
+}
+
+
+function apagarStory() {
+
+    if (
+        !storyAtual ||
+        storyAtual.usuario !==
+        usuarioAtual
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !confirm(
+            "Tem certeza que deseja apagar este story?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    var stories =
+        pegarStories()
+            .filter(
+                function(story) {
+
+                    return story.id !==
+                        storyAtual.id;
+
+                }
+            );
+
+
+    salvarStories(
+        stories
+    );
+
+
+    fecharMenuStory();
+
+    fecharStory();
+
+    carregarStories();
+
+}
+
+
+/* =====================================================
+   COMPARTILHAMENTO
+===================================================== */
+
+function abrirCompartilhar(
+    conteudo
+) {
+
+    document.getElementById(
+        "modalTitulo"
+    ).textContent =
+        "Compartilhar";
+
+
+    document.getElementById(
+        "modalTexto"
+    ).textContent =
+        "Escolha uma pessoa que você segue.";
+
+
+    var lista =
+        document.getElementById(
+            "modalLista"
+        );
+
+
+    lista.innerHTML =
+        "";
+
+
+    var seguindo =
+        pegarSeguindo(
+            usuarioAtual
+        );
+
+
+    var contas =
+        pegarContas();
+
+
+    var encontrou =
+        false;
+
+
+    for (
+        var i = 0;
+        i < seguindo.length;
+        i++
+    ) {
+
+        for (
+            var j = 0;
+            j < contas.length;
+            j++
+        ) {
+
+            if (
+                contas[j].usuario ===
+                seguindo[i]
+            ) {
+
+                criarPessoaCompartilhar(
+                    lista,
+                    contas[j],
+                    conteudo
+                );
+
+
+                encontrou =
+                    true;
+
+            }
+
+        }
+
+    }
+
+
+    if (
+        !encontrou
+    ) {
+
+        var vazio =
+            document.createElement(
+                "div"
+            );
+
+
+        vazio.className =
+            "busca-vazia";
+
+
+        vazio.textContent =
+            "Você ainda não segue ninguém.";
+
+
+        lista.appendChild(
+            vazio
+        );
+
+    }
+
+
+    document.getElementById(
+        "modalGeral"
+    ).classList.add(
+        "ativo"
+    );
+
+}
+
+
+function criarPessoaCompartilhar(
+    lista,
+    conta,
+    conteudo
+) {
+
+    var botao =
+        document.createElement(
+            "button"
+        );
+
+
+    botao.className =
+        "pessoa-compartilhar";
+
+
+    var avatar =
+        document.createElement(
+            "div"
+        );
+
+
+    avatar.className =
+        "pessoa-avatar";
+
+
+    if (
+        conta.fotoPerfil
+    ) {
+
+        var img =
+            document.createElement(
+                "img"
+            );
+
+
+        img.src =
+            conta.fotoPerfil;
+
+
+        avatar.appendChild(
+            img
+        );
+
+    }
+
+    else {
+
+        avatar.textContent =
+            (
+                conta.nome ||
+                "U"
+            )
+            .charAt(0)
+            .toUpperCase();
+
+    }
+
+
+    var dados =
+        document.createElement(
+            "div"
+        );
+
+
+    dados.className =
+        "pessoa-dados";
+
+
+    var nome =
+        document.createElement(
+            "strong"
+        );
+
+
+    nome.textContent =
+        conta.nome;
+
+
+    var usuario =
+        document.createElement(
+            "span"
+        );
+
+
+    usuario.textContent =
+        "@" +
+        conta.usuario;
+
+
+    dados.appendChild(
+        nome
+    );
+
+
+    dados.appendChild(
+        usuario
+    );
+
+
+    botao.appendChild(
+        avatar
+    );
+
+
+    botao.appendChild(
+        dados
+    );
+
+
+    botao.onclick =
+        function() {
+
+            criarNotificacao(
+                conta.usuario,
+                "share",
+                nomeUsuario +
+                " compartilhou um conteúdo com você.",
+                usuarioAtual
+            );
+
+
+            fecharModal();
+
+
+            alert(
+                "Conteúdo enviado."
+            );
+
+        };
+
+
+    lista.appendChild(
+        botao
+    );
+
+}
+
+
+function fecharModal() {
+
+    document.getElementById(
+        "modalGeral"
+    ).classList.remove(
+        "ativo"
+    );
+
+}
+
+
+/* =====================================================
+   CRIAR
+===================================================== */
+
+document.getElementById(
+    "arquivoCriacao"
+).addEventListener(
+    "change",
+    function() {
+
+        arquivosSelecionados =
+            Array.from(
+                this.files
+            );
+
+
+        if (
+            arquivosSelecionados.length === 0
+        ) {
+
+            return;
+
+        }
+
+
+        var arquivo =
+            arquivosSelecionados[0];
+
+
+        var preview =
+            document.getElementById(
+                "criacaoPreview"
+            );
+
+
+        preview.innerHTML =
+            "";
+
+
+        if (
+            arquivo.type.indexOf(
+                "image/"
+            ) === 0
+        ) {
+
+            var img =
+                document.createElement(
+                    "img"
+                );
+
+
+            img.src =
+                URL.createObjectURL(
+                    arquivo
+                );
+
+
+            preview.appendChild(
+                img
+            );
+
+        }
+
+        else {
+
+            var video =
+                document.createElement(
+                    "video"
+                );
+
+
+            video.src =
+                URL.createObjectURL(
+                    arquivo
+                );
+
+            video.controls =
+                true;
+
+
+            preview.appendChild(
+                video
+            );
+
+        }
+
+
+        preview.classList.add(
+            "ativo"
+        );
+
+
+        document.getElementById(
+            "modalCriacao"
+        ).classList.add(
+            "ativo"
+        );
+
+    }
+);
+
+
+function abrirCriacao(origem) {
+
+    origemCriacaoPerfil = origem || "";
+
+    var input =
+        document.getElementById("arquivoCriacao");
+
+    input.value = "";
+    arquivosSelecionados = [];
+
+    input.accept =
+        origemCriacaoPerfil === "fotos"
+            ? "image/*"
+            : origemCriacaoPerfil === "videos"
+                ? "video/*"
+                : "image/*,video/*";
+
+    document.getElementById(
+        "criacaoPreview"
+    ).innerHTML = "";
+
+    document.getElementById(
+        "criacaoPreview"
+    ).classList.remove("ativo");
+
+    input.click();
+
+}
+
+function cancelarCriacao() {
+
+    document.getElementById(
+        "modalCriacao"
+    ).classList.remove(
+        "ativo"
+    );
+
+
+    arquivosSelecionados =
+        [];
+
+}
+
+
+function criarPublicacaoSelecionada() {
+
+    if (arquivosSelecionados.length === 0) {
+        alert("Escolha uma imagem ou vídeo primeiro.");
+        return;
+    }
+
+    var arquivo = arquivosSelecionados[0];
+
+    var ehVideo =
+        arquivo.type &&
+        arquivo.type.indexOf("video/") === 0;
+
+    var ehImagem =
+        arquivo.type &&
+        arquivo.type.indexOf("image/") === 0;
+
+    if (!ehVideo && !ehImagem) {
+        alert("Escolha uma imagem ou vídeo válido.");
+        return;
+    }
+
+    if (origemCriacaoPerfil === "fotos" && !ehImagem) {
+        alert("Na aba Fotos, selecione uma imagem.");
+        return;
+    }
+
+    if (origemCriacaoPerfil === "videos" && !ehVideo) {
+        alert("Na aba Vídeos, selecione um vídeo.");
+        return;
+    }
+
+    var tipo = ehVideo ? "video" : "imagem";
+    var leitor = new FileReader();
+
+    leitor.onload = function(evento) {
+
+        try {
+
+            var publicacoes = pegarPublicacoes();
+
+            publicacoes.unshift({
+                id: gerarId("pub"),
+                usuario: usuarioAtual,
+                nome: nomeUsuario,
+                tipo: tipo,
+                arquivo: evento.target.result,
+                legenda: "",
+                curtidas: [],
+                favoritos: [],
+                comentarios: [],
+                data: new Date().getTime()
+            });
+
+            salvarPublicacoes(publicacoes);
+
+            cancelarCriacao();
+            carregarPublicacoes();
+
+            var abaDepois = tipo === "video" ? "videos" : "fotos";
+
+            if (
+                document.getElementById("perfilArea").classList.contains("ativa")
+            ) {
+                abrirPerfilUsuario(usuarioAtual, abaDepois);
+            }
+
+            origemCriacaoPerfil = "";
+
+            alert(
+                tipo === "video"
+                    ? "Vídeo publicado."
+                    : "Foto publicada."
+            );
+
+        } catch (erro) {
+            console.error(erro);
+            alert(
+                "Não foi possível salvar a publicação. Se for um vídeo grande, tente um arquivo menor."
+            );
+        }
+
+    };
+
+    leitor.onerror = function() {
+        alert("Não foi possível ler o arquivo selecionado.");
+    };
+
+    leitor.readAsDataURL(arquivo);
+
+}
+
+function criarStorySelecionado() {
+
+    if (
+        arquivosSelecionados.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    var arquivo =
+        arquivosSelecionados[0];
+
+
+    var leitor =
+        new FileReader();
+
+
+    leitor.onload =
+        function(evento) {
+
+            var stories =
+                pegarStories();
+
+
+            stories.unshift({
+
+                id:
+                    gerarId("story"),
+
+                nome:
+                    nomeUsuario,
+
+                usuario:
+                    usuarioAtual,
+
+                tipo:
+                    arquivo.type.indexOf(
+                        "video/"
+                    ) === 0
+                        ? "video"
+                        : "imagem",
+
+                arquivo:
+                    evento.target.result,
+
+                curtidas:
+                    [],
+
+                respostas:
+                    [],
+
+                data:
+                    new Date()
+                        .toLocaleString(
+                            "pt-BR"
+                        )
+
+            });
+
+
+            try {
+
+                salvarStories(
+                    stories
+                );
+
+
+                cancelarCriacao();
+
+                carregarStories();
+
+
+                alert(
+                    "Story criado."
+                );
+
+            }
+
+            catch (
+                erro
+            ) {
+
+                alert(
+                    "Não foi possível salvar o story."
+                );
+
+            }
+
+        };
+
+
+    leitor.readAsDataURL(
+        arquivo
+    );
+
+}
+
+
+/* =====================================================
+   PUBLICAÇÕES
+===================================================== */
+
+function carregarPublicacoes() {
+
+    var feed =
+        document.getElementById(
+            "feed"
+        );
+
+
+    var publicacoes =
+        pegarPublicacoes();
+
+
+    feed.innerHTML =
+        "";
+
+
+    if (
+        publicacoes.length === 0
+    ) {
+
+        var vazio =
+            document.createElement(
+                "div"
+            );
+
+
+        vazio.className =
+            "vazio";
+
+
+        vazio.textContent =
+            "Ainda não existem publicações.";
+
+
+        feed.appendChild(
+            vazio
+        );
+
+
+        return;
+
+    }
+
+
+    for (
+        var i = 0;
+        i < publicacoes.length;
+        i++
+    ) {
+
+        criarPublicacaoVisual(
+            publicacoes[i]
+        );
+
+    }
+
+}
+
+
+function formatarTempoPublicacao(valor) {
+
+    if (!valor) {
+        return "Agora";
+    }
+
+    var dataPublicacao;
+
+    if (typeof valor === "number") {
+        dataPublicacao = new Date(valor);
+    } else if (/^\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}$/.test(String(valor))) {
+        var partes = String(valor).match(/^(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}):(\d{2})$/);
+        dataPublicacao = new Date(
+            Number(partes[3]),
+            Number(partes[2]) - 1,
+            Number(partes[1]),
+            Number(partes[4]),
+            Number(partes[5]),
+            Number(partes[6])
+        );
+    } else {
+        dataPublicacao = new Date(valor);
+    }
+
+    if (isNaN(dataPublicacao.getTime())) {
+        return "Agora";
+    }
+
+    var diferenca = new Date().getTime() - dataPublicacao.getTime();
+    var segundos = Math.floor(diferenca / 1000);
+
+    if (segundos < 60) {
+        return "há poucos segundos";
+    }
+
+    var minutos = Math.floor(segundos / 60);
+    if (minutos < 60) {
+        return minutos === 1 ? "há 1 minuto" : "há " + minutos + " minutos";
+    }
+
+    var horas = Math.floor(minutos / 60);
+    if (horas < 24) {
+        return horas === 1 ? "há 1 hora" : "há " + horas + " horas";
+    }
+
+    var dias = Math.floor(horas / 24);
+    if (dias < 7) {
+        return dias === 1 ? "há 1 dia" : "há " + dias + " dias";
+    }
+
+    var semanas = Math.floor(dias / 7);
+    if (semanas < 5) {
+        return semanas === 1 ? "há 1 semana" : "há " + semanas + " semanas";
+    }
+
+    var meses = Math.floor(dias / 30);
+    if (meses < 12) {
+        return meses === 1 ? "há 1 mês" : "há " + meses + " meses";
+    }
+
+    var anos = Math.floor(dias / 365);
+    return anos === 1 ? "há 1 ano" : "há " + anos + " anos";
+}
+
+function criarPublicacaoVisual(
+    publicacao
+) {
+
+    var artigo =
+        document.createElement(
+            "article"
+        );
+
+
+    artigo.className =
+        "publicacao";
+
+
+    var topo =
+        document.createElement(
+            "div"
+        );
+
+
+    topo.className =
+        "publicacao-topo";
+
+
+    var avatar =
+        document.createElement(
+            "div"
+        );
+
+
+    avatar.className =
+        "avatar";
+
+
+    var conta =
+        buscarConta(
+            publicacao.usuario
+        );
+
+
+    if (
+        conta &&
+        conta.fotoPerfil
+    ) {
+
+        var img =
+            document.createElement(
+                "img"
+            );
+
+
+        img.src =
+            conta.fotoPerfil;
+
+
+        avatar.appendChild(
+            img
+        );
+
+    }
+
+    else {
+
+        avatar.textContent =
+            (
+                publicacao.nome ||
+                "U"
+            )
+            .charAt(0)
+            .toUpperCase();
+
+    }
+
+
+    var dados =
+        document.createElement(
+            "div"
+        );
+
+
+    var nome =
+        document.createElement(
+            "div"
+        );
+
+
+    nome.className =
+        "publicacao-nome";
+
+
+    nome.textContent =
+        publicacao.nome ||
+        "Usuário";
+
+
+    var usuario =
+        document.createElement(
+            "div"
+        );
+
+
+    usuario.className =
+        "publicacao-usuario";
+
+
+    usuario.textContent =
+        "@" +
+        (
+            publicacao.usuario ||
+            ""
+        );
+
+
+    dados.appendChild(
+        nome
+    );
+
+
+    dados.appendChild(
+        usuario
+    );
+
+
+    topo.appendChild(
+        avatar
+    );
+
+
+    topo.appendChild(
+        dados
+    );
+
+
+    var opcoes =
+        document.createElement(
+            "button"
+        );
+
+
+    opcoes.className =
+        "botao-opcoes-publicacao";
+
+
+    opcoes.textContent =
+        "⋮";
+
+
+    opcoes.onclick =
+        function(evento) {
+
+            evento.stopPropagation();
+
+            abrirMenuPublicacao(
+                publicacao,
+                opcoes
+            );
+
+        };
+
+
+    topo.appendChild(
+        opcoes
+    );
+
+
+    var midia =
+        document.createElement(
+            "div"
+        );
+
+
+    midia.className =
+        "midia-publicacao";
+
+
+    if (
+        publicacao.tipo ===
+        "video"
+    ) {
+
+        var video =
+            document.createElement(
+                "video"
+            );
+
+
+        video.src =
+            publicacao.arquivo;
+
+        video.controls =
+            true;
+
+
+        midia.appendChild(
+            video
+        );
+
+    }
+
+    else {
+
+        var imagem =
+            document.createElement(
+                "img"
+            );
+
+
+        imagem.src =
+            publicacao.arquivo;
+
+
+        midia.appendChild(
+            imagem
+        );
+
+    }
+
+
+    var acoes =
+        document.createElement(
+            "div"
+        );
+
+
+    acoes.className =
+        "publicacao-acoes";
+
+
+    var curtir =
+        criarAcaoSVG(
+            `
+                <path d="
+                    M20.8 8.7
+                    c0 5.5-8.8 10.1-8.8 10.1
+                    S3.2 14.2 3.2 8.7
+                    A4.2 4.2 0 0 1 7.4 4.5
+                    c1.7 0 3.3.9 4.2 2.2
+                    a5 5 0 0 1 4.2-2.2
+                    a5 5 0 0 1 5 4.2Z
+                "></path>
+            `,
+            "Curtir"
+        );
+
+
+    var comentarios =
+        criarAcaoSVG(
+            `
+                <path d="
+                    M20 11
+                    a7 7 0 0 1-7 7
+                    H8
+                    l-4 3
+                    1.5-4.2
+                    A7 7 0 1 1 20 11Z
+                "></path>
+            `,
+            "Comentários"
+        );
+
+
+    var favorito =
+        criarAcaoSVG(
+            `
+                <path d="
+                    M6 3
+                    h12
+                    v18
+                    l-6-3.5
+                    L6 21
+                    Z
+                "></path>
+            `,
+            "Favoritos"
+        );
+
+
+    var compartilhar =
+        criarAcaoSVG(
+            `
+                <path d="M21 3 10 13"></path>
+
+                <path d="
+                    M21 3
+                    l-7 18
+                    -4-8
+                    -7-4
+                    Z
+                "></path>
+            `,
+            "Compartilhar"
+        );
+
+
+    if (
+        (
+            publicacao.curtidas ||
+            []
+        ).includes(
+            usuarioAtual
+        )
+    ) {
+
+        curtir.classList.add(
+            "curtido"
+        );
+
+    }
+
+
+    if (
+        (
+            publicacao.favoritos ||
+            []
+        ).includes(
+            usuarioAtual
+        )
+    ) {
+
+        favorito.classList.add(
+            "favorito"
+        );
+
+    }
+
+
+    curtir.onclick =
+        function() {
+
+            alternarCurtidaPublicacao(
+                publicacao.id
+            );
+
+        };
+
+
+    comentarios.onclick =
+        function() {
+
+            alternarComentarios(
+                publicacao.id
+            );
+
+        };
+
+
+    favorito.onclick =
+        function() {
+
+            alternarFavoritoPublicacao(
+                publicacao.id
+            );
+
+        };
+
+
+    compartilhar.onclick =
+        function() {
+
+            abrirCompartilhar(
+                publicacao
+            );
+
+        };
+
+
+    acoes.appendChild(
+        curtir
+    );
+
+
+    acoes.appendChild(
+        comentarios
+    );
+
+
+    acoes.appendChild(
+        favorito
+    );
+
+
+    acoes.appendChild(
+        compartilhar
+    );
+
+
+    var info =
+        document.createElement(
+            "div"
+        );
+
+
+    info.className =
+        "publicacao-info";
+
+
+    var curtidas =
+        document.createElement(
+            "div"
+        );
+
+
+    curtidas.className =
+        "curtidas";
+
+
+    var quantidade =
+        (
+            publicacao.curtidas ||
+            []
+        ).length;
+
+
+    curtidas.textContent =
+        quantidade +
+        (
+            quantidade === 1
+                ? " curtida"
+                : " curtidas"
+        );
+
+
+    var legenda =
+        document.createElement(
+            "div"
+        );
+
+
+    legenda.className =
+        "legenda";
+
+
+    var usuarioLegenda =
+        document.createElement(
+            "strong"
+        );
+
+
+    usuarioLegenda.textContent =
+        "@" +
+        (
+            publicacao.usuario ||
+            ""
+        );
+
+
+    legenda.appendChild(
+        usuarioLegenda
+    );
+
+
+    legenda.appendChild(
+        document.createTextNode(
+            " " +
+            (
+                publicacao.legenda ||
+                ""
+            )
+        )
+    );
+
+
+    var data =
+        document.createElement(
+            "div"
+        );
+
+
+    data.className =
+        "data-publicacao";
+
+
+    data.textContent =
+        formatarTempoPublicacao(
+            publicacao.data
+        );
+
+
+    info.appendChild(
+        curtidas
+    );
+
+
+    info.appendChild(
+        legenda
+    );
+
+
+    info.appendChild(
+        data
+    );
+
+
+    var comentariosArea =
+        document.createElement(
+            "div"
+        );
+
+
+    comentariosArea.className =
+        "comentarios";
+
+
+    comentariosArea.id =
+        "comentarios-" +
+        publicacao.id;
+
+
+    var lista =
+        document.createElement(
+            "div"
+        );
+
+
+    lista.className =
+        "comentarios-lista";
+
+
+    carregarComentariosNaLista(
+        lista,
+        publicacao
+    );
+
+
+    var formulario =
+        document.createElement(
+            "div"
+        );
+
+
+    formulario.className =
+        "comentario-form";
+
+
+    var input =
+        document.createElement(
+            "input"
+        );
+
+
+    input.placeholder =
+        "Adicionar comentário...";
+
+
+    var enviar =
+        document.createElement(
+            "button"
+        );
+
+
+    enviar.textContent =
+        "Enviar";
+
+
+    enviar.onclick =
+        function() {
+
+            adicionarComentario(
+                publicacao.id,
+                input
+            );
+
+        };
+
+
+    input.addEventListener(
+        "keydown",
+        function(evento) {
+
+            if (
+                evento.key ===
+                "Enter"
+            ) {
+
+                adicionarComentario(
+                    publicacao.id,
+                    input
+                );
+
+            }
+
+        }
+    );
+
+
+    formulario.appendChild(
+        input
+    );
+
+
+    formulario.appendChild(
+        enviar
+    );
+
+
+    comentariosArea.appendChild(
+        lista
+    );
+
+
+    comentariosArea.appendChild(
+        formulario
+    );
+
+
+    artigo.appendChild(
+        topo
+    );
+
+
+    artigo.appendChild(
+        midia
+    );
+
+
+    artigo.appendChild(
+        acoes
+    );
+
+
+    artigo.appendChild(
+        info
+    );
+
+
+    artigo.appendChild(
+        comentariosArea
+    );
+
+
+    document.getElementById(
+        "feed"
+    ).appendChild(
+        artigo
+    );
+
+}
+
+
+function criarAcaoSVG(
+    conteudo,
+    titulo
+) {
+
+    var botao =
+        document.createElement(
+            "button"
+        );
+
+
+    botao.className =
+        "acao-publicacao";
+
+
+    botao.title =
+        titulo;
+
+
+    var svg =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "svg"
+        );
+
+
+    svg.setAttribute(
+        "class",
+        "icone-acao"
+    );
+
+
+    svg.setAttribute(
+        "viewBox",
+        "0 0 24 24"
+    );
+
+
+    svg.innerHTML =
+        conteudo;
+
+
+    botao.appendChild(
+        svg
+    );
+
+
+    return botao;
+
+}
+
+
+function alternarCurtidaPublicacao(
+    id
+) {
+
+    var publicacoes =
+        pegarPublicacoes();
+
+
+    for (
+        var i = 0;
+        i < publicacoes.length;
+        i++
+    ) {
+
+        if (
+            publicacoes[i].id ===
+            id
+        ) {
+
+            if (
+                !publicacoes[i].curtidas
+            ) {
+
+                publicacoes[i].curtidas =
+                    [];
+
+            }
+
+
+            var pos =
+                publicacoes[i]
+                    .curtidas
+                    .indexOf(
+                        usuarioAtual
+                    );
+
+
+            if (
+                pos === -1
+            ) {
+
+                publicacoes[i]
+                    .curtidas
+                    .push(
+                        usuarioAtual
+                    );
+
+
+                criarNotificacao(
+                    publicacoes[i].usuario,
+                    "post_like",
+                    nomeUsuario +
+                    " curtiu sua publicação.",
+                    usuarioAtual
+                );
+
+            }
+
+            else {
+
+                publicacoes[i]
+                    .curtidas
+                    .splice(
+                        pos,
+                        1
+                    );
+
+            }
+
+            break;
+
+        }
+
+    }
+
+
+    salvarPublicacoes(
+        publicacoes
+    );
+
+
+    carregarPublicacoes();
+
+    atualizarBadgeNotificacoes();
+
+}
+
+
+function alternarFavoritoPublicacao(
+    id
+) {
+
+    var publicacoes =
+        pegarPublicacoes();
+
+
+    for (
+        var i = 0;
+        i < publicacoes.length;
+        i++
+    ) {
+
+        if (
+            publicacoes[i].id ===
+            id
+        ) {
+
+            if (
+                !publicacoes[i].favoritos
+            ) {
+
+                publicacoes[i].favoritos =
+                    [];
+
+            }
+
+
+            var pos =
+                publicacoes[i]
+                    .favoritos
+                    .indexOf(
+                        usuarioAtual
+                    );
+
+
+            if (
+                pos === -1
+            ) {
+
+                publicacoes[i]
+                    .favoritos
+                    .push(
+                        usuarioAtual
+                    );
+
+            }
+
+            else {
+
+                publicacoes[i]
+                    .favoritos
+                    .splice(
+                        pos,
+                        1
+                    );
+
+            }
+
+
+            break;
+
+        }
+
+    }
+
+
+    salvarPublicacoes(
+        publicacoes
+    );
+
+
+    carregarPublicacoes();
+
+}
+
+
+function alternarComentarios(
+    id
+) {
+
+    var elemento =
+        document.getElementById(
+            "comentarios-" +
+            id
+        );
+
+
+    if (
+        elemento
+    ) {
+
+        elemento.classList.toggle(
+            "ativo"
+        );
+
+    }
+
+}
+
+
+function carregarComentariosNaLista(
+    lista,
+    publicacao
+) {
+
+    lista.innerHTML =
+        "";
+
+
+    var comentarios =
+        publicacao.comentarios ||
+        [];
+
+
+    if (
+        comentarios.length === 0
+    ) {
+
+        var vazio =
+            document.createElement(
+                "div"
+            );
+
+
+        vazio.style.color =
+            "#9ca3af";
+
+
+        vazio.style.fontSize =
+            "12px";
+
+
+        vazio.textContent =
+            "Nenhum comentário ainda.";
+
+
+        lista.appendChild(
+            vazio
+        );
+
+
+        return;
+
+    }
+
+
+    for (
+        var i = 0;
+        i < comentarios.length;
+        i++
+    ) {
+
+        var item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "comentario";
+
+
+        var nome =
+            document.createElement(
+                "div"
+            );
+
+
+        nome.className =
+            "comentario-nome";
+
+
+        nome.textContent =
+            comentarios[i].nome;
+
+
+        var texto =
+            document.createElement(
+                "div"
+            );
+
+
+        texto.className =
+            "comentario-texto";
+
+
+        texto.textContent =
+            comentarios[i].texto;
+
+
+        item.appendChild(
+            nome
+        );
+
+
+        item.appendChild(
+            texto
+        );
+
+
+        lista.appendChild(
+            item
+        );
+
+    }
+
+}
+
+
+function adicionarComentario(
+    id,
+    input
+) {
+
+    var texto =
+        input.value.trim();
+
+
+    if (
+        texto === ""
+    ) {
+
+        return;
+
+    }
+
+
+    var publicacoes =
+        pegarPublicacoes();
+
+
+    for (
+        var i = 0;
+        i < publicacoes.length;
+        i++
+    ) {
+
+        if (
+            publicacoes[i].id ===
+            id
+        ) {
+
+            if (
+                !publicacoes[i].comentarios
+            ) {
+
+                publicacoes[i].comentarios =
+                    [];
+
+            }
+
+
+            publicacoes[i]
+                .comentarios
+                .push({
+
+                    usuario:
+                        usuarioAtual,
+
+                    nome:
+                        nomeUsuario,
+
+                    texto:
+                        texto,
+
+                    data:
+                        new Date()
+                            .toLocaleString(
+                                "pt-BR"
+                            )
+
+                });
+
+
+            criarNotificacao(
+                publicacoes[i].usuario,
+                "comment",
+                nomeUsuario +
+                " comentou na sua publicação.",
+                usuarioAtual
+            );
+
+
+            break;
+
+        }
+
+    }
+
+
+    salvarPublicacoes(
+        publicacoes
+    );
+
+
+    carregarPublicacoes();
+
+    atualizarBadgeNotificacoes();
+
+}
+
+
+/* =====================================================
+   MENU PUBLICAÇÃO
+===================================================== */
+
+function abrirMenuPublicacao(
+    publicacao,
+    botao
+) {
+
+    var menu =
+        document.getElementById(
+            "menuPublicacao"
+        );
+
+
+    menu.innerHTML =
+        "";
+
+
+    var rect =
+        botao.getBoundingClientRect();
+
+
+    menu.style.top =
+        (
+            rect.bottom + 5
+        ) +
+        "px";
+
+
+    menu.style.right =
+        "16px";
+
+
+    adicionarBotaoMenu(
+        menu,
+        "Compartilhar",
+        function() {
+
+            fecharMenuPublicacao();
+
+            abrirCompartilhar(
+                publicacao
+            );
+
+        }
+    );
+
+
+    adicionarBotaoMenu(
+        menu,
+        "Copiar link",
+        function() {
+
+            copiarLinkPublicacao(
+                publicacao
+            );
+
+        }
+    );
+
+
+    if (
+        publicacao.usuario ===
+        usuarioAtual
+    ) {
+
+        adicionarBotaoMenu(
+            menu,
+            "Editar publicação",
+            function() {
+
+                fecharMenuPublicacao();
+
+
+                var legenda =
+                    prompt(
+                        "Edite a legenda:",
+                        publicacao.legenda ||
+                        ""
+                    );
+
+
+                if (
+                    legenda ===
+                    null
+                ) {
+
+                    return;
+
+                }
+
+
+                var publicacoes =
+                    pegarPublicacoes();
+
+
+                for (
+                    var i = 0;
+                    i < publicacoes.length;
+                    i++
+                ) {
+
+                    if (
+                        publicacoes[i].id ===
+                        publicacao.id
+                    ) {
+
+                        publicacoes[i].legenda =
+                            legenda;
+
+                    }
+
+                }
+
+
+                salvarPublicacoes(
+                    publicacoes
+                );
+
+
+                carregarPublicacoes();
+
+            }
+        );
+
+
+        adicionarBotaoMenu(
+            menu,
+            "Apagar publicação",
+            function() {
+
+                apagarPublicacao(
+                    publicacao.id
+                );
+
+            },
+            true
+        );
+
+    }
+
+    else {
+
+        adicionarBotaoMenu(
+            menu,
+            "Silenciar",
+            function() {
+
+                fecharMenuPublicacao();
+
+                alert(
+                    "Silenciar ficará disponível posteriormente."
+                );
+
+            }
+        );
+
+
+        adicionarBotaoMenu(
+            menu,
+            "Ver perfil",
+            function() {
+
+                fecharMenuPublicacao();
+
+                abrirPerfilUsuario(
+                    publicacao.usuario
+                );
+
+            }
+        );
+
+    }
+
+
+    adicionarBotaoMenu(
+        menu,
+        "Cancelar",
+        function() {
+
+            fecharMenuPublicacao();
+
+        }
+    );
+
+
+    menu.classList.add(
+        "ativo"
+    );
+
+}
+
+
+function fecharMenuPublicacao() {
+
+    document.getElementById(
+        "menuPublicacao"
+    ).classList.remove(
+        "ativo"
+    );
+
+}
+
+
+function copiarLinkPublicacao(
+    publicacao
+) {
+
+    var link =
+        window.location.href.split(
+            "#"
+        )[0] +
+        "#publicacao=" +
+        encodeURIComponent(
+            publicacao.id
+        );
+
+
+    if (
+        navigator.clipboard
+    ) {
+
+        navigator.clipboard
+            .writeText(
+                link
+            )
+            .then(
+                function() {
+
+                    fecharMenuPublicacao();
+
+                    alert(
+                        "Link copiado."
+                    );
+
+                }
+            );
+
+    }
+
+    else {
+
+        alert(
+            link
+        );
+
+        fecharMenuPublicacao();
+
+    }
+
+}
+
+
+function apagarPublicacao(id) {
+
+    if (
+        !confirm(
+            "Tem certeza que deseja apagar esta publicação?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    var publicacoes =
+        pegarPublicacoes()
+            .filter(
+                function(publicacao) {
+
+                    return publicacao.id !==
+                        id;
+
+                }
+            );
+
+
+    salvarPublicacoes(
+        publicacoes
+    );
+
+
+    fecharMenuPublicacao();
+
+    carregarPublicacoes();
+
+
+    if (
+        document.getElementById(
+            "perfilArea"
+        ).classList.contains(
+            "ativa"
+        )
+    ) {
+
+        abrirPerfilUsuario(
+            usuarioAtual
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   PERFIL
+===================================================== */
+
+function abrirPerfilProprio() {
+
+    abrirPerfilUsuario(
+        usuarioAtual
+    );
+
+}
+
+
+function abrirPerfilUsuario(
+    usuario,
+    abaInicial
+) {
+
+    mostrarSomente(
+        "perfil"
+    );
+
+
+    atualizarNav(
+        "perfil"
+    );
+
+
+    var conta =
+        buscarConta(
+            usuario
+        );
+
+
+    if (
+        !conta
+    ) {
+
+        return;
+
+    }
+
+
+    var ehMeuPerfil =
+        conta.usuario ===
+        usuarioAtual;
+
+
+    /* FOTO */
+
+    var foto =
+        document.getElementById(
+            "perfilFotoNova"
+        );
+
+
+    foto.innerHTML =
+        "";
+
+
+    if (
+        conta.fotoPerfil
+    ) {
+
+        var imagem =
+            document.createElement(
+                "img"
+            );
+
+
+        imagem.src =
+            conta.fotoPerfil;
+
+
+        foto.appendChild(
+            imagem
+        );
+
+    }
+
+    else {
+
+        foto.textContent =
+            (
+                conta.nome ||
+                "U"
+            )
+            .charAt(0)
+            .toUpperCase();
+
+    }
+
+
+    /* NOME */
+
+    document.getElementById(
+        "perfilNomeNovo"
+    ).textContent =
+        conta.nome ||
+        "Usuário";
+
+
+    document.getElementById(
+        "perfilUsuarioNovo"
+    ).textContent =
+        "@" +
+        (
+            conta.usuario ||
+            ""
+        );
+
+
+    /* BIO */
+
+    var bio =
+        document.getElementById(
+            "perfilBioNova"
+        );
+
+
+    bio.textContent =
+        conta.bio ||
+        "";
+
+
+    bio.style.display =
+        conta.bio
+            ? "block"
+            : "none";
+
+
+    /* CONTADORES */
+
+    var seguidores =
+        pegarSeguidores(
+            conta.usuario
+        );
+
+
+    var seguindo =
+        pegarSeguindo(
+            conta.usuario
+        );
+
+
+    var publicacoes =
+        pegarPublicacoes()
+            .filter(
+                function(publicacao) {
+
+                    return publicacao.usuario ===
+                        conta.usuario;
+
+                }
+            );
+
+
+    document.getElementById(
+        "numeroSeguidoresPerfil"
+    ).textContent =
+        seguidores.length;
+
+
+    document.getElementById(
+        "numeroSeguindoPerfil"
+    ).textContent =
+        seguindo.length;
+
+
+    document.getElementById(
+        "numeroPublicacoesPerfil"
+    ).textContent =
+        publicacoes.length;
+
+
+    /* BOTÕES */
+
+    var acoes =
+        document.getElementById(
+            "perfilAcoesNovas"
+        );
+
+
+    acoes.innerHTML =
+        "";
+
+
+    if (
+        ehMeuPerfil
+    ) {
+
+        var editar =
+            document.createElement(
+                "button"
+            );
+
+
+        editar.className =
+            "botao-perfil-principal";
+
+
+        editar.textContent =
+            "Editar perfil";
+
+
+        editar.onclick =
+            function() {
+
+                window.location.href =
+                    "configuracoes.html";
+
+            };
+
+
+        acoes.appendChild(
+            editar
+        );
+
+        var botaoSair =
+            document.createElement(
+                "button"
+            );
+
+        botaoSair.className =
+            "botao-perfil-secundario";
+
+        botaoSair.textContent =
+            "Sair da conta";
+
+        botaoSair.onclick =
+            function() {
+                abrirModalSaida();
+            };
+
+        acoes.appendChild(
+            botaoSair
+        );
+
+    }
+
+    else {
+
+        var seguindoAtual =
+            pegarSeguindo(
+                usuarioAtual
+            );
+
+
+        var seguidoresPessoa =
+            pegarSeguidores(
+                conta.usuario
+            );
+
+
+        var euSigo =
+            seguindoAtual.includes(
+                conta.usuario
+            );
+
+
+        var elaMeSegue =
+            seguidoresPessoa.includes(
+                usuarioAtual
+            );
+
+
+        var botaoSeguir =
+            document.createElement(
+                "button"
+            );
+
+
+        botaoSeguir.className =
+            "botao-perfil-principal";
+
+
+        if (
+            euSigo
+        ) {
+
+            botaoSeguir.textContent =
+                "Seguindo";
+
+        }
+
+        else if (
+            elaMeSegue
+        ) {
+
+            botaoSeguir.textContent =
+                "Seguir de volta";
+
+        }
+
+        else {
+
+            botaoSeguir.textContent =
+                "Seguir";
+
+        }
+
+
+        botaoSeguir.onclick =
+            function() {
+
+                alternarSeguir(
+                    conta.usuario
+                );
+
+
+                abrirPerfilUsuario(
+                    conta.usuario
+                );
+
+            };
+
+
+        var botaoMensagem =
+            document.createElement(
+                "button"
+            );
+
+
+        botaoMensagem.className =
+            "botao-perfil-secundario";
+
+
+        botaoMensagem.textContent =
+            "Mensagem";
+
+
+        botaoMensagem.onclick =
+            function() {
+
+                window.location.href =
+                    "mensagens.html?usuario=" +
+                    encodeURIComponent(
+                        conta.usuario
+                    );
+
+            };
+
+
+        acoes.appendChild(
+            botaoSeguir
+        );
+
+
+        acoes.appendChild(
+            botaoMensagem
+        );
+
+    }
+
+
+    document.getElementById(
+        "criarFotos"
+    ).style.display =
+        ehMeuPerfil
+            ? "block"
+            : "none";
+
+
+    document.getElementById(
+        "criarVideos"
+    ).style.display =
+        ehMeuPerfil
+            ? "block"
+            : "none";
+
+
+    carregarConteudoPerfil(
+        conta.usuario
+    );
+
+
+    trocarAbaPerfil(
+        abaInicial || "fotos"
+    );
+
+}
+
+
+function trocarAbaPerfil(
+    aba
+) {
+
+    var fotos =
+        document.getElementById(
+            "abaFotos"
+        );
+
+
+    var videos =
+        document.getElementById(
+            "abaVideos"
+        );
+
+
+    var conteudoFotos =
+        document.getElementById(
+            "conteudoFotos"
+        );
+
+
+    var conteudoVideos =
+        document.getElementById(
+            "conteudoVideos"
+        );
+
+
+    if (
+        aba === "fotos"
+    ) {
+
+        fotos.classList.add(
+            "ativa"
+        );
+
+        videos.classList.remove(
+            "ativa"
+        );
+
+
+        conteudoFotos.classList.add(
+            "ativa"
+        );
+
+        conteudoVideos.classList.remove(
+            "ativa"
+        );
+
+    }
+
+    else {
+
+        fotos.classList.remove(
+            "ativa"
+        );
+
+        videos.classList.add(
+            "ativa"
+        );
+
+
+        conteudoFotos.classList.remove(
+            "ativa"
+        );
+
+        conteudoVideos.classList.add(
+            "ativa"
+        );
+
+    }
+
+}
+
+
+function carregarConteudoPerfil(
+    usuario
+) {
+
+    var publicacoes =
+        pegarPublicacoes()
+            .filter(
+                function(publicacao) {
+
+                    return publicacao.usuario ===
+                        usuario;
+
+                }
+            );
+
+
+    var fotos =
+        publicacoes.filter(
+            function(publicacao) {
+
+                return publicacao.tipo !==
+                    "video";
+
+            }
+        );
+
+
+    var videos =
+        publicacoes.filter(
+            function(publicacao) {
+
+                return publicacao.tipo ===
+                    "video";
+
+            }
+        );
+
+
+    montarGradePerfil(
+        "gradeFotos",
+        "vazioFotos",
+        fotos
+    );
+
+
+    montarGradePerfil(
+        "gradeVideos",
+        "vazioVideos",
+        videos
+    );
+
+
+}
+
+
+function montarGradePerfil(
+    gradeId,
+    vazioId,
+    publicacoes
+) {
+
+    var grade =
+        document.getElementById(
+            gradeId
+        );
+
+
+    var vazio =
+        document.getElementById(
+            vazioId
+        );
+
+
+    grade.innerHTML =
+        "";
+
+
+    if (
+        publicacoes.length === 0
+    ) {
+
+        vazio.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    vazio.style.display =
+        "none";
+
+
+    for (
+        var i = 0;
+        i < publicacoes.length;
+        i++
+    ) {
+
+        var publicacao =
+            publicacoes[i];
+
+
+        var item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "item-grade-perfil";
+
+
+        if (
+            publicacao.tipo ===
+            "video"
+        ) {
+
+            var video =
+                document.createElement(
+                    "video"
+                );
+
+
+            video.src =
+                publicacao.arquivo;
+
+            video.muted =
+                true;
+
+            video.preload =
+                "metadata";
+
+
+            item.appendChild(
+                video
+            );
+
+
+            var indicador =
+                document.createElement(
+                    "div"
+                );
+
+
+            indicador.className =
+                "indicador-video-perfil";
+
+
+            indicador.innerHTML = `
+                <svg viewBox="0 0 24 24">
+                    <path d="M8 5l11 7-11 7Z"></path>
+                </svg>
+            `;
+
+
+            item.appendChild(
+                indicador
+            );
+
+        }
+
+        else {
+
+            var imagem =
+                document.createElement(
+                    "img"
+                );
+
+
+            imagem.src =
+                publicacao.arquivo;
+
+
+            item.appendChild(
+                imagem
+            );
+
+        }
+
+
+        item.onclick =
+            function(
+                publicacaoSelecionada
+            ) {
+
+                return function() {
+
+                    abrirPublicacaoDoPerfil(
+                        publicacaoSelecionada
+                    );
+
+                };
+
+            }(
+                publicacao
+            );
+
+
+        grade.appendChild(
+            item
+        );
+
+    }
+
+}
+
+
+function abrirPublicacaoDoPerfil(
+    publicacao
+) {
+
+    alert(
+        "Publicação selecionada."
+    );
+
+}
+
+
+/* =====================================================
+   SEGUIR
+===================================================== */
+
+function alternarSeguir(
+    usuario
+) {
+
+    var seguindo =
+        pegarSeguindo(
+            usuarioAtual
+        );
+
+
+    var seguidores =
+        pegarSeguidores(
+            usuario
+        );
+
+
+    var posSeguindo =
+        seguindo.indexOf(
+            usuario
+        );
+
+
+    var posSeguidor =
+        seguidores.indexOf(
+            usuarioAtual
+        );
+
+
+    if (
+        posSeguindo === -1
+    ) {
+
+        seguindo.push(
+            usuario
+        );
+
+
+        if (
+            posSeguidor === -1
+        ) {
+
+            seguidores.push(
+                usuarioAtual
+            );
+
+        }
+
+
+        salvarSeguindo(
+            usuarioAtual,
+            seguindo
+        );
+
+
+        salvarSeguidores(
+            usuario,
+            seguidores
+        );
+
+
+        criarNotificacao(
+            usuario,
+            "follow",
+            nomeUsuario +
+            " começou a seguir você.",
+            usuarioAtual
+        );
+
+    }
+
+    else {
+
+        seguindo.splice(
+            posSeguindo,
+            1
+        );
+
+
+        if (
+            posSeguidor !== -1
+        ) {
+
+            seguidores.splice(
+                posSeguidor,
+                1
+            );
+
+        }
+
+
+        salvarSeguindo(
+            usuarioAtual,
+            seguindo
+        );
+
+
+        salvarSeguidores(
+            usuario,
+            seguidores
+        );
+
+    }
+
+
+    atualizarBadgeNotificacoes();
+
+}
+
+
+/* =====================================================
+   NOTIFICAÇÕES
+===================================================== */
+
+function abrirNotificacoes() {
+
+    mostrarSomente(
+        "notificacoes"
+    );
+
+
+    atualizarNav(
+        "notificacoes"
+    );
+
+
+    carregarNotificacoes();
+
+}
+
+
+function carregarNotificacoes() {
+
+    var lista =
+        document.getElementById(
+            "listaNotificacoes"
+        );
+
+
+    var notificacoes =
+        pegarNotificacoes();
+
+
+    lista.innerHTML =
+        "";
+
+
+    if (
+        notificacoes.length === 0
+    ) {
+
+        var vazio =
+            document.createElement(
+                "div"
+            );
+
+
+        vazio.className =
+            "vazio";
+
+
+        vazio.textContent =
+            "Você ainda não tem notificações.";
+
+
+        lista.appendChild(
+            vazio
+        );
+
+
+        atualizarBadgeNotificacoes();
+
+        return;
+
+    }
+
+
+    for (
+        var i = 0;
+        i < notificacoes.length;
+        i++
+    ) {
+
+        var n =
+            notificacoes[i];
+
+
+        var item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "notificacao-item";
+
+
+        if (
+            !n.lida
+        ) {
+
+            item.classList.add(
+                "nao-lida"
+            );
+
+        }
+
+
+        var avatar =
+            document.createElement(
+                "div"
+            );
+
+
+        avatar.className =
+            "notificacao-avatar";
+
+
+        var conta =
+            buscarConta(
+                n.usuario
+            );
+
+
+        if (
+            conta &&
+            conta.fotoPerfil
+        ) {
+
+            var img =
+                document.createElement(
+                    "img"
+                );
+
+
+            img.src =
+                conta.fotoPerfil;
+
+
+            avatar.appendChild(
+                img
+            );
+
+        }
+
+        else {
+
+            avatar.textContent =
+                (
+                    conta &&
+                    conta.nome
+                        ? conta.nome
+                        : "U"
+                )
+                .charAt(0)
+                .toUpperCase();
+
+        }
+
+
+        var texto =
+            document.createElement(
+                "div"
+            );
+
+
+        texto.className =
+            "notificacao-texto";
+
+
+        texto.textContent =
+            n.texto;
+
+
+        var data =
+            document.createElement(
+                "div"
+            );
+
+
+        data.className =
+            "notificacao-data";
+
+
+        data.textContent =
+            n.data;
+
+
+        texto.appendChild(
+            data
+        );
+
+
+        item.appendChild(
+            avatar
+        );
+
+
+        item.appendChild(
+            texto
+        );
+
+
+        item.onclick =
+            function(
+                notificacao
+            ) {
+
+                return function() {
+
+                    notificacao.lida =
+                        true;
+
+
+                    salvarNotificacoes(
+                        notificacoes
+                    );
+
+
+                    carregarNotificacoes();
+
+                };
+
+            }(
+                n
+            );
+
+
+        lista.appendChild(
+            item
+        );
+
+    }
+
+
+    atualizarBadgeNotificacoes();
+
+}
+
+
+function atualizarBadgeNotificacoes() {
+
+    var notificacoes =
+        pegarNotificacoes();
+
+
+    var quantidade =
+        notificacoes.filter(
+            function(n) {
+
+                return !n.lida;
+
+            }
+        ).length;
+
+
+    var badge =
+        document.getElementById(
+            "badgeNotificacoes"
+        );
+
+
+    if (
+        quantidade > 0
+    ) {
+
+        badge.textContent =
+            quantidade > 99
+                ? "99+"
+                : quantidade;
+
+
+        badge.classList.add(
+            "ativo"
+        );
+
+    }
+
+    else {
+
+        badge.classList.remove(
+            "ativo"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CONFIGURAÇÕES
+===================================================== */
+
+function abrirConfiguracoes() {
+
+    window.location.href =
+        "configuracoes.html";
+
+}
+
+
+/* =====================================================
+   SAIR
+===================================================== */
+
+function limparSessaoNikko() {
+
+    localStorage.removeItem(
+        "usuarioLogado"
+    );
+
+
+    localStorage.removeItem(
+        "usuarioAtual"
+    );
+
+
+    localStorage.removeItem(
+        "nomeUsuario"
+    );
+
+
+    localStorage.removeItem(
+        "emailUsuario"
+    );
+
+}
+
+
+function abrirModalSaida() {
+
+    document.getElementById(
+        "modalSaidaConta"
+    ).classList.add(
+        "ativo"
+    );
+
+}
+
+
+function fecharModalSaida() {
+
+    document.getElementById(
+        "modalSaidaConta"
+    ).classList.remove(
+        "ativo"
+    );
+
+}
+
+
+function entrarOutraConta() {
+
+    limparSessaoNikko();
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+function criarOutraConta() {
+
+    limparSessaoNikko();
+
+    window.location.href =
+        "cadastro.html";
+
+}
+
+
+function sair() {
+
+    entrarOutraConta();
+
+}
+
+
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(evento) {
+
+        if (
+            evento.key ===
+            "Escape"
+        ) {
+
+            fecharStory();
+
+            fecharModal();
+
+            fecharMenuPublicacao();
+
+            fecharMenuStory();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   FECHAR MENU
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(evento) {
+
+        var menu =
+            document.getElementById(
+                "menuPublicacao"
+            );
+
+
+        if (
+            menu.classList.contains(
+                "ativo"
+            ) &&
+            !menu.contains(
+                evento.target
+            )
+        ) {
+
+            fecharMenuPublicacao();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+mostrarSomente(
+    "inicio"
+);
+
+
+atualizarNav(
+    "inicio"
+);
+
+
+carregarStories();
+
+carregarPublicacoes();
+
+atualizarBadgeNotificacoes();
+
+</script>
+
+
+</body>
+
+</html>
